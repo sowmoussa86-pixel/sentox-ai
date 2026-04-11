@@ -1,96 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+  <meta charset="UTF-8">
   <title>SENTOX PRO</title>
-
-  <!-- favicon -->
-  <link rel="icon" type="image/png" href="favicon.png">
 
   <style>
     body {
       font-family: Arial;
       text-align: center;
-      background: #f5f7fa;
-    }
-
-    .box {
-      background: white;
-      padding: 30px;
-      margin: 50px auto;
-      width: 400px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-top: 50px;
     }
 
     input {
-      width: 90%;
       padding: 10px;
-      margin: 10px;
+      width: 250px;
     }
 
     button {
       padding: 10px 20px;
-      margin: 5px;
-      background: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
+      margin: 10px;
       cursor: pointer;
-    }
-
-    button:hover {
-      background: #0056b3;
     }
   </style>
 </head>
 
 <body>
 
-<div class="box">
+  <h1>SENTOX PRO</h1>
 
-  <img src="logo.png" style="width:200px;">
-
-  <h2>SENTOX PRO</h2>
-
-  <input id="produit" placeholder="Entrer produit">
-
+  <input type="text" placeholder="Entrer produit" />
   <br>
 
-  <button onclick="analyser()">Analyser</button>
-  <button onclick="pdf()">PDF</button>
+  <button>Analyser</button>
+  <button>PDF</button>
 
-  <div id="resultat"></div>
-
-</div>
-
-<script>
-async function analyser() {
-  const produit = document.getElementById("produit").value;
-
-  const res = await fetch("http://localhost:5000/analyse/" + produit);
-  const data = await res.json();
-
-  document.getElementById("resultat").innerHTML = `
-    <p><b>Produit:</b> ${data.produit}</p>
-    <p><b>Type:</b> ${data.type}</p>
-    <p><b>Toxicité:</b> ${data.toxicite?.nature || "-"}</p>
-    <p><b>Organe:</b> ${data.toxicite?.organe || "-"}</p>
-    <p><b>Dose faible:</b> ${data.dose?.faible || "-"}</p>
-    <p><b>Dose modérée:</b> ${data.dose?.moderee || "-"}</p>
-    <p><b>Dose élevée:</b> ${data.dose?.elevee || "-"}</p>
-    <p><b>Effets:</b> ${data.effets}</p>
-    <p><b>Conduite:</b> ${data.conduite}</p>
-    <p><b>Formule:</b> ${data.formule || "-"}</p>
-    <p><b>Poids:</b> ${data.poids || "-"}</p>
-    <p><b>Source:</b> ${data.source}</p>
-  `;
-}
-
-function pdf() {
-  const produit = document.getElementById("produit").value;
-  window.open("http://localhost:5000/pdf/" + produit);
-}
-</script>
+  <script src="script.js"></script>
 
 </body>
 </html>
