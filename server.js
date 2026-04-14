@@ -1,45 +1,73 @@
 const express = require("express");
-const cors = require("cors");
+const app = express();
 const path = require("path");
 
-const app = express();
+// servir les fichiers frontend
+app.use(express.static("public"));
 
-app.use(cors());
-app.use(express.json());
+/* =========================
+   LOGIQUE TOXICOLOGIQUE
+========================= */
+function analyseToxicologique(produit) {
+    produit = produit.toLowerCase();
 
-// 👉 servir le frontend
-app.use(express.static(path.join(__dirname, "public")));
+    if (produit.includes("paracetamol")) {
+        return {
+            nom: "Paracétamol",
+            risque: "Faible à modéré",
+            organe_cible: "Foie",
+            dose_max: "4g/jour adulte",
+            toxicite: "Hépatotoxicité en cas de surdosage",
+            interactions: ["Alcool", "Isoniazide"],
+            conseils: "Éviter l’alcool et respecter la dose",
+            niveau: "🟢"
+        };
+    }
 
-// 👉 ANALYSE
-app.post("/analyze", (req, res) => {
-  const { product } = req.body;
+    if (produit.includes("ibuprofene")) {
+        return {
+            nom: "Ibuprofène",
+            risque: "Modéré",
+            organe_cible: "Estomac, reins",
+            dose_max: "1200–2400 mg/jour",
+            toxicite: "Ulcères et insuffisance rénale",
+            interactions: ["Aspirine", "Anticoagulants"],
+            conseils: "Prendre après repas",
+            niveau: "🟠"
+        };
+    }
 
-  res.json({
-    product,
-    status: "Analysé",
-    danger: "Faible",
-    message: "Produit globalement sûr"
-  });
+    return {
+        nom: produit,
+        risque: "Inconnu",
+        organe_cible: "Non défini",
+        dose_max: "Non disponible",
+        toxicite: "Données insuffisantes",
+        interactions: [],
+        conseils: "Consulter un professionnel de santé",
+        niveau: "⚪"
+    };
+}
+
+/* =========================
+   API ANALYSE
+========================= */
+app.get("/analyze", (req, res) => {
+    const produit = req.query.produit;
+
+    if (!produit) {
+        return res.json({ erreur: "Produit non fourni" });
+    }
+
+    const resultat = analyseToxicologique(produit);
+    res.json(resultat);
 });
 
-// 👉 PDF
-app.get("/pdf/:product", (req, res) => {
-  const product = req.params.product;
-
-  res.send(`
-    <h1>Rapport SENTOX</h1>
-    <p>Produit : ${product}</p>
-    <p>Status : OK</p>
-  `);
-});
-
-// 👉 fallback (important pour Render)
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
-
-const PORT = process.env.PORT || 5000;
+/* =========================
+   PORT
+========================= */
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log("Serveur lancé sur port " + PORT);
+    console.log("Serveur lancé sur le port " + PORT);
 });

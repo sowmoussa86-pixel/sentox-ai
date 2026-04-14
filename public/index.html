@@ -1,40 +1,76 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>SENTOX PRO</title>
+    <meta charset="UTF-8">
+    <title>SENTOX PRO</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #f5f7fa;
+            padding: 50px;
+        }
 
-  <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      margin-top: 50px;
-    }
+        input {
+            padding: 10px;
+            width: 250px;
+            margin: 10px;
+        }
 
-    input {
-      padding: 10px;
-      width: 250px;
-    }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
 
-    button {
-      padding: 10px 20px;
-      margin: 10px;
-      cursor: pointer;
-    }
-  </style>
+        #resultat {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 
 <body>
 
-  <h1>SENTOX PRO</h1>
+<h1>SENTOX PRO</h1>
 
-  <input type="text" placeholder="Entrer produit" />
-  <br>
+<input type="text" id="produit" placeholder="Entrer produit">
+<br>
 
-  <button>Analyser</button>
-  <button>PDF</button>
+<button onclick="analyser()">Analyser</button>
 
-  <script src="script.js"></script>
+<div id="resultat"></div>
+
+<script>
+async function analyser() {
+    const produit = document.getElementById("produit").value;
+
+    if (!produit) {
+        alert("Veuillez entrer un produit");
+        return;
+    }
+
+    const res = await fetch(`/analyze?produit=${produit}`);
+    const data = await res.json();
+
+    document.getElementById("resultat").innerHTML = `
+        <h2>Résultat SENTOX</h2>
+        <p><strong>Produit :</strong> ${data.nom}</p>
+        <p><strong>Risque :</strong> ${data.niveau} ${data.risque}</p>
+        <p><strong>Organe cible :</strong> ${data.organe_cible}</p>
+        <p><strong>Dose max :</strong> ${data.dose_max}</p>
+        <p><strong>Toxicité :</strong> ${data.toxicite}</p>
+        <p><strong>Interactions :</strong> ${data.interactions.join(", ")}</p>
+        <p><strong>Conseils :</strong> ${data.conseils}</p>
+    `;
+}
+</script>
 
 </body>
 </html>
