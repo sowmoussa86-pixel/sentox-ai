@@ -1,16 +1,17 @@
 const express = require("express");
 const app = express();
-const path = require("path");
+const PDFDocument = require("pdfkit");
 
-// servir les fichiers frontend
+// servir frontend
 app.use(express.static("public"));
 
 /* =========================
-   LOGIQUE TOXICOLOGIQUE
+   BASE TOXICOLOGIQUE
 ========================= */
 function analyseToxicologique(produit) {
     produit = produit.toLowerCase();
 
+    // MEDICAMENTS
     if (produit.includes("paracetamol")) {
         return {
             nom: "Paracétamol",
@@ -18,9 +19,10 @@ function analyseToxicologique(produit) {
             organe_cible: "Foie",
             dose_max: "4g/jour adulte",
             toxicite: "Hépatotoxicité en cas de surdosage",
-            interactions: ["Alcool", "Isoniazide"],
-            conseils: "Éviter l’alcool et respecter la dose",
-            niveau: "🟢"
+            interactions: ["Alcool"],
+            conseils: "Respecter la dose",
+            niveau: "🟢",
+            score: 2
         };
     }
 
@@ -29,14 +31,45 @@ function analyseToxicologique(produit) {
             nom: "Ibuprofène",
             risque: "Modéré",
             organe_cible: "Estomac, reins",
-            dose_max: "1200–2400 mg/jour",
-            toxicite: "Ulcères et insuffisance rénale",
-            interactions: ["Aspirine", "Anticoagulants"],
+            dose_max: "1200–2400 mg",
+            toxicite: "Ulcères possibles",
+            interactions: ["Aspirine"],
             conseils: "Prendre après repas",
-            niveau: "🟠"
+            niveau: "🟠",
+            score: 5
         };
     }
 
+    // PLANTES AFRICAINES
+    if (produit.includes("kinkeliba")) {
+        return {
+            nom: "Kinkeliba",
+            risque: "Faible",
+            organe_cible: "Foie",
+            dose_max: "Infusion",
+            toxicite: "Faible",
+            interactions: ["Antidiabétiques"],
+            conseils: "Éviter excès",
+            niveau: "🟢",
+            score: 2
+        };
+    }
+
+    if (produit.includes("neem")) {
+        return {
+            nom: "Neem",
+            risque: "Modéré",
+            organe_cible: "Foie",
+            dose_max: "Contrôlé",
+            toxicite: "Toxique à forte dose",
+            interactions: [],
+            conseils: "Attention enfants",
+            niveau: "🟠",
+            score: 6
+        };
+    }
+
+    // PAR DEFAUT
     return {
         nom: produit,
         risque: "Inconnu",
@@ -44,8 +77,9 @@ function analyseToxicologique(produit) {
         dose_max: "Non disponible",
         toxicite: "Données insuffisantes",
         interactions: [],
-        conseils: "Consulter un professionnel de santé",
-        niveau: "⚪"
+        conseils: "Consulter un professionnel",
+        niveau: "⚪",
+        score: 0
     };
 }
 
@@ -56,11 +90,49 @@ app.get("/analyze", (req, res) => {
     const produit = req.query.produit;
 
     if (!produit) {
-        return res.json({ erreur: "Produit non fourni" });
+        return res.json({ erreur: "Produit manquant" });
     }
 
     const resultat = analyseToxicologique(produit);
     res.json(resultat);
+});
+
+/* =========================
+   IA SIMPLE (stable)
+========================= */
+app.get("/ai", (req, res) => {
+    const produit = req.query.produit;
+
+    res.json({
+        message: `Analyse intelligente de ${produit} : vérifier toxicité, interactions et dose.`
+    });
+});
+
+/* =========================
+   PDF
+========================= */
+app.get("/pdf", (req, res) => {
+    const produit = req.query.produit;
+    const data = analyseToxicologique(produit);
+
+    const doc = new PDFDocument();
+
+    res.setHeader("Content-Type", "application/pdf");
+    doc.pipe(res);
+
+    doc.fontSize(20).text("RAPPORT SENTOX", { align: "center" });
+
+    doc.moveDown();
+    doc.fontSize(12).text(`Produit: ${data.nom}`);
+    doc.text(`Risque: ${data.risque}`);
+    doc.text(`Score: ${data.score}/10`);
+    doc.text(`Organe: ${data.organe_cible}`);
+    doc.text(`Dose max: ${data.dose_max}`);
+    doc.text(`Toxicité: ${data.toxicite}`);
+    doc.text(`Interactions: ${data.interactions.join(", ")}`);
+    doc.text(`Conseils: ${data.conseils}`);
+
+    doc.end();
 });
 
 /* =========================

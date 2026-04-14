@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>SENTOX PRO</title>
     <style>
         body {
             font-family: Arial;
             text-align: center;
-            background: #f5f7fa;
+            background: #f4f6f8;
             padding: 50px;
         }
 
         input {
             padding: 10px;
             width: 250px;
-            margin: 10px;
         }
 
         button {
-            padding: 10px 20px;
+            padding: 10px;
             margin: 5px;
             cursor: pointer;
         }
@@ -27,11 +25,10 @@
             margin-top: 30px;
             padding: 20px;
             background: white;
-            border-radius: 10px;
             width: 400px;
             margin-left: auto;
             margin-right: auto;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -44,6 +41,7 @@
 <br>
 
 <button onclick="analyser()">Analyser</button>
+<button onclick="pdf()">PDF</button>
 
 <div id="resultat"></div>
 
@@ -51,24 +49,25 @@
 async function analyser() {
     const produit = document.getElementById("produit").value;
 
-    if (!produit) {
-        alert("Veuillez entrer un produit");
-        return;
-    }
-
     const res = await fetch(`/analyze?produit=${produit}`);
     const data = await res.json();
 
     document.getElementById("resultat").innerHTML = `
-        <h2>Résultat SENTOX</h2>
-        <p><strong>Produit :</strong> ${data.nom}</p>
-        <p><strong>Risque :</strong> ${data.niveau} ${data.risque}</p>
-        <p><strong>Organe cible :</strong> ${data.organe_cible}</p>
-        <p><strong>Dose max :</strong> ${data.dose_max}</p>
-        <p><strong>Toxicité :</strong> ${data.toxicite}</p>
-        <p><strong>Interactions :</strong> ${data.interactions.join(", ")}</p>
-        <p><strong>Conseils :</strong> ${data.conseils}</p>
+        <h2>Résultat</h2>
+        <p><b>Produit :</b> ${data.nom}</p>
+        <p><b>Risque :</b> ${data.niveau} ${data.risque}</p>
+        <p><b>Score :</b> ${data.score}/10</p>
+        <p><b>Organe :</b> ${data.organe_cible}</p>
+        <p><b>Dose :</b> ${data.dose_max}</p>
+        <p><b>Toxicité :</b> ${data.toxicite}</p>
+        <p><b>Interactions :</b> ${data.interactions.join(", ")}</p>
+        <p><b>Conseils :</b> ${data.conseils}</p>
     `;
+}
+
+function pdf() {
+    const produit = document.getElementById("produit").value;
+    window.open(`/pdf?produit=${produit}`);
 }
 </script>
 
