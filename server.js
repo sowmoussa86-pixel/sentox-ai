@@ -11,14 +11,13 @@ app.use(express.static("public"));
 function analyseToxicologique(produit) {
     produit = produit.toLowerCase();
 
-    // MEDICAMENTS
     if (produit.includes("paracetamol")) {
         return {
             nom: "Paracétamol",
             risque: "Faible à modéré",
             organe_cible: "Foie",
-            dose_max: "4g/jour adulte",
-            toxicite: "Hépatotoxicité en cas de surdosage",
+            dose_max: "4g/jour",
+            toxicite: "Hépatotoxicité",
             interactions: ["Alcool"],
             conseils: "Respecter la dose",
             niveau: "🟢",
@@ -30,17 +29,16 @@ function analyseToxicologique(produit) {
         return {
             nom: "Ibuprofène",
             risque: "Modéré",
-            organe_cible: "Estomac, reins",
+            organe_cible: "Estomac",
             dose_max: "1200–2400 mg",
-            toxicite: "Ulcères possibles",
+            toxicite: "Ulcères",
             interactions: ["Aspirine"],
-            conseils: "Prendre après repas",
+            conseils: "Après repas",
             niveau: "🟠",
             score: 5
         };
     }
 
-    // PLANTES AFRICAINES
     if (produit.includes("kinkeliba")) {
         return {
             nom: "Kinkeliba",
@@ -48,8 +46,8 @@ function analyseToxicologique(produit) {
             organe_cible: "Foie",
             dose_max: "Infusion",
             toxicite: "Faible",
-            interactions: ["Antidiabétiques"],
-            conseils: "Éviter excès",
+            interactions: [],
+            conseils: "Usage modéré",
             niveau: "🟢",
             score: 2
         };
@@ -61,7 +59,7 @@ function analyseToxicologique(produit) {
             risque: "Modéré",
             organe_cible: "Foie",
             dose_max: "Contrôlé",
-            toxicite: "Toxique à forte dose",
+            toxicite: "Toxique forte dose",
             interactions: [],
             conseils: "Attention enfants",
             niveau: "🟠",
@@ -69,7 +67,6 @@ function analyseToxicologique(produit) {
         };
     }
 
-    // PAR DEFAUT
     return {
         nom: produit,
         risque: "Inconnu",
@@ -88,23 +85,17 @@ function analyseToxicologique(produit) {
 ========================= */
 app.get("/analyze", (req, res) => {
     const produit = req.query.produit;
-
-    if (!produit) {
-        return res.json({ erreur: "Produit manquant" });
-    }
-
-    const resultat = analyseToxicologique(produit);
-    res.json(resultat);
+    res.json(analyseToxicologique(produit));
 });
 
 /* =========================
-   IA SIMPLE (stable)
+   IA SIMPLE
 ========================= */
 app.get("/ai", (req, res) => {
     const produit = req.query.produit;
 
     res.json({
-        message: `Analyse intelligente de ${produit} : vérifier toxicité, interactions et dose.`
+        message: `Analyse IA de ${produit} : vérifier toxicité, dose et interactions.`
     });
 });
 
@@ -135,11 +126,6 @@ app.get("/pdf", (req, res) => {
     doc.end();
 });
 
-/* =========================
-   PORT
-========================= */
+/* ========================= */
 const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-    console.log("Serveur lancé sur le port " + PORT);
-});
+app.listen(PORT, () => console.log("Serveur lancé"));

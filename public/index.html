@@ -1,49 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SENTOX PRO</title>
+
     <style>
         body {
             font-family: Arial;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
             text-align: center;
-            background: #f4f6f8;
             padding: 50px;
+            color: white;
+        }
+
+        .container {
+            background: white;
+            color: black;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        img {
+            width: 120px;
         }
 
         input {
             padding: 10px;
-            width: 250px;
+            width: 80%;
         }
 
         button {
             padding: 10px;
             margin: 5px;
-            cursor: pointer;
+            background: #2c5364;
+            color: white;
+            border: none;
         }
 
         #resultat {
-            margin-top: 30px;
-            padding: 20px;
-            background: white;
-            width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-            border-radius: 10px;
+            margin-top: 20px;
+            text-align: left;
         }
     </style>
 </head>
 
 <body>
 
-<h1>SENTOX PRO</h1>
+<div class="container">
+
+<img src="logo.png">
+
+<h2>SENTOX PRO</h2>
 
 <input type="text" id="produit" placeholder="Entrer produit">
 <br>
 
 <button onclick="analyser()">Analyser</button>
 <button onclick="pdf()">PDF</button>
+<button onclick="ia()">IA</button>
 
 <div id="resultat"></div>
+
+</div>
 
 <script>
 async function analyser() {
@@ -53,21 +75,30 @@ async function analyser() {
     const data = await res.json();
 
     document.getElementById("resultat").innerHTML = `
-        <h2>Résultat</h2>
-        <p><b>Produit :</b> ${data.nom}</p>
-        <p><b>Risque :</b> ${data.niveau} ${data.risque}</p>
-        <p><b>Score :</b> ${data.score}/10</p>
-        <p><b>Organe :</b> ${data.organe_cible}</p>
-        <p><b>Dose :</b> ${data.dose_max}</p>
-        <p><b>Toxicité :</b> ${data.toxicite}</p>
-        <p><b>Interactions :</b> ${data.interactions.join(", ")}</p>
-        <p><b>Conseils :</b> ${data.conseils}</p>
+        <h3>${data.nom}</h3>
+        <p>Risque : ${data.niveau} ${data.risque}</p>
+        <p>Score : ${data.score}/10</p>
+        <p>Organe : ${data.organe_cible}</p>
+        <p>Toxicité : ${data.toxicite}</p>
+        <p>Conseils : ${data.conseils}</p>
     `;
 }
 
 function pdf() {
     const produit = document.getElementById("produit").value;
     window.open(`/pdf?produit=${produit}`);
+}
+
+async function ia() {
+    const produit = document.getElementById("produit").value;
+
+    const res = await fetch(`/ai?produit=${produit}`);
+    const data = await res.json();
+
+    document.getElementById("resultat").innerHTML += `
+        <hr>
+        <p><b>IA :</b> ${data.message}</p>
+    `;
 }
 </script>
 
