@@ -1,7 +1,6 @@
 {
-  "name": "sentox-ai",
+  "name": "sentox",
   "version": "1.0.0",
-  "description": "Plateforme toxicologique SENTOX",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

@@ -6,7 +6,7 @@ const fetch = require("node-fetch");
 app.use(express.static("public"));
 
 /* =========================
-   NORMALISATION TEXTE
+   NORMALISATION
 ========================= */
 function nettoyer(texte) {
     return texte
@@ -16,46 +16,49 @@ function nettoyer(texte) {
 }
 
 /* =========================
-   BASE PLANTES INTERNATIONALE
+   BASE HYBRIDE (PLANTES + MEDICAMENTS)
 ========================= */
 const basePlantes = {
+
     neem: {
         nom: "Neem",
         dl50: "2000–5000 mg/kg",
         dose: "variable",
-        usages: ["antipaludique", "antibactérien"],
+        usages: ["antipaludique"],
         activites: ["anti-inflammatoire"],
         forme: ["huile", "infusion"],
         dosage: "non standardisé",
         toxicite: "toxique forte dose",
         score: 6
     },
+
     moringa: {
         nom: "Moringa",
-        dl50: null,
+        dl50: "Études en cours",
         dose: "traditionnelle",
         usages: ["nutrition"],
         activites: ["antioxydant"],
         forme: ["feuilles"],
-        dosage: null,
-        toxicite: "faible",
-        score: 2
-    },
-    kinkeliba: {
-        nom: "Kinkeliba",
-        dl50: null,
-        dose: "infusion",
-        usages: ["digestif"],
-        activites: ["hépatoprotecteur"],
-        forme: ["infusion"],
         dosage: "traditionnel",
         toxicite: "faible",
         score: 2
+    },
+
+    paracetamol: {
+        nom: "Paracétamol",
+        dl50: "338 mg/kg",
+        dose: "500 mg - 1g",
+        usages: ["antalgique"],
+        activites: ["analgésique"],
+        forme: ["comprimé"],
+        dosage: "max 4g/jour",
+        toxicite: "hépatotoxique",
+        score: 7
     }
 };
 
 /* =========================
-   ANALYSE PLANTE
+   ANALYSE
 ========================= */
 function analyserPlante(produit) {
 
@@ -81,12 +84,12 @@ function analyserPlante(produit) {
 
     return {
         nom: plante.nom,
-        dl50: plante.dl50 || "Études en cours",
-        dose: plante.dose || "Non disponible",
+        dl50: plante.dl50,
+        dose: plante.dose,
         usages: plante.usages.join(", "),
         activites: plante.activites.join(", "),
         forme: plante.forme.join(", "),
-        dosage: plante.dosage || "Études en cours",
+        dosage: plante.dosage,
         toxicite: plante.toxicite,
         risque: plante.score >= 7 ? "Élevé" :
                 plante.score >= 4 ? "Modéré" : "Faible",
@@ -97,106 +100,96 @@ function analyserPlante(produit) {
 }
 
 /* =========================
-   API ANALYSE SIMPLE
+   ROUTES
 ========================= */
+
+// Analyse simple
 app.get("/analyze", (req, res) => {
-    const produit = req.query.produit;
-    res.json(analyserPlante(produit));
+    res.json(analyserPlante(req.query.produit));
 });
 
-/* =========================
-   API PUBCHEM (MONDIALE)
-========================= */
+// PubChem
 app.get("/api/pubchem", async (req, res) => {
-    const produit = req.query.produit;
-
     try {
-        const url = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${produit}/property/MolecularWeight/JSON`;
-
-        const response = await fetch(url);
-        const data = await response.json();
-
-        res.json({
-            source: "PubChem",
-            data: data
-        });
-
+        const r = await fetch(`https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${req.query.produit}/property/MolecularWeight/JSON`);
+        const data = await r.json();
+        res.json(data);
     } catch {
-        res.json({
-            message: "Données non disponibles (études en cours)"
-        });
+        res.json({ message: "Études en cours" });
     }
 });
 
-/* =========================
-   IA SCIENTIFIQUE
-========================= */
-app.get("/ai-science", (req, res) => {
-    const produit = req.query.produit;
+// PubMed
+app.get("/api/pubmed", async (req, res) => {
+    try {
+        const r = await fetch(`https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${req.query.produit}&retmode=json`);
+        const data = await r.json();
+        res.json(data);
+    } catch {
+        res.json({ message: "Études en cours" });
+    }
+});
+
+// IA
+app.get("/ai", (req, res) => {
+    const data = analyserPlante(req.query.produit);
+
+    let interpretation =
+        data.score >= 7 ? "Risque élevé" :
+        data.score >= 4 ? "Risque modéré" :
+        "Risque faible";
 
     res.json({
-        analyse: `
-Analyse scientifique du produit ${produit} :
-
-- Toxicité dépend de la dose
-- Effets possibles sur organes
-- Interactions médicamenteuses possibles
-- Données scientifiques en cours d’évolution
-
-⚠️ Certaines données peuvent être en cours de validation.
-`
+        produit: data.nom,
+        interpretation
     });
 });
 
-/* =========================
-   ANALYSE COMPLETE
-========================= */
-app.get("/analyse-complete", async (req, res) => {
+// FULL AI (TOUT)
+app.get("/full-ai", async (req, res) => {
+
     const produit = req.query.produit;
 
     const local = analyserPlante(produit);
 
     let pubchem;
+    let pubmed;
 
     try {
-        const response = await fetch(`https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${produit}/property/MolecularWeight/JSON`);
-        pubchem = await response.json();
+        const r1 = await fetch(`https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${produit}/property/MolecularWeight/JSON`);
+        pubchem = await r1.json();
     } catch {
         pubchem = "Études en cours";
+    }
+
+    try {
+        const r2 = await fetch(`https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${produit}&retmode=json`);
+        pubmed = await r2.json();
+    } catch {
+        pubmed = "Études en cours";
     }
 
     res.json({
         produit,
         local,
-        pubchem
+        pubchem,
+        pubmed
     });
 });
 
-/* =========================
-   PDF
-========================= */
+// PDF
 app.get("/pdf", (req, res) => {
-    const produit = req.query.produit;
-    const data = analyserPlante(produit);
+    const data = analyserPlante(req.query.produit);
 
     const doc = new PDFDocument();
-
     res.setHeader("Content-Type", "application/pdf");
+
     doc.pipe(res);
 
-    doc.fontSize(20).text("RAPPORT SENTOX", { align: "center" });
-
-    doc.moveDown();
-    doc.fontSize(12).text(`Produit: ${data.nom}`);
+    doc.text("RAPPORT SENTOX");
+    doc.text(`Produit: ${data.nom}`);
     doc.text(`Risque: ${data.risque}`);
     doc.text(`Score: ${data.score}/10`);
-    doc.text(`DL50: ${data.dl50}`);
-    doc.text(`Dose: ${data.dose}`);
-    doc.text(`Usages: ${data.usages}`);
-    doc.text(`Activités: ${data.activites}`);
-    doc.text(`Forme: ${data.forme}`);
-    doc.text(`Dosage: ${data.dosage}`);
-    doc.text(`Toxicité: ${data.toxicite}`);
 
     doc.end();
 });
@@ -205,5 +198,5 @@ app.get("/pdf", (req, res) => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    console.log("Serveur SENTOX lancé 🚀");
+    console.log("SENTOX lancé 🚀");
 });

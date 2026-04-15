@@ -1,128 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SENTOX PRO</title>
-
-    <style>
-        body {
-            font-family: Arial;
-            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-            text-align: center;
-            padding: 50px;
-            color: white;
-        }
-
-        .container {
-            background: white;
-            color: black;
-            padding: 30px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 400px;
-            margin: auto;
-        }
-
-        img {
-            width: 120px;
-        }
-
-        input {
-            padding: 10px;
-            width: 80%;
-        }
-
-        button {
-            padding: 10px;
-            margin: 5px;
-            background: #2c5364;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #1b3c4d;
-        }
-
-        #resultat {
-            margin-top: 20px;
-            text-align: left;
-        }
-    </style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SENTOX PRO</title>
 </head>
 
-<body>
-
-<div class="container">
-
-<img src="logo.png">
+<body style="font-family:Arial; text-align:center;">
 
 <h2>SENTOX PRO</h2>
 
-<input type="text" id="produit" placeholder="Entrer produit">
-<br>
+<input id="produit" placeholder="Produit"><br><br>
 
 <button onclick="analyser()">Analyser</button>
-<button onclick="analyseComplete()">Analyse complète</button>
+<button onclick="full()">Full AI</button>
 <button onclick="ia()">IA</button>
 <button onclick="pdf()">PDF</button>
 
-<div id="resultat"></div>
-
-</div>
+<div id="res"></div>
 
 <script>
-async function analyser() {
-    const produit = document.getElementById("produit").value;
 
-    const res = await fetch(`/analyze?produit=${produit}`);
-    const data = await res.json();
-
-    afficher(data);
+async function analyser(){
+    let p = document.getElementById("produit").value;
+    let r = await fetch(`/analyze?produit=${p}`);
+    let d = await r.json();
+    afficher(d);
 }
 
-async function analyseComplete() {
-    const produit = document.getElementById("produit").value;
+async function full(){
+    let p = document.getElementById("produit").value;
+    let r = await fetch(`/full-ai?produit=${p}`);
+    let d = await r.json();
 
-    const res = await fetch(`/analyse-complete?produit=${produit}`);
-    const data = await res.json();
-
-    afficher(data.local);
-}
-
-async function ia() {
-    const produit = document.getElementById("produit").value;
-
-    const res = await fetch(`/ai-science?produit=${produit}`);
-    const data = await res.json();
-
-    document.getElementById("resultat").innerHTML += `
-        <hr>
-        <p><b>IA :</b> ${data.analyse}</p>
+    document.getElementById("res").innerHTML = `
+        <h3>${d.local.nom}</h3>
+        <p>Score: ${d.local.score}</p>
+        <p>PubChem: ${JSON.stringify(d.pubchem)}</p>
+        <p>PubMed: ${JSON.stringify(d.pubmed)}</p>
     `;
 }
 
-function pdf() {
-    const produit = document.getElementById("produit").value;
-    window.open(`/pdf?produit=${produit}`);
+async function ia(){
+    let p = document.getElementById("produit").value;
+    let r = await fetch(`/ai?produit=${p}`);
+    let d = await r.json();
+    alert(d.interpretation);
 }
 
-function afficher(data) {
-    document.getElementById("resultat").innerHTML = `
-        <h3>${data.nom}</h3>
-        <p>Risque : ${data.niveau} ${data.risque}</p>
-        <p>Score : ${data.score}/10</p>
-        <p>DL50 : ${data.dl50}</p>
-        <p>Dose : ${data.dose}</p>
-        <p>Usages : ${data.usages}</p>
-        <p>Activités : ${data.activites}</p>
-        <p>Forme : ${data.forme}</p>
-        <p>Dosage : ${data.dosage}</p>
-        <p>Toxicité : ${data.toxicite}</p>
+function pdf(){
+    let p = document.getElementById("produit").value;
+    window.open(`/pdf?produit=${p}`);
+}
+
+function afficher(d){
+    document.getElementById("res").innerHTML = `
+        <h3>${d.nom}</h3>
+        <p>Risque: ${d.risque}</p>
+        <p>Score: ${d.score}</p>
     `;
 }
+
 </script>
 
 </body>
