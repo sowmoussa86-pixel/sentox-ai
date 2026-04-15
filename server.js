@@ -1,3 +1,6 @@
+const pdf = require("pdf-parse");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 const express = require("express");
 const cors = require("cors");
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
@@ -121,6 +124,30 @@ app.get("/pdf", (req, res) => {
     <p>Produit: ${p}</p>
     <p>Analyse générée par IA + bases scientifiques</p>
   `);
+});
+app.post("/upload-pdf", upload.single("file"), async (req, res) => {
+
+    const fs = require("fs");
+
+    try {
+        const dataBuffer = fs.readFileSync(req.file.path);
+        const data = await pdf(dataBuffer);
+
+        let texte = data.text;
+
+        // 🔍 Extraction simple intelligente
+        let resultat = {
+            dl50: texte.includes("LD50") ? "Mentionnée" : "Non trouvée",
+            toxicite: texte.includes("toxic") ? "Présente" : "Non mentionnée",
+            dose: texte.includes("dose") ? "Mentionnée" : "Non trouvée",
+            resume: texte.substring(0, 500)
+        };
+
+        res.json(resultat);
+
+    } catch (error) {
+        res.json({ erreur: "Lecture PDF impossible" });
+    }
 });
 
 /* ============================
