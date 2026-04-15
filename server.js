@@ -1,5 +1,6 @@
 const pdf = require("pdf-parse");
 const multer = require("multer");
+
 const upload = multer({ dest: "uploads/" });
 const express = require("express");
 const cors = require("cors");
@@ -135,15 +136,17 @@ app.post("/upload-pdf", upload.single("file"), async (req, res) => {
 
         let texte = data.text;
 
-        // 🔍 Extraction simple intelligente
-        let resultat = {
-            dl50: texte.includes("LD50") ? "Mentionnée" : "Non trouvée",
-            toxicite: texte.includes("toxic") ? "Présente" : "Non mentionnée",
-            dose: texte.includes("dose") ? "Mentionnée" : "Non trouvée",
-            resume: texte.substring(0, 500)
-        };
+        // 🔍 Extraction intelligente
+        let dl50 = texte.match(/LD50[^.\n]*/i);
+        let dose = texte.match(/dose[^.\n]*/i);
+        let tox = texte.match(/toxic[^.\n]*/i);
 
-        res.json(resultat);
+        res.json({
+            dl50: dl50 ? dl50[0] : "Non trouvée",
+            dose: dose ? dose[0] : "Non trouvée",
+            toxicite: tox ? tox[0] : "Non trouvée",
+            resume: texte.substring(0, 500)
+        });
 
     } catch (error) {
         res.json({ erreur: "Lecture PDF impossible" });

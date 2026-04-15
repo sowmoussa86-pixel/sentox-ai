@@ -62,7 +62,8 @@ async function analyser(){
   let p = document.getElementById("produit").value;
   let r = await fetch("/analyze?produit=" + p);
   let d = await r.json();
-
+<input type="file" id="pdfFile">
+<button onclick="uploadPDF()">Analyser PDF</button>
   document.getElementById("res").innerHTML = `
     <h3>${d.nom}</h3>
     <p>Risque : ${d.risque}</p>
@@ -73,14 +74,37 @@ async function analyser(){
     <p>Toxicité : ${d.toxicite}</p>
   `;
 }
-
+<input type="file" id="pdfFile">
+<button onclick="uploadPDF()">Analyser PDF</button>
 async function ia(){
   let p = document.getElementById("produit").value;
   let r = await fetch("/ai?produit=" + p);
   let d = await r.json();
   alert(d.interpretation);
 }
+async function uploadPDF() {
 
+    const file = document.getElementById("pdfFile").files[0];
+
+    let formData = new FormData();
+    formData.append("file", file);
+
+    const res = await fetch("/upload-pdf", {
+        method: "POST",
+        body: formData
+    });
+
+    const data = await res.json();
+
+    document.getElementById("res").innerHTML += `
+        <hr>
+        <h3>Analyse PDF</h3>
+        <p><b>DL50 :</b> ${data.dl50}</p>
+        <p><b>Dose :</b> ${data.dose}</p>
+        <p><b>Toxicité :</b> ${data.toxicite}</p>
+        <p><b>Résumé :</b> ${data.resume}</p>
+    `;
+}
 function pdf(){
   let p = document.getElementById("produit").value;
   window.open("/pdf?produit=" + p);
