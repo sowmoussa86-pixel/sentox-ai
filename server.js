@@ -1,7 +1,12 @@
 const express = require("express");
 const app = express();
 const PDFDocument = require("pdfkit");
-
+function nettoyer(texte) {
+    return texte
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+}
 // servir frontend
 app.use(express.static("public"));
 
@@ -9,7 +14,9 @@ app.use(express.static("public"));
    BASE TOXICOLOGIQUE
 ========================= */
 function analyseToxicologique(produit) {
-    produit = produit.toLowerCase();
+
+    produit = nettoyer(produit);
+
 
     if (produit.includes("paracetamol")) {
         return {
