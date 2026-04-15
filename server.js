@@ -1,108 +1,174 @@
 const express = require("express");
 const app = express();
 const PDFDocument = require("pdfkit");
+const fetch = require("node-fetch");
+
+app.use(express.static("public"));
+
+/* =========================
+   NORMALISATION TEXTE
+========================= */
 function nettoyer(texte) {
     return texte
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
 }
-// servir frontend
-app.use(express.static("public"));
 
 /* =========================
-   BASE TOXICOLOGIQUE
+   BASE PLANTES INTERNATIONALE
 ========================= */
-function analyseToxicologique(produit) {
+const basePlantes = {
+    neem: {
+        nom: "Neem",
+        dl50: "2000–5000 mg/kg",
+        dose: "variable",
+        usages: ["antipaludique", "antibactérien"],
+        activites: ["anti-inflammatoire"],
+        forme: ["huile", "infusion"],
+        dosage: "non standardisé",
+        toxicite: "toxique forte dose",
+        score: 6
+    },
+    moringa: {
+        nom: "Moringa",
+        dl50: null,
+        dose: "traditionnelle",
+        usages: ["nutrition"],
+        activites: ["antioxydant"],
+        forme: ["feuilles"],
+        dosage: null,
+        toxicite: "faible",
+        score: 2
+    },
+    kinkeliba: {
+        nom: "Kinkeliba",
+        dl50: null,
+        dose: "infusion",
+        usages: ["digestif"],
+        activites: ["hépatoprotecteur"],
+        forme: ["infusion"],
+        dosage: "traditionnel",
+        toxicite: "faible",
+        score: 2
+    }
+};
+
+/* =========================
+   ANALYSE PLANTE
+========================= */
+function analyserPlante(produit) {
 
     produit = nettoyer(produit);
 
+    const plante = basePlantes[produit];
 
-    if (produit.includes("paracetamol")) {
+    if (!plante) {
         return {
-            nom: "Paracétamol",
-            risque: "Faible à modéré",
-            organe_cible: "Foie",
-            dose_max: "4g/jour",
-            toxicite: "Hépatotoxicité",
-            interactions: ["Alcool"],
-            conseils: "Respecter la dose",
-            niveau: "🟢",
-            score: 2
-        };
-    }
-
-    if (produit.includes("ibuprofene")) {
-        return {
-            nom: "Ibuprofène",
-            risque: "Modéré",
-            organe_cible: "Estomac",
-            dose_max: "1200–2400 mg",
-            toxicite: "Ulcères",
-            interactions: ["Aspirine"],
-            conseils: "Après repas",
-            niveau: "🟠",
-            score: 5
-        };
-    }
-
-    if (produit.includes("kinkeliba")) {
-        return {
-            nom: "Kinkeliba",
-            risque: "Faible",
-            organe_cible: "Foie",
-            dose_max: "Infusion",
-            toxicite: "Faible",
-            interactions: [],
-            conseils: "Usage modéré",
-            niveau: "🟢",
-            score: 2
-        };
-    }
-
-    if (produit.includes("neem")) {
-        return {
-            nom: "Neem",
-            risque: "Modéré",
-            organe_cible: "Foie",
-            dose_max: "Contrôlé",
-            toxicite: "Toxique forte dose",
-            interactions: [],
-            conseils: "Attention enfants",
-            niveau: "🟠",
-            score: 6
+            nom: produit,
+            dl50: "Études en cours",
+            dose: "Non disponible",
+            usages: "Données insuffisantes",
+            activites: "Non documenté",
+            forme: "Non définie",
+            dosage: "Études en cours",
+            toxicite: "Inconnue",
+            risque: "Inconnu",
+            niveau: "⚪",
+            score: 0
         };
     }
 
     return {
-        nom: produit,
-        risque: "Inconnu",
-        organe_cible: "Non défini",
-        dose_max: "Non disponible",
-        toxicite: "Données insuffisantes",
-        interactions: [],
-        conseils: "Consulter un professionnel",
-        niveau: "⚪",
-        score: 0
+        nom: plante.nom,
+        dl50: plante.dl50 || "Études en cours",
+        dose: plante.dose || "Non disponible",
+        usages: plante.usages.join(", "),
+        activites: plante.activites.join(", "),
+        forme: plante.forme.join(", "),
+        dosage: plante.dosage || "Études en cours",
+        toxicite: plante.toxicite,
+        risque: plante.score >= 7 ? "Élevé" :
+                plante.score >= 4 ? "Modéré" : "Faible",
+        niveau: plante.score >= 7 ? "🔴" :
+                plante.score >= 4 ? "🟠" : "🟢",
+        score: plante.score
     };
 }
 
 /* =========================
-   API ANALYSE
+   API ANALYSE SIMPLE
 ========================= */
 app.get("/analyze", (req, res) => {
     const produit = req.query.produit;
-    res.json(analyseToxicologique(produit));
+    res.json(analyserPlante(produit));
 });
 
 /* =========================
-   IA SIMPLE
+   API PUBCHEM (MONDIALE)
 ========================= */
-app.get("/ai", (req, res) => {
+app.get("/api/pubchem", async (req, res) => {
+    const produit = req.query.produit;
+
+    try {
+        const url = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${produit}/property/MolecularWeight/JSON`;
+
+        const response = await fetch(url);
+        const data = await response.json();
+
+        res.json({
+            source: "PubChem",
+            data: data
+        });
+
+    } catch {
+        res.json({
+            message: "Données non disponibles (études en cours)"
+        });
+    }
+});
+
+/* =========================
+   IA SCIENTIFIQUE
+========================= */
+app.get("/ai-science", (req, res) => {
     const produit = req.query.produit;
 
     res.json({
-        message: `Analyse IA de ${produit} : vérifier toxicité, dose et interactions.`
+        analyse: `
+Analyse scientifique du produit ${produit} :
+
+- Toxicité dépend de la dose
+- Effets possibles sur organes
+- Interactions médicamenteuses possibles
+- Données scientifiques en cours d’évolution
+
+⚠️ Certaines données peuvent être en cours de validation.
+`
+    });
+});
+
+/* =========================
+   ANALYSE COMPLETE
+========================= */
+app.get("/analyse-complete", async (req, res) => {
+    const produit = req.query.produit;
+
+    const local = analyserPlante(produit);
+
+    let pubchem;
+
+    try {
+        const response = await fetch(`https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${produit}/property/MolecularWeight/JSON`);
+        pubchem = await response.json();
+    } catch {
+        pubchem = "Études en cours";
+    }
+
+    res.json({
+        produit,
+        local,
+        pubchem
     });
 });
 
@@ -111,7 +177,7 @@ app.get("/ai", (req, res) => {
 ========================= */
 app.get("/pdf", (req, res) => {
     const produit = req.query.produit;
-    const data = analyseToxicologique(produit);
+    const data = analyserPlante(produit);
 
     const doc = new PDFDocument();
 
@@ -124,15 +190,20 @@ app.get("/pdf", (req, res) => {
     doc.fontSize(12).text(`Produit: ${data.nom}`);
     doc.text(`Risque: ${data.risque}`);
     doc.text(`Score: ${data.score}/10`);
-    doc.text(`Organe: ${data.organe_cible}`);
-    doc.text(`Dose max: ${data.dose_max}`);
+    doc.text(`DL50: ${data.dl50}`);
+    doc.text(`Dose: ${data.dose}`);
+    doc.text(`Usages: ${data.usages}`);
+    doc.text(`Activités: ${data.activites}`);
+    doc.text(`Forme: ${data.forme}`);
+    doc.text(`Dosage: ${data.dosage}`);
     doc.text(`Toxicité: ${data.toxicite}`);
-    doc.text(`Interactions: ${data.interactions.join(", ")}`);
-    doc.text(`Conseils: ${data.conseils}`);
 
     doc.end();
 });
 
 /* ========================= */
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("Serveur lancé"));
+
+app.listen(PORT, () => {
+    console.log("Serveur SENTOX lancé 🚀");
+});

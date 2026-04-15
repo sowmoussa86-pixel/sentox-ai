@@ -39,6 +39,11 @@
             background: #2c5364;
             color: white;
             border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1b3c4d;
         }
 
         #resultat {
@@ -60,8 +65,9 @@
 <br>
 
 <button onclick="analyser()">Analyser</button>
-<button onclick="pdf()">PDF</button>
+<button onclick="analyseComplete()">Analyse complète</button>
 <button onclick="ia()">IA</button>
+<button onclick="pdf()">PDF</button>
 
 <div id="resultat"></div>
 
@@ -74,13 +80,27 @@ async function analyser() {
     const res = await fetch(`/analyze?produit=${produit}`);
     const data = await res.json();
 
-    document.getElementById("resultat").innerHTML = `
-        <h3>${data.nom}</h3>
-        <p>Risque : ${data.niveau} ${data.risque}</p>
-        <p>Score : ${data.score}/10</p>
-        <p>Organe : ${data.organe_cible}</p>
-        <p>Toxicité : ${data.toxicite}</p>
-        <p>Conseils : ${data.conseils}</p>
+    afficher(data);
+}
+
+async function analyseComplete() {
+    const produit = document.getElementById("produit").value;
+
+    const res = await fetch(`/analyse-complete?produit=${produit}`);
+    const data = await res.json();
+
+    afficher(data.local);
+}
+
+async function ia() {
+    const produit = document.getElementById("produit").value;
+
+    const res = await fetch(`/ai-science?produit=${produit}`);
+    const data = await res.json();
+
+    document.getElementById("resultat").innerHTML += `
+        <hr>
+        <p><b>IA :</b> ${data.analyse}</p>
     `;
 }
 
@@ -89,15 +109,18 @@ function pdf() {
     window.open(`/pdf?produit=${produit}`);
 }
 
-async function ia() {
-    const produit = document.getElementById("produit").value;
-
-    const res = await fetch(`/ai?produit=${produit}`);
-    const data = await res.json();
-
-    document.getElementById("resultat").innerHTML += `
-        <hr>
-        <p><b>IA :</b> ${data.message}</p>
+function afficher(data) {
+    document.getElementById("resultat").innerHTML = `
+        <h3>${data.nom}</h3>
+        <p>Risque : ${data.niveau} ${data.risque}</p>
+        <p>Score : ${data.score}/10</p>
+        <p>DL50 : ${data.dl50}</p>
+        <p>Dose : ${data.dose}</p>
+        <p>Usages : ${data.usages}</p>
+        <p>Activités : ${data.activites}</p>
+        <p>Forme : ${data.forme}</p>
+        <p>Dosage : ${data.dosage}</p>
+        <p>Toxicité : ${data.toxicite}</p>
     `;
 }
 </script>
