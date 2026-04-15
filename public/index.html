@@ -3,66 +3,91 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SENTOX PRO</title>
+
+<style>
+body {
+  font-family: Arial;
+  text-align: center;
+  background: linear-gradient(to right, #0f3d3e, #2c6975);
+  color: white;
+}
+
+.card {
+  background: white;
+  color: black;
+  padding: 20px;
+  margin: 40px auto;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 400px;
+}
+
+button {
+  padding: 10px;
+  margin: 5px;
+  background: #2c6975;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+input {
+  padding: 10px;
+  width: 80%;
+}
+</style>
+
 </head>
 
-<body style="font-family:Arial; text-align:center;">
+<body>
+
+<div class="card">
+
+<img src="logo.png" width="150">
 
 <h2>SENTOX PRO</h2>
 
-<input id="produit" placeholder="Produit"><br><br>
+<input id="produit" placeholder="Entrer produit"><br><br>
 
 <button onclick="analyser()">Analyser</button>
-<button onclick="full()">Full AI</button>
 <button onclick="ia()">IA</button>
 <button onclick="pdf()">PDF</button>
 
 <div id="res"></div>
 
+</div>
+
 <script>
 
 async function analyser(){
-    let p = document.getElementById("produit").value;
-    let r = await fetch(`/analyze?produit=${p}`);
-    let d = await r.json();
-    afficher(d);
-}
+  let p = document.getElementById("produit").value;
+  let r = await fetch("/analyze?produit=" + p);
+  let d = await r.json();
 
-async function full(){
-    let p = document.getElementById("produit").value;
-    let r = await fetch(`/full-ai?produit=${p}`);
-    let d = await r.json();
-
-    document.getElementById("res").innerHTML = `
-        <h3>${d.local.nom}</h3>
-        <p>Type : ${d.type}</p>
-        <p>Risque : ${d.local.risque}</p>
-        <p>Score : ${d.local.score}/10</p>
-
-        <hr>
-
-        <p><b>PubChem :</b> ${d.pubchem?.PropertyTable ? "Données disponibles" : "Études en cours"}</p>
-        <p><b>PubMed :</b> ${d.pubmed?.esearchresult ? "Articles disponibles" : "Études en cours"}</p>
-    `;
+  document.getElementById("res").innerHTML = `
+    <h3>${d.nom}</h3>
+    <p>Risque : ${d.risque}</p>
+    <p>Score : ${d.score}/10</p>
+    <p>DL50 : ${d.dl50}</p>
+    <p>Dose : ${d.dose}</p>
+    <p>Usages : ${d.usages}</p>
+    <p>Activités : ${d.activites}</p>
+    <p>Forme : ${d.forme}</p>
+    <p>Dosage : ${d.dosage}</p>
+    <p>Toxicité : ${d.toxicite}</p>
+  `;
 }
 
 async function ia(){
-    let p = document.getElementById("produit").value;
-    let r = await fetch(`/ai?produit=${p}`);
-    let d = await r.json();
-    alert(d.interpretation);
+  let p = document.getElementById("produit").value;
+  let r = await fetch("/ai?produit=" + p);
+  let d = await r.json();
+  alert(d.interpretation);
 }
 
 function pdf(){
-    let p = document.getElementById("produit").value;
-    window.open(`/pdf?produit=${p}`);
-}
-
-function afficher(d){
-    document.getElementById("res").innerHTML = `
-        <h3>${d.nom}</h3>
-        <p>Risque: ${d.risque}</p>
-        <p>Score: ${d.score}</p>
-    `;
+  let p = document.getElementById("produit").value;
+  window.open("/pdf?produit=" + p);
 }
 
 </script>
