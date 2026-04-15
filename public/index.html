@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SENTOX PRO</title>
+<title>SENTOX ULTIME</title>
 
 <style>
 body {
@@ -36,20 +36,19 @@ input {
   width: 80%;
 }
 </style>
-
 </head>
 
 <body>
 
 <div class="card">
 
-<img src="logo.png" width="150">
+<img src="logo.png" width="120">
 
-<h2>SENTOX PRO</h2>
+<h2>SENTOX ULTIME</h2>
 
-<input id="produit" placeholder="Entrer produit"><br><br>
+<input id="produit" placeholder="Produit"><br><br>
 
-<button onclick="analyser()">Analyser</button>
+<button onclick="analyser()">Analyse</button>
 <button onclick="ia()">IA</button>
 <button onclick="pdf()">PDF</button>
 
@@ -68,12 +67,9 @@ async function analyser(){
     <h3>${d.nom}</h3>
     <p>Risque : ${d.risque}</p>
     <p>Score : ${d.score}/10</p>
-    <p>DL50 : ${d.dl50}</p>
-    <p>Dose : ${d.dose}</p>
-    <p>Usages : ${d.usages}</p>
-    <p>Activités : ${d.activites}</p>
-    <p>Forme : ${d.forme}</p>
-    <p>Dosage : ${d.dosage}</p>
+    <p>Formule : ${d.formule}</p>
+    <p>Poids : ${d.poids}</p>
+    <p>PubMed : ${d.articles}</p>
     <p>Toxicité : ${d.toxicite}</p>
   `;
 }

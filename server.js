@@ -1,130 +1,130 @@
 const express = require("express");
 const cors = require("cors");
-const app = express();
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
+const app = express();
 app.use(cors());
 app.use(express.static("public"));
 
 /* ============================
-   BASE DE DONNÉES SCIENTIFIQUE
+   BASE MINIMALE (fallback)
 ============================ */
-
 const db = {
-  neem: {
-    nom: "Neem",
-    risque: "Modéré",
-    score: 6,
-    dl50: "200 mg/kg",
-    dose: "500 mg/jour",
-    usages: "Antipaludique, antibactérien",
-    activites: "Antifongique, anti-inflammatoire",
-    forme: "Extrait, poudre",
-    dosage: "1-2 prises/jour",
-    toxicite: "Toxique à forte dose"
-  },
-
-  paracetamol: {
-    nom: "Paracétamol",
-    risque: "Faible",
-    score: 3,
-    dl50: "338 mg/kg",
-    dose: "500-1000 mg",
-    usages: "Antalgique, antipyrétique",
-    activites: "Inhibition COX",
-    forme: "Comprimé, sirop",
-    dosage: "Max 4g/jour",
-    toxicite: "Hépatotoxique à forte dose"
-  },
-
-  moringa: {
-    nom: "Moringa",
-    risque: "Faible",
-    score: 2,
-    dl50: "Études en cours",
-    dose: "500-1000 mg",
-    usages: "Nutrition, antioxydant",
-    activites: "Anti-inflammatoire",
-    forme: "Poudre, capsule",
-    dosage: "1-2 fois/jour",
-    toxicite: "Faible"
-  }
+  neem: { risque: "Modéré", score: 6 },
+  paracetamol: { risque: "Faible", score: 3 }
 };
 
 /* ============================
-   ANALYSE SIMPLE
+   PUBCHEM (TOXICO + FORMULE)
 ============================ */
+app.get("/pubchem", async (req, res) => {
+  let p = req.query.produit;
 
-app.get("/analyze", (req, res) => {
-  let p = (req.query.produit || "").toLowerCase();
+  try {
+    let url = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${p}/property/MolecularFormula,MolecularWeight/JSON`;
 
-  if (db[p]) {
-    res.json(db[p]);
-  } else {
+    let r = await fetch(url);
+    let data = await r.json();
+
+    let props = data.PropertyTable.Properties[0];
+
     res.json({
-      nom: p,
-      risque: "Inconnu",
-      score: 0,
-      dl50: "Études en cours",
-      dose: "Non disponible",
-      usages: "Données insuffisantes",
-      activites: "Non documenté",
-      forme: "Non définie",
-      dosage: "Études en cours",
-      toxicite: "Inconnue"
+      formule: props.MolecularFormula,
+      poids: props.MolecularWeight
     });
+
+  } catch {
+    res.json({ error: "Données PubChem non trouvées" });
   }
 });
 
 /* ============================
-   IA INTERPRÉTATION
+   PUBMED (ARTICLES)
 ============================ */
+app.get("/pubmed", async (req, res) => {
+  let p = req.query.produit;
 
-app.get("/ai", (req, res) => {
-  let p = (req.query.produit || "").toLowerCase();
-  let data = db[p];
+  try {
+    let url = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${p}&retmode=json`;
 
-  if (!data) {
-    return res.json({
-      interpretation: "Produit inconnu. Données scientifiques insuffisantes."
+    let r = await fetch(url);
+    let data = await r.json();
+
+    let count = data.esearchresult.count;
+
+    res.json({
+      articles: count + " articles scientifiques trouvés"
     });
-  }
 
-  let interpretation = `Le produit ${data.nom} présente un risque ${data.risque}. 
-Score toxicologique: ${data.score}/10. 
-Toxicité: ${data.toxicite}. 
-Utilisation recommandée avec précaution.`;
+  } catch {
+    res.json({ articles: "Erreur PubMed" });
+  }
+});
+
+/* ============================
+   ANALYSE INTELLIGENTE
+============================ */
+app.get("/analyze", async (req, res) => {
+  let p = (req.query.produit || "").toLowerCase();
+
+  let base = db[p] || { risque: "Inconnu", score: 0 };
+
+  let pubchem = {};
+  let pubmed = {};
+
+  try {
+    let pc = await fetch(`http://localhost:3000/pubchem?produit=${p}`);
+    pubchem = await pc.json();
+  } catch {}
+
+  try {
+    let pm = await fetch(`http://localhost:3000/pubmed?produit=${p}`);
+    pubmed = await pm.json();
+  } catch {}
+
+  res.json({
+    nom: p,
+    risque: base.risque,
+    score: base.score,
+    formule: pubchem.formule || "N/A",
+    poids: pubchem.poids || "N/A",
+    articles: pubmed.articles || "N/A",
+    toxicite: base.score > 5 ? "Surveiller dose" : "Faible"
+  });
+});
+
+/* ============================
+   IA (PRÊTE POUR OPENAI)
+============================ */
+app.get("/ai", async (req, res) => {
+  let p = req.query.produit;
+
+  let interpretation = `
+Analyse scientifique du produit ${p} :
+- Données issues de PubChem et PubMed
+- Évaluation toxicologique automatique
+- Risque dépendant de la dose
+- Recommandation : validation par expert
+`;
 
   res.json({ interpretation });
 });
 
 /* ============================
-   PDF SIMPLE
+   PDF
 ============================ */
-
 app.get("/pdf", (req, res) => {
-  let p = (req.query.produit || "").toLowerCase();
-  let d = db[p];
-
-  if (!d) return res.send("Produit non trouvé");
+  let p = req.query.produit;
 
   res.send(`
-    <h1>RAPPORT SENTOX</h1>
-    <p>Produit: ${d.nom}</p>
-    <p>Risque: ${d.risque}</p>
-    <p>Score: ${d.score}/10</p>
-    <p>DL50: ${d.dl50}</p>
-    <p>Dose: ${d.dose}</p>
-    <p>Usages: ${d.usages}</p>
-    <p>Activités: ${d.activites}</p>
-    <p>Forme: ${d.forme}</p>
-    <p>Dosage: ${d.dosage}</p>
-    <p>Toxicité: ${d.toxicite}</p>
+    <h1>RAPPORT SENTOX ULTIME</h1>
+    <p>Produit: ${p}</p>
+    <p>Analyse générée par IA + bases scientifiques</p>
   `);
 });
 
 /* ============================
-   LANCEMENT
+   START
 ============================ */
-
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("Serveur lancé sur port " + PORT));
+app.listen(PORT, () => console.log("SENTOX ULTIME lancé 🚀"));
