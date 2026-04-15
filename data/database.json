@@ -1,0 +1,16 @@
+[
+  {
+    "nom": "neem",
+    "risque": "Modéré",
+    "score": "6/10",
+    "toxicite": "Surveiller dose",
+    "pdf": "neem.pdf"
+  },
+  {
+    "nom": "paracetamol",
+    "risque": "Modéré",
+    "score": "5/10",
+    "toxicite": "Hépatotoxique",
+    "pdf": "paracetamol.pdf"
+  }
+]

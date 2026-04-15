@@ -1,115 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SENTOX ULTIME</title>
 
 <style>
 body {
   font-family: Arial;
   text-align: center;
-  background: linear-gradient(to right, #0f3d3e, #2c6975);
+  background: linear-gradient(to right, #0f2027, #2c5364);
   color: white;
 }
 
-.card {
+.box {
   background: white;
   color: black;
   padding: 20px;
   margin: 40px auto;
-  border-radius: 15px;
   width: 90%;
   max-width: 400px;
-}
-
-button {
-  padding: 10px;
-  margin: 5px;
-  background: #2c6975;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 input {
   padding: 10px;
   width: 80%;
 }
+
+button {
+  padding: 10px;
+  margin: 5px;
+  background: #2c5364;
+  color: white;
+  border: none;
+}
+
+img {
+  width: 150px;
+}
 </style>
 </head>
 
 <body>
 
-<div class="card">
+<div class="box">
+  <img src="logo.png">
+  <h2>SENTOX ULTIME</h2>
 
-<img src="logo.png" width="120">
+  <input id="produit" placeholder="Produit"><br><br>
 
-<h2>SENTOX ULTIME</h2>
+  <button onclick="analyser()">Analyse</button>
+  <button onclick="pdf()">PDF</button>
 
-<input id="produit" placeholder="Produit"><br><br>
-
-<button onclick="analyser()">Analyse</button>
-<button onclick="ia()">IA</button>
-<button onclick="pdf()">PDF</button>
-
-<div id="res"></div>
-
+  <div id="res"></div>
 </div>
 
 <script>
-
-async function analyser(){
+async function analyser() {
   let p = document.getElementById("produit").value;
-  let r = await fetch("/analyze?produit=" + p);
+
+  let r = await fetch(`/analyze?produit=${p}`);
   let d = await r.json();
-<input type="file" id="pdfFile">
-<button onclick="uploadPDF()">Analyser PDF</button>
+
   document.getElementById("res").innerHTML = `
     <h3>${d.nom}</h3>
     <p>Risque : ${d.risque}</p>
-    <p>Score : ${d.score}/10</p>
+    <p>Score : ${d.score}</p>
     <p>Formule : ${d.formule}</p>
     <p>Poids : ${d.poids}</p>
-    <p>PubMed : ${d.articles}</p>
+    <p>PubMed : ${d.pubmed}</p>
     <p>Toxicité : ${d.toxicite}</p>
   `;
 }
-<input type="file" id="pdfFile">
-<button onclick="uploadPDF()">Analyser PDF</button>
-async function ia(){
+
+function pdf() {
   let p = document.getElementById("produit").value;
-  let r = await fetch("/ai?produit=" + p);
-  let d = await r.json();
-  alert(d.interpretation);
+  window.open(`/pdf-local?produit=${p}`);
 }
-async function uploadPDF() {
-
-    const file = document.getElementById("pdfFile").files[0];
-
-    let formData = new FormData();
-    formData.append("file", file);
-
-    const res = await fetch("/upload-pdf", {
-        method: "POST",
-        body: formData
-    });
-
-    const data = await res.json();
-
-    document.getElementById("res").innerHTML += `
-        <hr>
-        <h3>Analyse PDF</h3>
-        <p><b>DL50 :</b> ${data.dl50}</p>
-        <p><b>Dose :</b> ${data.dose}</p>
-        <p><b>Toxicité :</b> ${data.toxicite}</p>
-        <p><b>Résumé :</b> ${data.resume}</p>
-    `;
-}
-function pdf(){
-  let p = document.getElementById("produit").value;
-  window.open("/pdf?produit=" + p);
-}
-
 </script>
 
 </body>

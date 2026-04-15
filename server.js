@@ -1,160 +1,90 @@
-const pdf = require("pdf-parse");
-const multer = require("multer");
-
-const upload = multer({ dest: "uploads/" });
 const express = require("express");
-const cors = require("cors");
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const fs = require("fs");
+const path = require("path");
+const fetch = require("node-fetch");
 
 const app = express();
-app.use(cors());
 app.use(express.static("public"));
 
-/* ============================
-   BASE MINIMALE (fallback)
-============================ */
-const db = {
-  neem: { risque: "Modéré", score: 6 },
-  paracetamol: { risque: "Faible", score: 3 }
-};
+// 📁 Charger base locale
+const database = JSON.parse(
+  fs.readFileSync(
+    path.join(__dirname, "data", "database.json"),
+    "utf-8"
+  )
+);
 
-/* ============================
-   PUBCHEM (TOXICO + FORMULE)
-============================ */
-app.get("/pubchem", async (req, res) => {
-  let p = req.query.produit;
-
+// 🧪 PubChem
+async function getPubChem(produit) {
   try {
-    let url = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${p}/property/MolecularFormula,MolecularWeight/JSON`;
+    const url = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${produit}/property/MolecularFormula,MolecularWeight/JSON`;
+    const res = await fetch(url);
+    const data = await res.json();
 
-    let r = await fetch(url);
-    let data = await r.json();
+    const props = data.PropertyTable.Properties[0];
 
-    let props = data.PropertyTable.Properties[0];
-
-    res.json({
+    return {
       formule: props.MolecularFormula,
       poids: props.MolecularWeight
-    });
-
+    };
   } catch {
-    res.json({ error: "Données PubChem non trouvées" });
+    return { formule: "N/A", poids: "N/A" };
   }
-});
+}
 
-/* ============================
-   PUBMED (ARTICLES)
-============================ */
-app.get("/pubmed", async (req, res) => {
-  let p = req.query.produit;
-
+// 📚 PubMed
+async function getPubMed(produit) {
   try {
-    let url = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${p}&retmode=json`;
+    const url = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${produit}&retmode=json`;
+    const res = await fetch(url);
+    const data = await res.json();
 
-    let r = await fetch(url);
-    let data = await r.json();
-
-    let count = data.esearchresult.count;
-
-    res.json({
-      articles: count + " articles scientifiques trouvés"
-    });
-
+    return data.esearchresult.idlist.length + " articles";
   } catch {
-    res.json({ articles: "Erreur PubMed" });
+    return "N/A";
   }
-});
+}
 
-/* ============================
-   ANALYSE INTELLIGENTE
-============================ */
+// 🔍 Analyse complète
 app.get("/analyze", async (req, res) => {
-  let p = (req.query.produit || "").toLowerCase();
+  const produit = req.query.produit.toLowerCase();
 
-  let base = db[p] || { risque: "Inconnu", score: 0 };
+  const local = database.find(p =>
+    produit.includes(p.nom.toLowerCase())
+  );
 
-  let pubchem = {};
-  let pubmed = {};
-
-  try {
-    let pc = await fetch(`http://localhost:3000/pubchem?produit=${p}`);
-    pubchem = await pc.json();
-  } catch {}
-
-  try {
-    let pm = await fetch(`http://localhost:3000/pubmed?produit=${p}`);
-    pubmed = await pm.json();
-  } catch {}
+  const pubchem = await getPubChem(produit);
+  const pubmed = await getPubMed(produit);
 
   res.json({
-    nom: p,
-    risque: base.risque,
-    score: base.score,
-    formule: pubchem.formule || "N/A",
-    poids: pubchem.poids || "N/A",
-    articles: pubmed.articles || "N/A",
-    toxicite: base.score > 5 ? "Surveiller dose" : "Faible"
+    nom: produit,
+    risque: local?.risque || "Inconnu",
+    score: local?.score || "0/10",
+    toxicite: local?.toxicite || "Non documentée",
+
+    formule: pubchem.formule,
+    poids: pubchem.poids,
+    pubmed: pubmed
   });
 });
 
-/* ============================
-   IA (PRÊTE POUR OPENAI)
-============================ */
-app.get("/ai", async (req, res) => {
-  let p = req.query.produit;
+// 📄 PDF LOCAL
+app.get("/pdf-local", (req, res) => {
+  const produit = req.query.produit.toLowerCase();
 
-  let interpretation = `
-Analyse scientifique du produit ${p} :
-- Données issues de PubChem et PubMed
-- Évaluation toxicologique automatique
-- Risque dépendant de la dose
-- Recommandation : validation par expert
-`;
+  const data = database.find(p =>
+    produit.includes(p.nom.toLowerCase())
+  );
 
-  res.json({ interpretation });
+  if (!data || !data.pdf) {
+    return res.send("PDF non disponible");
+  }
+
+  const filePath = path.join(__dirname, "pdfs", data.pdf);
+  res.sendFile(filePath);
 });
 
-/* ============================
-   PDF
-============================ */
-app.get("/pdf", (req, res) => {
-  let p = req.query.produit;
-
-  res.send(`
-    <h1>RAPPORT SENTOX ULTIME</h1>
-    <p>Produit: ${p}</p>
-    <p>Analyse générée par IA + bases scientifiques</p>
-  `);
+// 🚀 Lancement
+app.listen(3000, () => {
+  console.log("SENTOX actif sur http://localhost:3000");
 });
-app.post("/upload-pdf", upload.single("file"), async (req, res) => {
-
-    const fs = require("fs");
-
-    try {
-        const dataBuffer = fs.readFileSync(req.file.path);
-        const data = await pdf(dataBuffer);
-
-        let texte = data.text;
-
-        // 🔍 Extraction intelligente
-        let dl50 = texte.match(/LD50[^.\n]*/i);
-        let dose = texte.match(/dose[^.\n]*/i);
-        let tox = texte.match(/toxic[^.\n]*/i);
-
-        res.json({
-            dl50: dl50 ? dl50[0] : "Non trouvée",
-            dose: dose ? dose[0] : "Non trouvée",
-            toxicite: tox ? tox[0] : "Non trouvée",
-            resume: texte.substring(0, 500)
-        });
-
-    } catch (error) {
-        res.json({ erreur: "Lecture PDF impossible" });
-    }
-});
-
-/* ============================
-   START
-============================ */
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("SENTOX ULTIME lancé 🚀"));
