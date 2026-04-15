@@ -33,11 +33,12 @@ async function full(){
     let d = await r.json();
 
     document.getElementById("res").innerHTML = `
-        <h3>${d.local.nom}</h3>
-        <p>Score: ${d.local.score}</p>
-        <p>PubChem: ${JSON.stringify(d.pubchem)}</p>
-        <p>PubMed: ${JSON.stringify(d.pubmed)}</p>
-    `;
+    <h3>${d.local.nom}</h3>
+    <p>Type : ${d.type}</p>
+    <p>Score: ${d.local.score}</p>
+    <p>PubChem: ${JSON.stringify(d.pubchem)}</p>
+    <p>PubMed: ${JSON.stringify(d.pubmed)}</p>
+`;
 }
 
 async function ia(){
