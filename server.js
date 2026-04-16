@@ -1,90 +1,87 @@
 const express = require("express");
-const fs = require("fs");
-const path = require("path");
-const fetch = require("node-fetch");
-
 const app = express();
+const path = require("path");
+
+const data = require("./data/database.json");
+
 app.use(express.static("public"));
+app.use("/pdf", express.static(path.join(__dirname, "public/pdf")));
 
-// 📁 Charger base locale
-const database = JSON.parse(
-  fs.readFileSync(
-    path.join(__dirname, "data", "database.json"),
-    "utf-8"
-  )
-);
 
-// 🧪 PubChem
-async function getPubChem(produit) {
-  try {
-    const url = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${produit}/property/MolecularFormula,MolecularWeight/JSON`;
-    const res = await fetch(url);
-    const data = await res.json();
+// 🔥 Fonction SCORE TOXICOLOGIQUE
+function calculateScore(dl50) {
+  if (!dl50) return "Inconnu";
 
-    const props = data.PropertyTable.Properties[0];
-
-    return {
-      formule: props.MolecularFormula,
-      poids: props.MolecularWeight
-    };
-  } catch {
-    return { formule: "N/A", poids: "N/A" };
-  }
+  if (dl50 < 50) return "Très élevé ⚠️";
+  if (dl50 < 300) return "Élevé";
+  if (dl50 < 2000) return "Modéré";
+  return "Faible";
 }
 
-// 📚 PubMed
-async function getPubMed(produit) {
-  try {
-    const url = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${produit}&retmode=json`;
-    const res = await fetch(url);
-    const data = await res.json();
 
-    return data.esearchresult.idlist.length + " articles";
-  } catch {
-    return "N/A";
-  }
-}
+// 🔍 ROUTE RECHERCHE UNIQUE
+app.get("/search", (req, res) => {
+  const query = req.query.q?.toLowerCase();
 
-// 🔍 Analyse complète
-app.get("/analyze", async (req, res) => {
-  const produit = req.query.produit.toLowerCase();
-
-  const local = database.find(p =>
-    produit.includes(p.nom.toLowerCase())
-  );
-
-  const pubchem = await getPubChem(produit);
-  const pubmed = await getPubMed(produit);
-
-  res.json({
-    nom: produit,
-    risque: local?.risque || "Inconnu",
-    score: local?.score || "0/10",
-    toxicite: local?.toxicite || "Non documentée",
-
-    formule: pubchem.formule,
-    poids: pubchem.poids,
-    pubmed: pubmed
-  });
-});
-
-// 📄 PDF LOCAL
-app.get("/pdf-local", (req, res) => {
-  const produit = req.query.produit.toLowerCase();
-
-  const data = database.find(p =>
-    produit.includes(p.nom.toLowerCase())
-  );
-
-  if (!data || !data.pdf) {
-    return res.send("PDF non disponible");
+  if (!query) {
+    return res.json({ message: "Aucune recherche" });
   }
 
-  const filePath = path.join(__dirname, "pdfs", data.pdf);
-  res.sendFile(filePath);
+  // 🌿 PLANTES
+  const plant = data.plants.find(p =>
+    p.nom_scientifique.toLowerCase().includes(query) ||
+    p.nom_local.toLowerCase().includes(query)
+  );
+
+  if (plant) {
+    return res.json({
+      type: "plante",
+      data: {
+        ...plant,
+        score: calculateScore(plant.dl50)
+      }
+    });
+  }
+
+  // 💊 MEDICAMENTS
+  const med = data.medicaments.find(m =>
+    m.nom_commercial.toLowerCase().includes(query) ||
+    m.dci.toLowerCase().includes(query)
+  );
+
+  if (med) {
+    return res.json({
+      type: "medicament",
+      data: {
+        ...med,
+        score: calculateScore(med.toxicologie?.dl50)
+      }
+    });
+  }
+
+  // ☣️ SUBSTANCES
+  const sub = data.substances.find(s =>
+    s.nom.toLowerCase().includes(query) ||
+    s.cas.includes(query)
+  );
+
+  if (sub) {
+    return res.json({
+      type: "substance",
+      data: {
+        ...sub,
+        score: calculateScore(sub.toxicologie?.dl50)
+      }
+    });
+  }
+
+  // ❌ NON TROUVÉ
+  res.json({ message: "Produit non trouvé" });
 });
 
-// 🚀 Lancement
-app.listen(3000, () => {
-  console.log("SENTOX actif sur http://localhost:3000");
+
+// 🚀 LANCEMENT SERVEUR
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("Serveur lancé sur le port " + PORT);
 });

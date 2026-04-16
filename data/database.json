@@ -1,16 +1,111 @@
-[
-  {
-    "nom": "neem",
-    "risque": "Modéré",
-    "score": "6/10",
-    "toxicite": "Surveiller dose",
-    "pdf": "neem.pdf"
-  },
-  {
-    "nom": "paracetamol",
-    "risque": "Modéré",
-    "score": "5/10",
-    "toxicite": "Hépatotoxique",
-    "pdf": "paracetamol.pdf"
-  }
-]
+{
+  "plants": [
+    {
+      "id": 1,
+      "nom_scientifique": "Azadirachta indica",
+      "nom_local": "Neem",
+      "partie_utilisee": "Feuilles",
+      "principe_actif": "Azadirachtine",
+      "indication": "Antipaludique, antibactérien",
+      "toxicite": "Faible",
+      "dose": "5g infusion",
+      "dl50": 5000,
+      "risque": "Faible",
+      "pdf": "neem.pdf"
+    },
+    {
+      "id": 2,
+      "nom_scientifique": "Moringa oleifera",
+      "nom_local": "Moringa",
+      "partie_utilisee": "Feuilles",
+      "principe_actif": "Flavonoïdes",
+      "indication": "Antioxydant, nutrition",
+      "toxicite": "Très faible",
+      "dose": "10g/jour",
+      "dl50": 6000,
+      "risque": "Faible",
+      "pdf": "moringa.pdf"
+    }
+  ],
+
+  "medicaments": [
+    {
+      "id": 1,
+      "nom_commercial": "Paracetamol",
+      "dci": "Paracétamol",
+      "classe": "Antalgique",
+
+      "chimie": {
+        "formule": "C8H9NO2",
+        "iupac": "N-(4-hydroxyphenyl)acetamide",
+        "cas": "103-90-2"
+      },
+
+      "physicochimie": {
+        "solubilite": "Faible",
+        "pKa": "9.5",
+        "lipophilie": "Faible",
+        "stabilite": "Stable"
+      },
+
+      "pharmacocinetique": {
+        "biodisponibilite": "80%",
+        "distribution": "Systémique",
+        "metabolisme": "Hépatique",
+        "elimination": "Rénale"
+      },
+
+      "toxicologie": {
+        "dl50": 338,
+        "noael": "Non précisé",
+        "loael": "Non précisé",
+        "aigue": "Hépatotoxique",
+        "chronique": "Atteinte hépatique",
+        "organes_cibles": "Foie",
+        "effets_graves": "Nécrose hépatique",
+        "mecanisme": "NAPQI",
+        "marge_securite": "Étroite"
+      },
+
+      "pdf": "paracetamol.pdf"
+    }
+  ],
+
+  "substances": [
+    {
+      "id": 1,
+      "nom": "Benzene",
+      "iupac": "Benzene",
+      "cas": "71-43-2",
+      "famille": "Hydrocarbure aromatique",
+
+      "physicochimie": {
+        "formule": "C6H6",
+        "proprietes": "Volatile, inflammable"
+      },
+
+      "toxicologie": {
+        "dl50": 930,
+        "cl50": 10000,
+        "aigue": "Modérée",
+        "chronique": "Cancérigène",
+        "cancerogenicite": "Oui",
+        "mutagenicite": "Oui",
+        "reprotoxicite": "Oui",
+        "organes_cibles": "Moelle osseuse"
+      },
+
+      "securite": {
+        "voies_exposition": "Inhalation",
+        "mesures_urgence": "Ventilation",
+        "protection": "Masque, gants"
+      },
+
+      "impact": {
+        "environnemental": "Élevé"
+      },
+
+      "pdf": "benzene.pdf"
+    }
+  ]
+}
