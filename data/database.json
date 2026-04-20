@@ -1,40 +1,7 @@
 [
-  {"id":1,"nom":"Azadirachta indica","type":"plante","classe":"Meliaceae","principes_actifs":["azadirachtine"],"mode_administration":"infusion","dose_recommandee":"2-3 g/250 ml","toxicite":"modérée","dl50_mg_kg":2000},
-  {"id":2,"nom":"Moringa oleifera","type":"plante","classe":"Moringaceae","principes_actifs":["polyphénols"],"mode_administration":"alimentaire","dose_recommandee":"5-10 g/jour","toxicite":"faible","dl50_mg_kg":5000},
-  {"id":3,"nom":"Khaya senegalensis","type":"plante","classe":"Meliaceae","principes_actifs":["limonoïdes"],"mode_administration":"décoction","dose_recommandee":"10 g/L","toxicite":"modérée","dl50_mg_kg":1500},
-  {"id":4,"nom":"Hibiscus sabdariffa","type":"plante","classe":"Malvaceae","principes_actifs":["flavonoïdes"],"mode_administration":"infusion","dose_recommandee":"2 g/200 ml","toxicite":"faible","dl50_mg_kg":5000},
-  {"id":5,"nom":"Vernonia amygdalina","type":"plante","classe":"Asteraceae","principes_actifs":["saponines"],"mode_administration":"décoction","dose_recommandee":"5 g/L","toxicite":"modérée","dl50_mg_kg":1800},
-
-  {"id":6,"nom":"Paracétamol","type":"medicament","classe":"antalgique","principes_actifs":["paracétamol"],"mode_administration":"orale","dose_recommandee":"500-1000 mg","toxicite":"élevée","dl50_mg_kg":338},
-  {"id":7,"nom":"Amoxicilline","type":"medicament","classe":"antibiotique","principes_actifs":["amoxicilline"],"mode_administration":"orale","dose_recommandee":"500 mg","toxicite":"faible","dl50_mg_kg":2000},
-  {"id":8,"nom":"Ibuprofène","type":"medicament","classe":"anti-inflammatoire","principes_actifs":["ibuprofène"],"mode_administration":"orale","dose_recommandee":"400 mg","toxicite":"modérée","dl50_mg_kg":636},
-  {"id":9,"nom":"Metformine","type":"medicament","classe":"antidiabétique","principes_actifs":["metformine"],"mode_administration":"orale","dose_recommandee":"500 mg","toxicite":"faible","dl50_mg_kg":2000},
-  {"id":10,"nom":"Quinine","type":"medicament","classe":"antipaludique","principes_actifs":["quinine"],"mode_administration":"orale","dose_recommandee":"300 mg","toxicite":"modérée","dl50_mg_kg":660},
-
-  {"id":11,"nom":"Glyphosate","type":"chimique","classe":"herbicide","principes_actifs":["glyphosate"],"mode_administration":"exposition","dose_recommandee":"N/A","toxicite":"modérée","dl50_mg_kg":5600},
-  {"id":12,"nom":"Hypochlorite de sodium","type":"chimique","classe":"désinfectant","principes_actifs":["chlore"],"mode_administration":"exposition","dose_recommandee":"dilué","toxicite":"élevée","dl50_mg_kg":5800},
-  {"id":13,"nom":"Paraquat","type":"chimique","classe":"herbicide","principes_actifs":["paraquat"],"mode_administration":"exposition","dose_recommandee":"N/A","toxicite":"élevée","dl50_mg_kg":150},
-  {"id":14,"nom":"DDT","type":"chimique","classe":"insecticide","principes_actifs":["DDT"],"mode_administration":"exposition","dose_recommandee":"N/A","toxicite":"modérée","dl50_mg_kg":113},
-  {"id":15,"nom":"Ammoniac","type":"chimique","classe":"industriel","principes_actifs":["NH3"],"mode_administration":"inhalation","dose_recommandee":"N/A","toxicite":"élevée","dl50_mg_kg":350},
-
-  {"id":16,"nom":"Allium sativum","type":"plante","classe":"Amaryllidaceae","principes_actifs":["allicine"],"mode_administration":"alimentaire","dose_recommandee":"1-2 g","toxicite":"faible","dl50_mg_kg":5000},
-  {"id":17,"nom":"Zingiber officinale","type":"plante","classe":"Zingiberaceae","principes_actifs":["gingérol"],"mode_administration":"infusion","dose_recommandee":"2 g","toxicite":"faible","dl50_mg_kg":5000},
-  {"id":18,"nom":"Artemisia annua","type":"plante","classe":"Asteraceae","principes_actifs":["artémisinine"],"mode_administration":"infusion","dose_recommandee":"5 g","toxicite":"modérée","dl50_mg_kg":2000},
-
-  {"id":19,"nom":"Aspirine","type":"medicament","classe":"antalgique","principes_actifs":["acide acétylsalicylique"],"mode_administration":"orale","dose_recommandee":"500 mg","toxicite":"modérée","dl50_mg_kg":200},
-  {"id":20,"nom":"Diazépam","type":"medicament","classe":"anxiolytique","principes_actifs":["diazépam"],"mode_administration":"orale","dose_recommandee":"5 mg","toxicite":"modérée","dl50_mg_kg":720},
-
-  {"id":21,"nom":"Chlore","type":"chimique","classe":"gaz","principes_actifs":["Cl2"],"mode_administration":"inhalation","dose_recommandee":"N/A","toxicite":"élevée","dl50_mg_kg":293},
-  {"id":22,"nom":"Acide sulfurique","type":"chimique","classe":"acide","principes_actifs":["H2SO4"],"mode_administration":"exposition","dose_recommandee":"N/A","toxicite":"élevée","dl50_mg_kg":2140},
-  {"id":23,"nom":"Benzène","type":"chimique","classe":"solvant","principes_actifs":["C6H6"],"mode_administration":"inhalation","dose_recommandee":"N/A","toxicite":"élevée","dl50_mg_kg":930},
-
-  {"id":24,"nom":"Curcuma longa","type":"plante","classe":"Zingiberaceae","principes_actifs":["curcumine"],"mode_administration":"alimentaire","dose_recommandee":"1-3 g","toxicite":"faible","dl50_mg_kg":5000},
-  {"id":25,"nom":"Psidium guajava","type":"plante","classe":"Myrtaceae","principes_actifs":["tanins"],"mode_administration":"infusion","dose_recommandee":"3 g","toxicite":"faible","dl50_mg_kg":5000},
-
-  {"id":26,"nom":"Ciprofloxacine","type":"medicament","classe":"antibiotique","principes_actifs":["ciprofloxacine"],"mode_administration":"orale","dose_recommandee":"500 mg","toxicite":"modérée","dl50_mg_kg":500},
-  {"id":27,"nom":"Tramadol","type":"medicament","classe":"antalgique","principes_actifs":["tramadol"],"mode_administration":"orale","dose_recommandee":"50 mg","toxicite":"élevée","dl50_mg_kg":350},
-
-  {"id":28,"nom":"Formaldéhyde","type":"chimique","classe":"industriel","principes_actifs":["CH2O"],"mode_administration":"inhalation","dose_recommandee":"N/A","toxicite":"élevée","dl50_mg_kg":100},
-  {"id":29,"nom":"Méthanol","type":"chimique","classe":"alcool","principes_actifs":["CH3OH"],"mode_administration":"orale","dose_recommandee":"N/A","toxicite":"élevée","dl50_mg_kg":5628},
-  {"id":30,"nom":"Acétone","type":"chimique","classe":"solvant","principes_actifs":["C3H6O"],"mode_administration":"inhalation","dose_recommandee":"N/A","toxicite":"modérée","dl50_mg_kg":5800}
+  {
+    "id": 1,
+    "nom": "neem",
+    "dl50": 5000
+  }
 ]
