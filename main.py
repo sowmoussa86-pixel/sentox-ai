@@ -19,11 +19,19 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.join(BASE_DIR, "data", "database.json")
 
-with open(file_path, encoding="utf-8") as f:
-    DATA = json.load(f)
-    DATA = json.load(f)
-    DATA = json.load(f)
+print("Chemin fichier :", file_path)
 
+if not os.path.exists(file_path):
+    print("ERREUR : fichier non trouvé")
+    DATA = []
+else:
+    with open(file_path, encoding="utf-8") as f:
+        content = f.read().strip()
+        if not content:
+            print("ERREUR : fichier vide")
+            DATA = []
+        else:
+            DATA = json.loads(content)
 # SCORE TOXICOLOGIQUE
 def score_toxicologique(dl50):
     if dl50 <= 50:
