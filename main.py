@@ -22,6 +22,7 @@ file_path = os.path.join(BASE_DIR, "data", "database.json")
 with open(file_path, encoding="utf-8") as f:
     DATA = json.load(f)
     DATA = json.load(f)
+    DATA = json.load(f)
 
 # SCORE TOXICOLOGIQUE
 def score_toxicologique(dl50):
