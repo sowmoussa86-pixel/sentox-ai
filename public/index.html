@@ -9,79 +9,42 @@
 <h1>SENTOX</h1>
 
 <input type="text" id="searchInput" placeholder="Nom plante ou produit">
-
 <button onclick="rechercher()">Rechercher</button>
-<button onclick="analyser()">Analyser</button>
 
 <div id="resultats"></div>
 
 <script>
-const API_URL = "http://192.168.1.13:8000";
+const API_URL = "https://sentox-ai-1.onrender.com";
 
-// RECHERCHER
 async function rechercher() {
     const input = document.getElementById("searchInput").value;
 
-    const res = await fetch(${API_URL}/search?nom=${input});
-    const data = await res.json();
+    if (!input) {
+        alert("Entre un nom");
+        return;
+    }
 
-    let resultDiv = document.getElementById("resultats");
-    resultDiv.innerHTML = "";
+    try {
+        const res = await fetch(API_URL + "/search?nom=" + input);
+        const data = await res.json();
 
-    data.forEach(item => {
-        resultDiv.innerHTML += `
-            <div>
-                <b>${item.nom}</b> (${item.type}) <br>
-                Toxicité: ${item.score_toxicologique}
-            </div><hr>
-        `;
-    });
-}
+        let div = document.getElementById("resultats");
+        div.innerHTML = "";
 
-// ANALYSER
-async function analyser() {
-    const res = await fetch(${API_URL}/interaction-multi?ids=1,2);
-    const data = await res.json();
+        data.forEach(item => {
+            div.innerHTML += `
+                <div style="margin:10px;padding:10px;border:1px solid #ccc;">
+                    <b>${item.nom}</b><br>
+                    DL50: ${item.dl50}<br>
+                    Toxicité: ${item.score_toxicologique}
+                </div>
+            `;
+        });
 
-    let resultDiv = document.getElementById("resultats");
-    resultDiv.innerHTML = `
-        <b>Substances:</b> ${data.substances.join(", ")} <br>
-        <b>Interactions:</b><br> ${data.interactions.join("<br>")}
-    `;
-}
-<script>
-const API_URL = "http://192.168.1.13:8000";
-
-// 🔎 RECHERCHER
-async function rechercher() {
-    const input = document.getElementById("searchInput").value;
-
-    const res = await fetch(${API_URL}/search?nom=${input});
-    const data = await res.json();
-
-    let resultDiv = document.getElementById("resultats");
-    resultDiv.innerHTML = "";
-
-    data.forEach(item => {
-        resultDiv.innerHTML += `
-            <div>
-                <b>${item.nom}</b> (${item.type})<br>
-                Toxicité: ${item.score_toxicologique}
-            </div><hr>
-        `;
-    });
-}
-
-// ⚠️ ANALYSER (simple test)
-async function analyser() {
-    const res = await fetch(${API_URL}/interaction-multi?ids=1,2);
-    const data = await res.json();
-
-    let resultDiv = document.getElementById("resultats");
-    resultDiv.innerHTML = `
-        <b>Analyse interaction :</b><br>
-        ${JSON.stringify(data)}
-    `;
+    } catch (err) {
+        console.error(err);
+        alert("Erreur API");
+    }
 }
 </script>
 
