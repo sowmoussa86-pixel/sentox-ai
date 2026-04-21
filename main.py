@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import json
+
+from services.local_db import search_local
+from services.pubchem import search_pubchem
 
 app = FastAPI()
 
-# CORS (obligatoire pour le site web)
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -13,27 +15,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Charger base de données
-import os
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(BASE_DIR, "data", "database.json")
-
-print("Chemin fichier :", file_path)
-
-if not os.path.exists(file_path):
-    print("ERREUR : fichier non trouvé")
-    DATA = []
-else:
-    with open(file_path, encoding="utf-8") as f:
-        content = f.read().strip()
-        if not content:
-            print("ERREUR : fichier vide")
-            DATA = []
-        else:
-            DATA = json.loads(content)
-# SCORE TOXICOLOGIQUE
+# SCORE TOXICO
 def score_toxicologique(dl50):
+    try:
+        dl50 = float(dl50)
+    except:
+        return "Inconnu"
+
     if dl50 <= 50:
         return "🔴 Très toxique"
     elif dl50 <= 300:
@@ -48,62 +36,17 @@ def score_toxicologique(dl50):
 def home():
     return {"message": "SENTOX API OK"}
 
-# GET ALL
-@app.get("/substances")
-def get_all():
-    result = []
-    for item in DATA:
-        item_copy = item.copy()
-        item_copy["score_toxicologique"] = score_toxicologique(item.get("dl50", 1000))
-        result.append(item_copy)
-    return result
-
 # SEARCH
 @app.get("/search")
 def search(nom: str):
     local_results = search_local(nom)
     pubchem_result = search_pubchem(nom)
 
+    # ajouter score toxicologique
+    for item in local_results:
+        item["score_toxicologique"] = score_toxicologique(item.get("dl50"))
+
     return {
         "local": local_results,
         "scientifique": pubchem_result
-    }
-
-# INTERACTION SIMPLE
-def check_interaction(item1, item2):
-    interactions = []
-
-    if item1["id"] == item2["id"]:
-        return ["Même substance"]
-
-    if item1["nom"] == "Paracétamol" and item2["nom"] == "Methanol":
-        interactions.append("⚠️ Risque hépatotoxique grave")
-
-    if item2["nom"] == "Paracétamol" and item1["nom"] == "Methanol":
-        interactions.append("⚠️ Risque hépatotoxique grave")
-
-    if not interactions:
-        return ["Aucune interaction connue"]
-
-    return interactions
-
-# INTERACTION MULTI
-@app.get("/interaction-multi")
-def interaction_multi(ids: str):
-    id_list = [int(x) for x in ids.split(",")]
-
-    items = [x for x in DATA if x["id"] in id_list]
-
-    interactions = []
-
-    for i in range(len(items)):
-        for j in range(i + 1, len(items)):
-            inter = check_interaction(items[i], items[j])
-            interactions.extend(inter)
-
-    interactions = list(set(interactions))
-
-    return {
-        "substances": [item["nom"] for item in items],
-        "interactions": interactions
     }

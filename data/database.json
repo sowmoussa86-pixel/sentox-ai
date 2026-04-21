@@ -8,5 +8,10 @@
     "id": 2,
     "nom": "paracetamol",
     "dl50": 338
+  },
+  {
+    "id": 3,
+    "nom": "methanol",
+    "dl50": 5628
   }
 ]
