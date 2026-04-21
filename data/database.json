@@ -3,5 +3,10 @@
     "id": 1,
     "nom": "neem",
     "dl50": 5000
+  },
+  {
+    "id": 2,
+    "nom": "paracetamol",
+    "dl50": 338
   }
 ]
