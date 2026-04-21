@@ -61,13 +61,13 @@ def get_all():
 # SEARCH
 @app.get("/search")
 def search(nom: str):
-    results = []
-    for item in DATA:
-        if nom.lower() in item["nom"].lower():
-            item_copy = item.copy()
-            item_copy["score_toxicologique"] = score_toxicologique(item.get("dl50", 1000))
-            results.append(item_copy)
-    return results
+    local_results = search_local(nom)
+    pubchem_result = search_pubchem(nom)
+
+    return {
+        "local": local_results,
+        "scientifique": pubchem_result
+    }
 
 # INTERACTION SIMPLE
 def check_interaction(item1, item2):
