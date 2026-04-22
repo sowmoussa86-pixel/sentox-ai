@@ -1,13 +1,17 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
-from reportlab.platypus import SimpleDocTemplate, Paragraph
-from reportlab.lib.styles import getSampleStyleSheet
+import os
+
+from openai import OpenAI
 
 from services.local_db import search_local, get_all
 from services.pubchem import search_pubchem
 from services.fuzzy_search import suggest
 from services.interactions import check_interactions
+
+from reportlab.platypus import SimpleDocTemplate, Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
 
 app = FastAPI()
 
@@ -18,6 +22,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def clean_input(text):
     if not text or len(text) > 100:
@@ -33,24 +39,40 @@ def home():
 def search(nom: str):
     nom = clean_input(nom)
 
-    local_results = search_local(nom)
-    pubchem_result = search_pubchem(nom)
-    suggestions = suggest(nom, get_all())
-
     return {
-        "local": local_results,
-        "scientifique": pubchem_result,
-        "suggestions": suggestions
+        "local": search_local(nom),
+        "scientifique": search_pubchem(nom),
+        "suggestions": suggest(nom, get_all())
     }
+
+# 🧠 IA CHATGPT
+@app.get("/ai")
+def ai_analysis(nom: str):
+    nom = clean_input(nom)
+
+    prompt = f"""
+    Donne une analyse toxicologique simple pour : {nom}
+    - toxicité
+    - organes affectés
+    - risques
+    - recommandations
+    """
+
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}]
+        )
+
+        return {"result": response.choices[0].message.content}
+
+    except Exception as e:
+        return {"error": str(e)}
 
 # ⚗️ INTERACTION
 @app.get("/interaction")
 def interaction(ids: str):
-    try:
-        id_list = [int(x) for x in ids.split(",")]
-    except:
-        raise HTTPException(status_code=400, detail="IDs invalides")
-
+    id_list = [int(x) for x in ids.split(",")]
     data = get_all()
     items = [x for x in data if x["id"] in id_list]
 
@@ -59,7 +81,7 @@ def interaction(ids: str):
         "interactions": check_interactions(items)
     }
 
-# 📄 PDF TELECHARGEABLE
+# 📄 PDF
 @app.get("/export")
 def export(nom: str):
     nom = clean_input(nom)
@@ -67,12 +89,10 @@ def export(nom: str):
     results = search_local(nom)
 
     file_path = "rapport.pdf"
-
     doc = SimpleDocTemplate(file_path)
     styles = getSampleStyleSheet()
 
     content = []
-
     for item in results:
         text = f"{item['nom']} - DL50: {item['dl50']} - Danger: {item['danger']}"
         content.append(Paragraph(text, styles["Normal"]))

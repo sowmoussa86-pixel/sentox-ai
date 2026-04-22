@@ -165,6 +165,22 @@ async function analyseIA(){
    return;
  }
 
+ div.innerHTML="<div class='card'>Analyse en cours...</div>";
+
+ try{
+   let res=await fetch(`${API}/ai?nom=${encodeURIComponent(val)}`);
+   let data=await res.json();
+
+   div.innerHTML=`
+   <div class="card">
+   <h3>Analyse IA</h3>
+   ${data.result}
+   </div>`;
+ }catch(err){
+   div.innerHTML="<div class='card'>Erreur IA</div>";
+ }
+}
+
  let res=await fetch(`${API}/search?nom=${encodeURIComponent(val)}`);
  let data=await res.json();
 
