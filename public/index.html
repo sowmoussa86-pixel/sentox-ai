@@ -106,6 +106,7 @@ body {
 
 </div>
 
+<script>
 const API="https://sentox-ai-1.onrender.com";
 
 /* 🔎 RECHERCHE */
@@ -126,17 +127,17 @@ async function rechercher(){
 
    if(!data.local || data.local.length===0){
      html="<div class='card'>Aucun résultat trouvé</div>";
+   } else {
+     data.local.forEach(x=>{
+      html+=`
+      <div class="card">
+       <h3>${x.nom}</h3>
+       DL50: ${x.dl50}<br>
+       Danger: ${x.danger}<br>
+       Organe: ${x.organe}<br>
+      </div>`;
+     });
    }
-
-   data.local.forEach(x=>{
-    html+=`
-    <div class="card">
-     <h3>${x.nom}</h3>
-     DL50: ${x.dl50}<br>
-     Danger: ${x.danger}<br>
-     Organe: ${x.organe}<br>
-    </div>`;
-   });
 
    if(data.scientifique){
     html+=`
@@ -152,37 +153,6 @@ async function rechercher(){
  }catch(err){
    div.innerHTML="<div class='card'>Erreur serveur</div>";
  }
-}
-
- div.innerHTML=html;
-}
-
-function analyseIA(){
- document.getElementById("resultats").innerHTML=
- "<div class='card'>Analyse IA basée sur DL50 et organes</div>";
-}
-
-function interaction(){
- document.getElementById("resultats").innerHTML=
- "<div class='card'>Entrer plusieurs substances séparées par virgule (future version intelligente)</div>";
-}
-
-async function exportPDF(){
- let val=document.getElementById("searchInput").value;
- if(!val){alert("Entrer une substance");return;}
-
- window.open(`${API}/export?nom=${val}`);
-}
-</script>
-
-</body>
-</html>
-
- if(data.suggestions.length){
-  html+=`<div class="card">Suggestions: ${data.suggestions.join(", ")}</div>`;
- }
-
- div.innerHTML=html;
 }
 
 /* 🧠 IA */
@@ -205,55 +175,35 @@ async function analyseIA(){
 
  let x=data.local[0];
 
- let interpretation=`
+ div.innerHTML=`
  <div class="card">
- <h3>Analyse Toxicologique (IA)</h3>
-
+ <h3>Analyse IA</h3>
  Substance: ${x.nom}<br><br>
-
- Niveau de risque: ${x.danger}<br>
- Organe cible: ${x.organe}<br><br>
-
- Interprétation:
- Cette substance présente un risque ${x.danger}.
- L'exposition doit être contrôlée en raison de son impact potentiel sur ${x.organe}.
- 
- Recommandation:
- Utiliser avec prudence et respecter les doses.
+ Risque: ${x.danger}<br>
+ Organe: ${x.organe}<br><br>
+ Interprétation: Cette substance doit être utilisée avec précaution.
  </div>`;
-
- div.innerHTML=interpretation;
 }
 
 /* ⚗️ INTERACTION */
-async function interaction(){
+function interaction(){
  let val=document.getElementById("searchInput").value.trim();
  let div=document.getElementById("resultats");
 
- if(!val || !val.includes(",")){
+ if(!val.includes(",")){
    div.innerHTML="<div class='card'>Entrer au moins 2 substances séparées par virgule</div>";
    return;
  }
 
- let noms=val.split(",").map(x=>x.trim());
+ let noms=val.split(",");
 
- let res=await fetch(`${API}/search?nom=${encodeURIComponent(noms[0])}`);
- let data=await res.json();
-
- if(!data.local.length){
-   div.innerHTML="<div class='card'>Substances inconnues</div>";
-   return;
- }
-
- // simulation interaction intelligente
  let result="<div class='card'><h3>Interaction</h3>";
-
  result+=`Substances: ${noms.join(", ")}<br><br>`;
 
- if(noms.includes("paracetamol") && noms.includes("methanol")){
+ if(val.includes("paracetamol") && val.includes("methanol")){
    result+="⚠️ Risque hépatotoxique élevé";
- }else{
-   result+="✅ Aucune interaction majeure connue (base actuelle)";
+ } else {
+   result+="✅ Aucune interaction majeure connue";
  }
 
  result+="</div>";
