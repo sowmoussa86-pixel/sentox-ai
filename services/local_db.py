@@ -6,19 +6,32 @@ DB_PATH = os.path.join(BASE_DIR, "data", "database.json")
 with open(DB_PATH, encoding="utf-8") as f:
     DATA = json.load(f)
 
-# 🔥 enrichissement automatique
 def enrich_data(item):
     dl50 = item.get("dl50", 1000)
 
     if dl50 <= 50:
-        item["danger"] = "🔴 élevé"
-        item["organe"] = "foie"
+        danger = "🔴 Très toxique"
+        organe = "Foie / système nerveux"
     elif dl50 <= 300:
-        item["danger"] = "🟠 modéré"
-        item["organe"] = "rein"
+        danger = "🟠 Toxique"
+        organe = "Reins / foie"
+    elif dl50 <= 2000:
+        danger = "🟡 Modéré"
+        organe = "Digestif"
     else:
-        item["danger"] = "🟢 faible"
-        item["organe"] = "aucun critique"
+        danger = "🟢 Faible"
+        organe = "Aucun critique"
+
+    item["danger"] = danger
+    item["organe"] = organe
+
+    # 🧠 ajout scientifique
+    item["toxicologie"] = {
+        "dl50": dl50,
+        "classe": danger,
+        "voie_exposition": "orale",
+        "effets": "dose dépendante",
+    }
 
     return item
 

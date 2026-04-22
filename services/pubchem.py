@@ -12,9 +12,17 @@ def search_pubchem(name):
         props = data["PropertyTable"]["Properties"][0]
 
         return {
-            "formula": props.get("MolecularFormula"),
-            "poids_moleculaire": props.get("MolecularWeight")
-        }
-
+    "source": "PubChem",
+    "formula": props.get("MolecularFormula"),
+    "poids_moleculaire": props.get("MolecularWeight"),
+}
+if(data.scientifique){
+ html+=`
+ <div class="card">
+   <b>Données scientifiques:</b><br>
+   Formule: ${data.scientifique.formula}<br>
+   Poids moléculaire: ${data.scientifique.poids_moleculaire}
+ </div>`;
+}
     except:
         return None

@@ -160,14 +160,30 @@ async function rechercher(){
  let html="";
 
  data.local.forEach(x=>{
-  html+=`
-  <div class="card">
+ html+=`
+ <div class="card">
    <h3>${x.nom}</h3>
-   DL50: ${x.dl50}<br>
-   Danger: ${x.danger}<br>
-   Organe: ${x.organe}
-  </div>`;
- });
+
+   <b>DL50:</b> ${x.dl50}<br>
+   <b>Danger:</b> ${x.danger}<br>
+   <b>Organe cible:</b> ${x.organe}<br>
+
+   <hr>
+
+   <b>Analyse toxicologique:</b><br>
+   Classe: ${x.toxicologie.classe}<br>
+   Voie: ${x.toxicologie.voie_exposition}<br>
+   Effets: ${x.toxicologie.effets}
+ </div>`;
+});
+if(data.scientifique){
+ html+=`
+ <div class="card">
+   <b>Données scientifiques (PubChem):</b><br>
+   Formule: ${data.scientifique.formula}<br>
+   Poids moléculaire: ${data.scientifique.poids_moleculaire}
+ </div>`;
+}
 
  if(data.suggestions.length){
   html+=`<div class="card">Suggestions: ${data.suggestions.join(", ")}</div>`;
