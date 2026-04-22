@@ -3,13 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <title>SENTOX PRO</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+}
+
+.header {
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo {
+    width:50px;
+    height:50px;
+    background:#16a34a;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-weight:bold;
+}
+
+.card {
+    background:white;
+    padding:15px;
+    margin-top:10px;
+    border-radius:10px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+</style>
 </head>
 
-<body style="font-family:Arial;background:#f5f5f5;padding:20px">
+<body>
 
-<h1>SENTOX PRO 🧪</h1>
+<div class="header">
+<div class="logo">S</div>
+<h1>SENTOX</h1>
+</div>
 
-<input id="searchInput" placeholder="Nom substance..." />
+<input id="searchInput" placeholder="Substance..." />
 <button onclick="rechercher()">Rechercher</button>
 
 <div id="resultats"></div>
@@ -17,36 +55,38 @@
 <script>
 const API = "https://sentox-ai-1.onrender.com";
 
-async function rechercher() {
-    let input = document.getElementById("searchInput").value;
-    let div = document.getElementById("resultats");
-    div.innerHTML = "Chargement...";
+async function rechercher(){
+ let val = document.getElementById("searchInput").value;
+ let div = document.getElementById("resultats");
+ div.innerHTML="Chargement...";
 
-    let res = await fetch(`${API}/search?nom=${input}`);
-    let data = await res.json();
+ let res = await fetch(`${API}/search?nom=${val}`);
+ let data = await res.json();
 
-    let html = "";
+ let html="";
 
-    data.local.forEach(x=>{
-        html += `<div style="background:white;padding:10px;margin:10px">
-        <h3>${x.nom}</h3>
-        DL50: ${x.dl50}<br>
-        Toxicité: ${x.score_toxicologique}
-        </div>`;
-    });
+ data.local.forEach(x=>{
+  html+=`<div class="card">
+   <h3>${x.nom}</h3>
+   DL50: ${x.dl50}<br>
+   Toxicité: ${x.score_toxicologique}
+  </div>`;
+ });
 
-    if(data.scientifique){
-        html += `<div style="background:#eef;padding:10px">
-        Formule: ${data.scientifique.formula}<br>
-        Poids: ${data.scientifique.poids_moleculaire}
-        </div>`;
-    }
+ if(data.scientifique){
+  html+=`<div class="card">
+   <b>Formule:</b> ${data.scientifique.formula}<br>
+   <b>Poids:</b> ${data.scientifique.poids_moleculaire}
+  </div>`;
+ }
 
-    if(data.suggestions.length){
-        html += `<p>Suggestions: ${data.suggestions.join(", ")}</p>`;
-    }
+ if(data.suggestions.length){
+  html+=`<div class="card">
+   Suggestions: ${data.suggestions.join(", ")}
+  </div>`;
+ }
 
-    div.innerHTML = html;
+ div.innerHTML=html;
 }
 </script>
 

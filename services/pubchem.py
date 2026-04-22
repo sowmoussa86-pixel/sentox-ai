@@ -12,9 +12,9 @@ def search_pubchem(name):
         props = data["PropertyTable"]["Properties"][0]
 
         return {
-            "source": "PubChem",
             "formula": props.get("MolecularFormula"),
             "poids_moleculaire": props.get("MolecularWeight")
         }
+
     except:
         return None
