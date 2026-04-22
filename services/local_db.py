@@ -1,7 +1,13 @@
-import json
+import json, os
 
-with open("data/database.json", encoding="utf-8") as f:
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DB_PATH = os.path.join(BASE_DIR, "data", "database.json")
+
+with open(DB_PATH, encoding="utf-8") as f:
     DATA = json.load(f)
+
+def get_all():
+    return DATA
 
 def search_local(name):
     results = []

@@ -1,17 +1,7 @@
 [
-  {
-    "id": 1,
-    "nom": "neem",
-    "dl50": 5000
-  },
-  {
-    "id": 2,
-    "nom": "paracetamol",
-    "dl50": 338
-  },
-  {
-    "id": 3,
-    "nom": "methanol",
-    "dl50": 5628
-  }
+  {"id":1,"nom":"neem","dl50":5000},
+  {"id":2,"nom":"paracetamol","dl50":338},
+  {"id":3,"nom":"methanol","dl50":5628},
+  {"id":4,"nom":"ibuprofen","dl50":636},
+  {"id":5,"nom":"aspirine","dl50":200}
 ]

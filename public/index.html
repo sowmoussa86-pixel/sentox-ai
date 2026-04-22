@@ -1,50 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SENTOX</title>
+<meta charset="UTF-8">
+<title>SENTOX PRO</title>
 </head>
 
-<body>
+<body style="font-family:Arial;background:#f5f5f5;padding:20px">
 
-<h1>SENTOX</h1>
+<h1>SENTOX PRO 🧪</h1>
 
-<input type="text" id="searchInput" placeholder="Nom plante ou produit">
+<input id="searchInput" placeholder="Nom substance..." />
 <button onclick="rechercher()">Rechercher</button>
 
 <div id="resultats"></div>
 
 <script>
-const API_URL = "https://sentox-ai-1.onrender.com";
+const API = "https://sentox-ai-1.onrender.com";
 
 async function rechercher() {
-    const input = document.getElementById("searchInput").value;
+    let input = document.getElementById("searchInput").value;
+    let div = document.getElementById("resultats");
+    div.innerHTML = "Chargement...";
 
-    if (!input) {
-        alert("Entre un nom");
-        return;
+    let res = await fetch(`${API}/search?nom=${input}`);
+    let data = await res.json();
+
+    let html = "";
+
+    data.local.forEach(x=>{
+        html += `<div style="background:white;padding:10px;margin:10px">
+        <h3>${x.nom}</h3>
+        DL50: ${x.dl50}<br>
+        Toxicité: ${x.score_toxicologique}
+        </div>`;
+    });
+
+    if(data.scientifique){
+        html += `<div style="background:#eef;padding:10px">
+        Formule: ${data.scientifique.formula}<br>
+        Poids: ${data.scientifique.poids_moleculaire}
+        </div>`;
     }
 
-    try {
-        const res = await fetch(API_URL + "/search?nom=" + input);
-        const data = await res.json();
-
-        let div = document.getElementById("resultats");
-        div.innerHTML = "";
-
-        data.forEach(item => {
-            div.innerHTML += `
-                <div style="margin:10px;padding:10px;border:1px solid #ccc;">
-                    <b>${item.nom}</b><br>
-                    DL50: ${item.dl50}<br>
-                    Toxicité: ${item.score_toxicologique}
-                </div>
-            `;
-        });
-
-    } catch (err) {
-        console.error(err);
-        alert("Erreur API");
+    if(data.suggestions.length){
+        html += `<p>Suggestions: ${data.suggestions.join(", ")}</p>`;
     }
+
+    div.innerHTML = html;
 }
 </script>
 

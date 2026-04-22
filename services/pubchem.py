@@ -9,7 +9,6 @@ def search_pubchem(name):
             return None
 
         data = res.json()
-
         props = data["PropertyTable"]["Properties"][0]
 
         return {
@@ -17,6 +16,5 @@ def search_pubchem(name):
             "formula": props.get("MolecularFormula"),
             "poids_moleculaire": props.get("MolecularWeight")
         }
-
     except:
         return None
