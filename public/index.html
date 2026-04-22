@@ -8,8 +8,7 @@
 body {
     font-family: Arial;
     background: #f4f6f9;
-    margin: 0;
-    padding: 20px;
+    padding:20px;
 }
 
 .header {
@@ -37,6 +36,12 @@ body {
     border-radius:10px;
     box-shadow:0 2px 5px rgba(0,0,0,0.1);
 }
+
+button {
+    margin:5px;
+    padding:8px;
+    cursor:pointer;
+}
 </style>
 </head>
 
@@ -44,11 +49,13 @@ body {
 
 <div class="header">
 <div class="logo">S</div>
-<h1>SENTOX</h1>
+<h1>SENTOX PRO</h1>
 </div>
 
 <input id="searchInput" placeholder="Substance..." />
-<button onclick="rechercher()">Rechercher</button>
+
+<button onclick="rechercher()">🔍 Rechercher</button>
+<button onclick="exportPDF()">📄 PDF</button>
 
 <div id="resultats"></div>
 
@@ -66,27 +73,37 @@ async function rechercher(){
  let html="";
 
  data.local.forEach(x=>{
-  html+=`<div class="card">
+  html+=`
+  <div class="card">
    <h3>${x.nom}</h3>
    DL50: ${x.dl50}<br>
-   Toxicité: ${x.score_toxicologique}
+   Danger: ${x.danger}<br>
+   Organe: ${x.organe}
   </div>`;
  });
 
  if(data.scientifique){
-  html+=`<div class="card">
+  html+=`
+  <div class="card">
    <b>Formule:</b> ${data.scientifique.formula}<br>
    <b>Poids:</b> ${data.scientifique.poids_moleculaire}
   </div>`;
  }
 
  if(data.suggestions.length){
-  html+=`<div class="card">
+  html+=`
+  <div class="card">
    Suggestions: ${data.suggestions.join(", ")}
   </div>`;
  }
 
  div.innerHTML=html;
+}
+
+async function exportPDF(){
+ let val = document.getElementById("searchInput").value;
+ await fetch(`${API}/export?nom=${val}`);
+ alert("PDF généré !");
 }
 </script>
 
