@@ -10,30 +10,31 @@ body {
     font-family:Arial;
     background:url("logo.png") no-repeat center center;
     background-size:cover;
-    height:100vh;
 }
 
-/* couche transparente */
+/* overlay */
 .overlay {
-    background: rgba(255,255,255,0.3);
-    backdrop-filter: blur(4px);
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(2px);
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;   /* 👉 centre vertical */
-    align-items: center;       /* 👉 centre horizontal */
-    height: 100vh;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
 }
 
-/* logo titre */
+/* titre */
 .logo-title {
     font-size:60px;
     font-weight:bold;
     color:#1f7a3a;
     margin-bottom:20px;
+    text-shadow:0 2px 10px rgba(0,0,0,0.2);
 }
 
-/* barre recherche */
+/* barre */
 .search-box {
     display:flex;
     align-items:center;
@@ -41,6 +42,7 @@ body {
     border-radius:50px;
     overflow:hidden;
     width:500px;
+    max-width:90%;
     box-shadow:0 5px 20px rgba(0,0,0,0.2);
 }
 
@@ -60,13 +62,52 @@ body {
     cursor:pointer;
 }
 
+/* boutons */
+.actions {
+    margin-top:20px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.actions button {
+    background:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    box-shadow:0 3px 10px rgba(0,0,0,0.15);
+    transition:0.2s;
+}
+
+.actions button:hover {
+    background:#16a34a;
+    color:white;
+}
+
+/* résultats */
+.results {
+    margin-top:20px;
+    width:90%;
+    max-width:600px;
+}
+
+.card {
+    background:white;
+    padding:15px;
+    margin-top:10px;
+    border-radius:10px;
+    text-align:left;
+}
+
 /* footer */
 .footer {
     position:absolute;
-    bottom:20px;
+    bottom:15px;
     text-align:center;
+    width:100%;
     font-size:14px;
-    color:#333;
 }
 </style>
 </head>
@@ -82,6 +123,15 @@ body {
     <button onclick="rechercher()">🔍</button>
 </div>
 
+<div class="actions">
+    <button onclick="rechercher()">🔎 Recherche</button>
+    <button onclick="analyseIA()">🧠 IA</button>
+    <button onclick="interaction()">⚗️ Interaction</button>
+    <button onclick="exportPDF()">📄 PDF</button>
+</div>
+
+<div id="resultats" class="results"></div>
+
 </div>
 
 <div class="footer">
@@ -92,12 +142,79 @@ Plateforme web et Application mobile
 <script>
 const API="https://sentox-ai-1.onrender.com";
 
+/* 🔎 RECHERCHE */
 async function rechercher(){
  let val=document.getElementById("searchInput").value;
+ let div=document.getElementById("resultats");
+
+ if(!val){
+   div.innerHTML="<p>Entrer une substance</p>";
+   return;
+ }
+
+ div.innerHTML="Chargement...";
+
  let res=await fetch(`${API}/search?nom=${val}`);
  let data=await res.json();
 
- alert("Résultats trouvés: " + data.local.length);
+ let html="";
+
+ data.local.forEach(x=>{
+  html+=`
+  <div class="card">
+   <h3>${x.nom}</h3>
+   DL50: ${x.dl50}<br>
+   Danger: ${x.danger}<br>
+   Organe: ${x.organe}
+  </div>`;
+ });
+
+ if(data.suggestions.length){
+  html+=`<div class="card">Suggestions: ${data.suggestions.join(", ")}</div>`;
+ }
+
+ div.innerHTML=html;
+}
+
+/* 🧠 IA */
+function analyseIA(){
+ let val=document.getElementById("searchInput").value;
+
+ if(!val){
+   alert("Entrer une substance");
+   return;
+ }
+
+ alert("Analyse IA : basée sur DL50 + organes cibles");
+}
+
+/* ⚗️ INTERACTION */
+async function interaction(){
+ let ids=prompt("Entrer IDs (ex: 1,2)");
+
+ if(!ids) return;
+
+ let res=await fetch(`${API}/interaction?ids=${ids}`);
+ let data=await res.json();
+
+ document.getElementById("resultats").innerHTML=`
+ <div class="card">
+  Substances: ${data.substances.join(", ")}<br>
+  Résultat: ${data.interactions.join(", ")}
+ </div>`;
+}
+
+/* 📄 PDF */
+async function exportPDF(){
+ let val=document.getElementById("searchInput").value;
+
+ if(!val){
+   alert("Entrer une substance");
+   return;
+ }
+
+ await fetch(`${API}/export?nom=${val}`);
+ alert("PDF généré !");
 }
 </script>
 
