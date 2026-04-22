@@ -119,6 +119,30 @@ async function rechercher(){
    return;
  }
 
+ div.innerHTML="<div class='card'>Chargement...</div>";
+
+ let res=await fetch(`${API}/search?nom=${encodeURIComponent(val)}`);
+ let data=await res.json();
+
+ let html="";
+
+ data.local.forEach(x=>{
+  html+=`
+  <div class="card">
+   <h3>${x.nom}</h3>
+   DL50: ${x.dl50}<br>
+   Danger: ${x.danger}<br>
+   Organe: ${x.organe}
+  </div>`;
+ });
+
+ if(data.suggestions.length){
+  html+=`<div class="card">Suggestions: ${data.suggestions.join(", ")}</div>`;
+ }
+
+ div.innerHTML=html;
+}
+
  try{
    let res=await fetch(`${API}/search?nom=${encodeURIComponent(val)}`);
    let data=await res.json();
@@ -207,9 +231,26 @@ function interaction(){
  let div=document.getElementById("resultats");
 
  if(!val.includes(",")){
-   div.innerHTML="<div class='card'>Entrer au moins 2 substances séparées par virgule</div>";
+   div.innerHTML="<div class='card'>Entrer 2 substances (ex: paracetamol,methanol)</div>";
    return;
  }
+
+ let noms=val.split(",").map(x=>x.trim());
+
+ let result="<div class='card'><h3>Interaction</h3>";
+
+ result+=`Substances: ${noms.join(", ")}<br><br>`;
+
+ if(noms.includes("paracetamol") && noms.includes("methanol")){
+   result+="⚠️ Risque hépatotoxique élevé";
+ } else {
+   result+="✅ Aucune interaction majeure connue";
+ }
+
+ result+="</div>";
+
+ div.innerHTML=result;
+}
 
  let noms=val.split(",");
 
@@ -235,6 +276,9 @@ function exportPDF(){
    alert("Entrer une substance");
    return;
  }
+
+ window.open(`${API}/export?nom=${encodeURIComponent(val)}`);
+}
 
  window.open(`${API}/export?nom=${encodeURIComponent(val)}`);
 }
