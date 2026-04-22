@@ -6,69 +6,123 @@
 
 <style>
 body {
-    font-family: Arial;
-    background: #f4f6f9;
-    padding:20px;
+    margin:0;
+    font-family:Arial;
+    background:url("logo.png") no-repeat center center fixed;
+    background-size:cover;
 }
 
-.header {
+/* overlay sombre */
+.overlay {
+    background:rgba(255,255,255,0.9);
+    min-height:100vh;
     display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.logo {
-    width:50px;
-    height:50px;
-    background:#16a34a;
-    border-radius:50%;
-    display:flex;
+    flex-direction:column;
     align-items:center;
     justify-content:center;
-    color:white;
-    font-weight:bold;
 }
 
+/* titre */
+h1 {
+    font-size:40px;
+    color:#16a34a;
+}
+
+/* barre de recherche */
+.search-box {
+    display:flex;
+    background:white;
+    border-radius:30px;
+    overflow:hidden;
+    width:400px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+.search-box input {
+    flex:1;
+    padding:12px;
+    border:none;
+    outline:none;
+}
+
+.search-box button {
+    padding:12px;
+    border:none;
+    cursor:pointer;
+    background:#16a34a;
+    color:white;
+}
+
+/* boutons */
+.actions {
+    margin-top:15px;
+}
+
+.actions button {
+    margin:5px;
+    padding:10px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+/* cartes résultats */
 .card {
     background:white;
     padding:15px;
-    margin-top:10px;
+    margin:10px;
     border-radius:10px;
-    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    width:350px;
 }
 
-button {
-    margin:5px;
-    padding:8px;
-    cursor:pointer;
+/* footer */
+.footer {
+    position:fixed;
+    bottom:10px;
+    text-align:center;
+    width:100%;
+    font-size:14px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-<img src="logo.png" width="50">
-<h1>SENTOX PRO</h1>
+<div class="overlay">
+
+<h1>SENTOX</h1>
+
+<div class="search-box">
+    <input id="searchInput" placeholder="Rechercher une substance..." />
+    <button onclick="rechercher()">🔍</button>
 </div>
 
-<input id="searchInput" placeholder="Substance..." />
-
-<button onclick="rechercher()">🔍 Rechercher</button>
-<button onclick="exportPDF()">📄 PDF</button>
+<div class="actions">
+    <button onclick="rechercher()">🔎 Recherche</button>
+    <button onclick="analyseIA()">🧠 IA</button>
+    <button onclick="interaction()">⚗️ Interaction</button>
+    <button onclick="exportPDF()">📄 PDF</button>
+</div>
 
 <div id="resultats"></div>
 
-<script>
-const API = "https://sentox-ai-1.onrender.com";
+</div>
 
+<div class="footer">
+SENTOX – Plateforme web et Application mobile
+</div>
+
+<script>
+const API="https://sentox-ai-1.onrender.com";
+
+/* 🔎 RECHERCHE */
 async function rechercher(){
- let val = document.getElementById("searchInput").value;
- let div = document.getElementById("resultats");
+ let val=document.getElementById("searchInput").value;
+ let div=document.getElementById("resultats");
  div.innerHTML="Chargement...";
 
- let res = await fetch(`${API}/search?nom=${val}`);
- let data = await res.json();
+ let res=await fetch(`${API}/search?nom=${val}`);
+ let data=await res.json();
 
  let html="";
 
@@ -82,26 +136,34 @@ async function rechercher(){
   </div>`;
  });
 
- if(data.scientifique){
-  html+=`
-  <div class="card">
-   <b>Formule:</b> ${data.scientifique.formula}<br>
-   <b>Poids:</b> ${data.scientifique.poids_moleculaire}
-  </div>`;
- }
-
- if(data.suggestions.length){
-  html+=`
-  <div class="card">
-   Suggestions: ${data.suggestions.join(", ")}
-  </div>`;
- }
-
  div.innerHTML=html;
 }
 
+/* ⚗️ INTERACTION */
+async function interaction(){
+ let ids=prompt("Entrer les IDs séparés par virgule (ex: 1,2)");
+ if(!ids) return;
+
+ let res=await fetch(`${API}/interaction?ids=${ids}`);
+ let data=await res.json();
+
+ let div=document.getElementById("resultats");
+
+ div.innerHTML=`
+ <div class="card">
+  Substances: ${data.substances.join(", ")}<br>
+  Résultat: ${data.interactions.join(", ")}
+ </div>`;
+}
+
+/* 🧠 IA TOXICO (simulation) */
+function analyseIA(){
+ alert("Analyse IA activée : utilise les données DL50 + organes pour évaluer le risque.");
+}
+
+/* 📄 PDF */
 async function exportPDF(){
- let val = document.getElementById("searchInput").value;
+ let val=document.getElementById("searchInput").value;
  await fetch(`${API}/export?nom=${val}`);
  alert("PDF généré !");
 }
