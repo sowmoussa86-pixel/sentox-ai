@@ -1,5 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from reportlab.platypus import SimpleDocTemplate, Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
+
 from services.local_db import search_local, get_all
 from services.pubchem import search_pubchem
 from services.fuzzy_search import suggest
@@ -9,19 +13,22 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # plus tard tu peux restreindre
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# 🔐 validation simple
 def clean_input(text):
     if not text or len(text) > 100:
         raise HTTPException(status_code=400, detail="Entrée invalide")
     return text.strip().lower()
 
-# 🔎 RECHERCHE
+@app.get("/")
+def home():
+    return {"message": "SENTOX PRO OK"}
+
+# 🔎 SEARCH
 @app.get("/search")
 def search(nom: str):
     nom = clean_input(nom)
@@ -52,8 +59,24 @@ def interaction(ids: str):
         "interactions": check_interactions(items)
     }
 
-# 📄 PDF sécurisé
+# 📄 PDF TELECHARGEABLE
 @app.get("/export")
 def export(nom: str):
     nom = clean_input(nom)
-    return {"message": "PDF généré"}
+
+    results = search_local(nom)
+
+    file_path = "rapport.pdf"
+
+    doc = SimpleDocTemplate(file_path)
+    styles = getSampleStyleSheet()
+
+    content = []
+
+    for item in results:
+        text = f"{item['nom']} - DL50: {item['dl50']} - Danger: {item['danger']}"
+        content.append(Paragraph(text, styles["Normal"]))
+
+    doc.build(content)
+
+    return FileResponse(file_path, filename="rapport_sentox.pdf")
