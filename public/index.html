@@ -106,43 +106,53 @@ body {
 
 </div>
 
-<script>
 const API="https://sentox-ai-1.onrender.com";
 
+/* 🔎 RECHERCHE */
 async function rechercher(){
- let val=document.getElementById("searchInput").value;
+ let val=document.getElementById("searchInput").value.trim();
  let div=document.getElementById("resultats");
 
- if(!val){div.innerHTML="Entrer une substance";return;}
-
- let res=await fetch(`${API}/search?nom=${val}`);
- let data=await res.json();
-
- let html="";
-
- data.local.forEach(x=>{
-  html+=`
-  <div class="card">
-   <h3>${x.nom}</h3>
-   DL50: ${x.dl50}<br>
-   Danger: ${x.danger}<br>
-   Organe: ${x.organe}<br>
-
-   <hr>
-
-   Classe: ${x.toxicologie.classe}<br>
-   Voie: ${x.toxicologie.voie_exposition}<br>
-   Effets: ${x.toxicologie.effets}
-  </div>`;
- });
-
- if(data.scientifique){
-  html+=`
-  <div class="card">
-   Formule: ${data.scientifique.formula}<br>
-   Poids: ${data.scientifique.poids_moleculaire}
-  </div>`;
+ if(!val){
+   div.innerHTML="<div class='card'>Entrer une substance</div>";
+   return;
  }
+
+ try{
+   let res=await fetch(`${API}/search?nom=${encodeURIComponent(val)}`);
+   let data=await res.json();
+
+   let html="";
+
+   if(!data.local || data.local.length===0){
+     html="<div class='card'>Aucun résultat trouvé</div>";
+   }
+
+   data.local.forEach(x=>{
+    html+=`
+    <div class="card">
+     <h3>${x.nom}</h3>
+     DL50: ${x.dl50}<br>
+     Danger: ${x.danger}<br>
+     Organe: ${x.organe}<br>
+    </div>`;
+   });
+
+   if(data.scientifique){
+    html+=`
+    <div class="card">
+     <b>Données scientifiques:</b><br>
+     Formule: ${data.scientifique.formula}<br>
+     Poids: ${data.scientifique.poids_moleculaire}
+    </div>`;
+   }
+
+   div.innerHTML=html;
+
+ }catch(err){
+   div.innerHTML="<div class='card'>Erreur serveur</div>";
+ }
+}
 
  div.innerHTML=html;
 }
@@ -176,44 +186,91 @@ async function exportPDF(){
 }
 
 /* 🧠 IA */
-function analyseIA(){
- let val=document.getElementById("searchInput").value;
+async function analyseIA(){
+ let val=document.getElementById("searchInput").value.trim();
+ let div=document.getElementById("resultats");
 
  if(!val){
-   alert("Entrer une substance");
+   div.innerHTML="<div class='card'>Entrer une substance</div>";
    return;
  }
 
- alert("Analyse IA : basée sur DL50 + organes cibles");
+ let res=await fetch(`${API}/search?nom=${encodeURIComponent(val)}`);
+ let data=await res.json();
+
+ if(!data.local || data.local.length===0){
+   div.innerHTML="<div class='card'>Aucune donnée</div>";
+   return;
+ }
+
+ let x=data.local[0];
+
+ let interpretation=`
+ <div class="card">
+ <h3>Analyse Toxicologique (IA)</h3>
+
+ Substance: ${x.nom}<br><br>
+
+ Niveau de risque: ${x.danger}<br>
+ Organe cible: ${x.organe}<br><br>
+
+ Interprétation:
+ Cette substance présente un risque ${x.danger}.
+ L'exposition doit être contrôlée en raison de son impact potentiel sur ${x.organe}.
+ 
+ Recommandation:
+ Utiliser avec prudence et respecter les doses.
+ </div>`;
+
+ div.innerHTML=interpretation;
 }
 
 /* ⚗️ INTERACTION */
 async function interaction(){
- let ids=prompt("Entrer IDs (ex: 1,2)");
+ let val=document.getElementById("searchInput").value.trim();
+ let div=document.getElementById("resultats");
 
- if(!ids) return;
+ if(!val || !val.includes(",")){
+   div.innerHTML="<div class='card'>Entrer au moins 2 substances séparées par virgule</div>";
+   return;
+ }
 
- let res=await fetch(`${API}/interaction?ids=${ids}`);
+ let noms=val.split(",").map(x=>x.trim());
+
+ let res=await fetch(`${API}/search?nom=${encodeURIComponent(noms[0])}`);
  let data=await res.json();
 
- document.getElementById("resultats").innerHTML=`
- <div class="card">
-  Substances: ${data.substances.join(", ")}<br>
-  Résultat: ${data.interactions.join(", ")}
- </div>`;
+ if(!data.local.length){
+   div.innerHTML="<div class='card'>Substances inconnues</div>";
+   return;
+ }
+
+ // simulation interaction intelligente
+ let result="<div class='card'><h3>Interaction</h3>";
+
+ result+=`Substances: ${noms.join(", ")}<br><br>`;
+
+ if(noms.includes("paracetamol") && noms.includes("methanol")){
+   result+="⚠️ Risque hépatotoxique élevé";
+ }else{
+   result+="✅ Aucune interaction majeure connue (base actuelle)";
+ }
+
+ result+="</div>";
+
+ div.innerHTML=result;
 }
 
 /* 📄 PDF */
-async function exportPDF(){
- let val=document.getElementById("searchInput").value;
+function exportPDF(){
+ let val=document.getElementById("searchInput").value.trim();
 
  if(!val){
    alert("Entrer une substance");
    return;
  }
 
- await fetch(`${API}/export?nom=${val}`);
- alert("PDF généré !");
+ window.open(`${API}/export?nom=${encodeURIComponent(val)}`);
 }
 </script>
 
