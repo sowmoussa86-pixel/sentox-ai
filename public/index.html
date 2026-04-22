@@ -2,86 +2,65 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SENTOX PRO</title>
+<title>SENTOX</title>
 
 <style>
 body {
     margin:0;
     font-family:Arial;
-    background:url("logo.png") no-repeat center center fixed;
+    background:url("logo.png") no-repeat center center;
     background-size:cover;
+    height:100vh;
 }
 
-/* overlay sombre */
+/* couche transparente */
 .overlay {
-    background:rgba(255,255,255,0.9);
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
+    background: rgba(255,255,255,0.3);
+    backdrop-filter: blur(4px);
 }
 
-/* titre */
-h1 {
-    font-size:40px;
-    color:#16a34a;
+/* logo titre */
+.logo-title {
+    font-size:60px;
+    font-weight:bold;
+    color:#1f7a3a;
+    margin-bottom:20px;
 }
 
-/* barre de recherche */
+/* barre recherche */
 .search-box {
     display:flex;
+    align-items:center;
     background:white;
-    border-radius:30px;
+    border-radius:50px;
     overflow:hidden;
-    width:400px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    width:500px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.2);
 }
 
 .search-box input {
     flex:1;
-    padding:12px;
+    padding:15px;
     border:none;
     outline:none;
+    font-size:16px;
 }
 
 .search-box button {
-    padding:12px;
-    border:none;
-    cursor:pointer;
-    background:#16a34a;
+    background:#1f7a3a;
     color:white;
-}
-
-/* boutons */
-.actions {
-    margin-top:15px;
-}
-
-.actions button {
-    margin:5px;
-    padding:10px;
     border:none;
-    border-radius:5px;
+    padding:15px 20px;
     cursor:pointer;
-}
-
-/* cartes résultats */
-.card {
-    background:white;
-    padding:15px;
-    margin:10px;
-    border-radius:10px;
-    width:350px;
 }
 
 /* footer */
 .footer {
-    position:fixed;
-    bottom:10px;
+    position:absolute;
+    bottom:20px;
     text-align:center;
-    width:100%;
     font-size:14px;
+    color:#333;
 }
 </style>
 </head>
@@ -90,82 +69,29 @@ h1 {
 
 <div class="overlay">
 
-<h1>SENTOX</h1>
+<div class="logo-title">SENTOX</div>
 
 <div class="search-box">
     <input id="searchInput" placeholder="Rechercher une substance..." />
     <button onclick="rechercher()">🔍</button>
 </div>
 
-<div class="actions">
-    <button onclick="rechercher()">🔎 Recherche</button>
-    <button onclick="analyseIA()">🧠 IA</button>
-    <button onclick="interaction()">⚗️ Interaction</button>
-    <button onclick="exportPDF()">📄 PDF</button>
-</div>
-
-<div id="resultats"></div>
-
 </div>
 
 <div class="footer">
-SENTOX – Plateforme web et Application mobile
+<b>SENTOX</b><br>
+Plateforme web et Application mobile
 </div>
 
 <script>
 const API="https://sentox-ai-1.onrender.com";
 
-/* 🔎 RECHERCHE */
 async function rechercher(){
  let val=document.getElementById("searchInput").value;
- let div=document.getElementById("resultats");
- div.innerHTML="Chargement...";
-
  let res=await fetch(`${API}/search?nom=${val}`);
  let data=await res.json();
 
- let html="";
-
- data.local.forEach(x=>{
-  html+=`
-  <div class="card">
-   <h3>${x.nom}</h3>
-   DL50: ${x.dl50}<br>
-   Danger: ${x.danger}<br>
-   Organe: ${x.organe}
-  </div>`;
- });
-
- div.innerHTML=html;
-}
-
-/* ⚗️ INTERACTION */
-async function interaction(){
- let ids=prompt("Entrer les IDs séparés par virgule (ex: 1,2)");
- if(!ids) return;
-
- let res=await fetch(`${API}/interaction?ids=${ids}`);
- let data=await res.json();
-
- let div=document.getElementById("resultats");
-
- div.innerHTML=`
- <div class="card">
-  Substances: ${data.substances.join(", ")}<br>
-  Résultat: ${data.interactions.join(", ")}
- </div>`;
-}
-
-/* 🧠 IA TOXICO (simulation) */
-function analyseIA(){
- alert("Analyse IA activée : utilise les données DL50 + organes pour évaluer le risque.");
-}
-
-/* 📄 PDF */
-async function exportPDF(){
- let val=document.getElementById("searchInput").value;
- await fetch(`${API}/export?nom=${val}`);
- alert("PDF généré !");
+ alert("Résultats trouvés: " + data.local.length);
 }
 </script>
 
