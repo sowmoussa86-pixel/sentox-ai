@@ -33,18 +33,23 @@ def search(nom: str):
 @app.get("/ai")
 def ai_analysis(nom: str):
 
-    prompt = f"Analyse toxicologique de {nom}"
+    # ⚠️ PAS D'ACCENTS
+    prompt = f"Analyse toxicologique de {nom}. Donner toxicite, organes affectes, risques et recommandations."
 
     try:
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content": "Tu es un expert en toxicologie médicale"},
+                {"role": "system", "content": "You are a toxicology expert"},
                 {"role": "user", "content": prompt}
             ]
         )
 
-        return {"result": response.choices[0].message.content}
+        # ⚠️ conversion propre UTF-8 → ASCII safe
+        result = response.choices[0].message.content
+        result_clean = result.encode("utf-8", "ignore").decode("utf-8")
+
+        return {"result": result_clean}
 
     except Exception as e:
         return {"error": str(e)}
