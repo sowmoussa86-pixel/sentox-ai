@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import os
@@ -37,7 +38,10 @@ def ai_analysis(nom: str):
     try:
         response = client.chat.completions.create(
             model="gpt-4o-mini",
-            messages=[{"role":"user","content":prompt}]
+            messages=[
+                {"role": "system", "content": "Tu es un expert en toxicologie médicale"},
+                {"role": "user", "content": prompt}
+            ]
         )
 
         return {"result": response.choices[0].message.content}
