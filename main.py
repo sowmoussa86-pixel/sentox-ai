@@ -100,3 +100,33 @@ def export(nom: str):
     doc.build(content)
 
     return FileResponse(file_path, filename="rapport_sentox.pdf")
+from openai import OpenAI
+import os
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+@app.get("/ai")
+def ai_analysis(nom: str):
+
+    prompt = f"""
+    Analyse toxicologique de {nom}.
+    Donne :
+    - toxicité
+    - organes affectés
+    - risques
+    - recommandations
+    """
+
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": "Tu es un expert en toxicologie"},
+                {"role": "user", "content": prompt}
+            ]
+        )
+
+        return {"result": response.choices[0].message.content}
+
+    except Exception as e:
+        return {"error": str(e)}
