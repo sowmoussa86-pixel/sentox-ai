@@ -92,7 +92,8 @@ def search(nom: str):
 
 # -------------------------
 # 🧠 IA CHATGPT
-# -------------------------
+from fastapi.responses import JSONResponse
+
 @app.get("/ai")
 def ai_analysis(nom: str):
 
@@ -106,6 +107,18 @@ def ai_analysis(nom: str):
                 {"role": "user", "content": prompt}
             ]
         )
+
+        result = response.choices[0].message.content
+
+        # 🔥 SOLUTION CLÉ : ensure_ascii=False
+        return JSONResponse(
+            content={"result": result},
+            media_type="application/json",
+            headers={"Content-Type": "application/json; charset=utf-8"}
+        )
+
+    except Exception as e:
+        return {"error": str(e)}
 
         result = response.choices[0].message.content
 
