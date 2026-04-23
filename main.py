@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
@@ -90,14 +88,19 @@ def search(nom: str):
         "suggestions": [x["nom"] for x in DATABASE if nom in x["nom"]]
     }
 
-# -------------------------
-# 🧠 IA CHATGPT
 from fastapi.responses import JSONResponse
 
 @app.get("/ai")
 def ai_analysis(nom: str):
 
-    prompt = f"Analyse toxicologique de {nom}. Donner toxicite, organes affectes, risques et recommandations."
+    prompt = f"""
+    Provide a toxicological analysis of {nom}.
+    Include:
+    - toxicity level
+    - affected organs
+    - risks
+    - recommendations
+    """
 
     try:
         response = client.chat.completions.create(
@@ -110,26 +113,20 @@ def ai_analysis(nom: str):
 
         result = response.choices[0].message.content
 
-        # 🔥 SOLUTION CLÉ : ensure_ascii=False
-        return JSONResponse(
-            content={"result": result},
-            media_type="application/json",
-            headers={"Content-Type": "application/json; charset=utf-8"}
-        )
-
-    except Exception as e:
-        return {"error": str(e)}
-
-        result = response.choices[0].message.content
-
-        # 🔥 FIX ASCII
-        result_clean = unicodedata.normalize('NFKD', result).encode('ascii', 'ignore').decode('ascii')
+        # 🔥 FIX FINAL : enlever tous les caractères non ASCII
+        result_clean = result.encode("ascii", "ignore").decode()
 
         return JSONResponse(content={"result": result_clean})
 
     except Exception as e:
         return {"error": str(e)}
 
+        result = response.choices[0].message.content
+
+        return JSONResponse(content={"result": result})
+
+    except Exception as e:
+        return {"error": str(e)}
 # -------------------------
 # ⚗️ INTERACTION
 # -------------------------
