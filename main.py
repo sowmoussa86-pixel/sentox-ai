@@ -57,17 +57,19 @@ def search(nom: str):
     nom = nom.lower()
     results = []
 
+    # 🔹 1. BASE LOCALE
     for item in DATABASE:
         if nom in item["nom"]:
-            danger, organe = compute_toxicity(item["dl50"])
+            results.append(item)
 
-            item_copy = item.copy()
-            item_copy["danger"] = danger
-            item_copy["organe"] = organe
+    # 🔹 2. SI TROUVÉ → RETOUR
+    if results:
+        return {
+            "source": "local",
+            "data": results
+        }
 
-            results.append(item_copy)
-
-    # 🌍 PUBCHEM
+    # 🔹 3. PUBCHEM (chimique)
     try:
         url = f"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{nom}/property/MolecularFormula,MolecularWeight/JSON"
         r = requests.get(url)
@@ -75,9 +77,44 @@ def search(nom: str):
 
         props = data["PropertyTable"]["Properties"][0]
 
-        scientifique = {
-            "formula": props.get("MolecularFormula"),
-            "weight": props.get("MolecularWeight")
+        return {
+            "source": "pubchem",
+            "data": {
+                "nom": nom,
+                "formula": props.get("MolecularFormula"),
+                "weight": props.get("MolecularWeight")
+            }
+        }
+
+    except:
+        pass
+
+    # 🔹 4. IA (ULTIME FALLBACK)
+    try:
+        prompt = f"""
+        Give scientific, pharmacological and toxicological data for {nom}.
+        Include:
+        - type (plant, drug, chemical)
+        - toxicity (DL50, NOAEL if possible)
+        - pharmacology
+        - risks
+        """
+
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}]
+        )
+
+        result = response.choices[0].message.content
+
+        return {
+            "source": "ai",
+            "data": result
+        }
+
+    except:
+        return {
+            "error": "Substance non trouvée"
         }
     except:
         scientifique = None

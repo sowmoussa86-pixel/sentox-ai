@@ -135,6 +135,54 @@ async function rechercher(){
 
     let html = "";
 
+    // 🔹 CAS 1 : BASE LOCALE
+    if(data.source === "local"){
+        data.data.forEach(x=>{
+            html += `
+            <div class="card">
+                <h3>${x.nom}</h3>
+                DL50: ${x.dl50 || "-"}<br>
+                Type: ${x.type || "-"}
+            </div>`;
+        });
+    }
+
+    // 🔹 CAS 2 : PUBCHEM
+    if(data.source === "pubchem"){
+        html += `
+        <div class="card">
+            <h3>${data.data.nom}</h3>
+            Formule: ${data.data.formula}<br>
+            Masse: ${data.data.weight}
+        </div>`;
+    }
+
+    // 🔹 CAS 3 : IA
+    if(data.source === "ai"){
+        html += `
+        <div class="card">
+            <h3>Analyse IA</h3>
+            ${data.data}
+        </div>`;
+    }
+
+    // 🔹 CAS ERREUR
+    if(data.error){
+        html = `<div class="card">${data.error}</div>`;
+    }
+
+    div.innerHTML = html;
+}
+    let val = document.getElementById("searchInput").value;
+    let div = document.getElementById("resultats");
+
+    div.innerHTML = "Chargement...";
+
+    let res = await fetch(`${API}/search?nom=${encodeURIComponent(val)}`);
+    let data = await res.json();
+
+    let html = "";
+
     data.local.forEach(x=>{
         html += `
         <div class="card">
