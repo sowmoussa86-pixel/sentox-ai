@@ -1,87 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>SENTOX</title>
+<title>SENTOX PRO</title>
 
 <style>
 body {
-    margin:0;
-    font-family:Arial;
-    background:url("logo.png") no-repeat center center;
-    background-size:cover;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url("logo.png") no-repeat center center/cover;
+    height: 100vh;
 }
 
+/* overlay léger pour lisibilité */
 .overlay {
+    height: 100vh;
     background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(2px);
-
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
+/* titre */
 .logo-title {
-    font-size:60px;
-    font-weight:bold;
-    color:#1f7a3a;
-    margin-bottom:20px;
+    font-size: 60px;
+    font-weight: bold;
+    color: #16a34a;
+    margin-bottom: 20px;
 }
 
+/* barre de recherche */
 .search-box {
-    display:flex;
-    background:white;
-    border-radius:50px;
-    overflow:hidden;
-    width:500px;
-    max-width:90%;
+    display: flex;
+    width: 60%;
+    max-width: 600px;
+    background: white;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 .search-box input {
-    flex:1;
-    padding:15px;
-    border:none;
-    outline:none;
+    flex: 1;
+    padding: 15px;
+    border: none;
+    font-size: 16px;
+    outline: none;
 }
 
 .search-box button {
-    background:#1f7a3a;
-    color:white;
-    border:none;
-    padding:15px;
+    background: #16a34a;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    cursor: pointer;
 }
 
-.actions {
-    margin-top:20px;
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
+/* boutons */
+.buttons {
+    margin-top: 20px;
 }
 
-.actions button {
-    padding:10px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
+.buttons button {
+    margin: 5px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background: #e5e7eb;
+    cursor: pointer;
 }
 
-.results {
-    margin-top:20px;
-    width:90%;
-    max-width:600px;
+/* résultats */
+#resultats {
+    margin-top: 30px;
+    width: 60%;
+    max-width: 700px;
 }
 
 .card {
-    background:white;
-    padding:15px;
-    margin-top:10px;
-    border-radius:10px;
-    text-align:left;
+    background: white;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+/* footer */
+.footer {
+    position: absolute;
+    bottom: 10px;
+    color: #065f46;
 }
 </style>
+
 </head>
 
 <body>
@@ -91,196 +102,94 @@ body {
 <div class="logo-title">SENTOX</div>
 
 <div class="search-box">
-<input id="searchInput" placeholder="Rechercher..." />
-<button onclick="rechercher()">🔍</button>
+    <input id="searchInput" placeholder="Rechercher une substance..." />
+    <button onclick="rechercher()">🔍</button>
 </div>
 
-<div class="actions">
-<button onclick="rechercher()">🔎 Recherche</button>
-<button onclick="analyseIA()">🧠 IA</button>
-<button onclick="interaction()">⚗️ Interaction</button>
-<button onclick="exportPDF()">📄 PDF</button>
+<div class="buttons">
+    <button onclick="rechercher()">🔎 Recherche</button>
+    <button onclick="analyseIA()">🧠 IA</button>
+    <button onclick="interaction()">⚗️ Interaction</button>
+    <button onclick="exportPDF()">📄 PDF</button>
 </div>
 
-<div id="resultats" class="results"></div>
+<div id="resultats"></div>
 
+</div>
+
+<div class="footer">
+SENTOX - Plateforme web et Application mobile
 </div>
 
 <script>
-const API="https://sentox-ai-1.onrender.com";
+const API = "https://sentox-ai-1.onrender.com";
 
-/* 🔎 RECHERCHE */
 async function rechercher(){
- let val=document.getElementById("searchInput").value.trim();
- let div=document.getElementById("resultats");
+    let val = document.getElementById("searchInput").value;
+    let div = document.getElementById("resultats");
 
- if(!val){
-   div.innerHTML="<div class='card'>Entrer une substance</div>";
-   return;
- }
+    div.innerHTML = "Chargement...";
 
- div.innerHTML="<div class='card'>Chargement...</div>";
+    let res = await fetch(`${API}/search?nom=${encodeURIComponent(val)}`);
+    let data = await res.json();
 
- let res=await fetch(`${API}/search?nom=${encodeURIComponent(val)}`);
- let data=await res.json();
+    let html = "";
 
- let html="";
+    data.local.forEach(x=>{
+        html += `
+        <div class="card">
+            <h3>${x.nom}</h3>
+            DL50: ${x.dl50}<br>
+            Danger: ${x.danger}<br>
+            Organe: ${x.organe}
+        </div>`;
+    });
 
- data.local.forEach(x=>{
-  html+=`
-  <div class="card">
-   <h3>${x.nom}</h3>
-   DL50: ${x.dl50}<br>
-   Danger: ${x.danger}<br>
-   Organe: ${x.organe}
-  </div>`;
- });
+    if(data.scientifique){
+        html += `
+        <div class="card">
+            Formule: ${data.scientifique.formula}<br>
+            Poids: ${data.scientifique.weight}
+        </div>`;
+    }
 
- if(data.suggestions.length){
-  html+=`<div class="card">Suggestions: ${data.suggestions.join(", ")}</div>`;
- }
-
- div.innerHTML=html;
+    div.innerHTML = html;
 }
 
- try{
-   let res=await fetch(`${API}/search?nom=${encodeURIComponent(val)}`);
-   let data=await res.json();
-
-   let html="";
-
-   if(!data.local || data.local.length===0){
-     html="<div class='card'>Aucun résultat trouvé</div>";
-   } else {
-     data.local.forEach(x=>{
-      html+=`
-      <div class="card">
-       <h3>${x.nom}</h3>
-       DL50: ${x.dl50}<br>
-       Danger: ${x.danger}<br>
-       Organe: ${x.organe}<br>
-      </div>`;
-     });
-   }
-
-   if(data.scientifique){
-    html+=`
-    <div class="card">
-     <b>Données scientifiques:</b><br>
-     Formule: ${data.scientifique.formula}<br>
-     Poids: ${data.scientifique.poids_moleculaire}
-    </div>`;
-   }
-
-   div.innerHTML=html;
-
- }catch(err){
-   div.innerHTML="<div class='card'>Erreur serveur</div>";
- }
-}
-
-/* 🧠 IA */
 async function analyseIA(){
- let val=document.getElementById("searchInput").value.trim();
- let div=document.getElementById("resultats");
+    let val = document.getElementById("searchInput").value;
+    let div = document.getElementById("resultats");
 
- if(!val){
-   div.innerHTML="<div class='card'>Entrer une substance</div>";
-   return;
- }
+    div.innerHTML = "Analyse IA...";
 
- div.innerHTML="<div class='card'>Analyse en cours...</div>";
+    let res = await fetch(`${API}/ai?nom=${encodeURIComponent(val)}`);
+    let data = await res.json();
 
- try{
-   let res=await fetch(`${API}/ai?nom=${encodeURIComponent(val)}`);
-   let data=await res.json();
-
-   div.innerHTML=`
-   <div class="card">
-   <h3>Analyse IA</h3>
-   ${data.result}
-   </div>`;
- }catch(err){
-   div.innerHTML="<div class='card'>Erreur IA</div>";
- }
+    div.innerHTML = `<div class="card">${data.result || data.error}</div>`;
 }
 
- let res=await fetch(`${API}/search?nom=${encodeURIComponent(val)}`);
- let data=await res.json();
+async function interaction(){
+    let val = document.getElementById("searchInput").value;
+    let div = document.getElementById("resultats");
 
- if(!data.local || data.local.length===0){
-   div.innerHTML="<div class='card'>Aucune donnée</div>";
-   return;
- }
+    if(!val.includes(",")){
+        div.innerHTML = "Entrer plusieurs substances (ex: paracetamol,methanol)";
+        return;
+    }
 
- let x=data.local[0];
+    let res = await fetch(`${API}/interaction?noms=${encodeURIComponent(val)}`);
+    let data = await res.json();
 
- div.innerHTML=`
- <div class="card">
- <h3>Analyse IA</h3>
- Substance: ${x.nom}<br><br>
- Risque: ${x.danger}<br>
- Organe: ${x.organe}<br><br>
- Interprétation: Cette substance doit être utilisée avec précaution.
- </div>`;
+    div.innerHTML = `
+    <div class="card">
+        <h3>Interaction</h3>
+        ${data.interaction}
+    </div>`;
 }
 
-/* ⚗️ INTERACTION */
-function interaction(){
- let val=document.getElementById("searchInput").value.trim();
- let div=document.getElementById("resultats");
-
- if(!val.includes(",")){
-   div.innerHTML="<div class='card'>Entrer 2 substances (ex: paracetamol,methanol)</div>";
-   return;
- }
-
- let noms=val.split(",").map(x=>x.trim());
-
- let result="<div class='card'><h3>Interaction</h3>";
-
- result+=`Substances: ${noms.join(", ")}<br><br>`;
-
- if(noms.includes("paracetamol") && noms.includes("methanol")){
-   result+="⚠️ Risque hépatotoxique élevé";
- } else {
-   result+="✅ Aucune interaction majeure connue";
- }
-
- result+="</div>";
-
- div.innerHTML=result;
-}
-
- let noms=val.split(",");
-
- let result="<div class='card'><h3>Interaction</h3>";
- result+=`Substances: ${noms.join(", ")}<br><br>`;
-
- if(val.includes("paracetamol") && val.includes("methanol")){
-   result+="⚠️ Risque hépatotoxique élevé";
- } else {
-   result+="✅ Aucune interaction majeure connue";
- }
-
- result+="</div>";
-
- div.innerHTML=result;
-}
-
-/* 📄 PDF */
 function exportPDF(){
- let val=document.getElementById("searchInput").value.trim();
-
- if(!val){
-   alert("Entrer une substance");
-   return;
- }
-
- window.open(`${API}/export?nom=${encodeURIComponent(val)}`);
-}
-
- window.open(`${API}/export?nom=${encodeURIComponent(val)}`);
+    let val = document.getElementById("searchInput").value;
+    window.open(`${API}/export?nom=${encodeURIComponent(val)}`);
 }
 </script>
 
