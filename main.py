@@ -1,10 +1,11 @@
-from fastapi import FastAPI, HTTPException
+# -*- coding: utf-8 -*-
+
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 
 import os
 import requests
-import unicodedata
 
 from openai import OpenAI
 from reportlab.platypus import SimpleDocTemplate, Paragraph
@@ -25,7 +26,7 @@ app.add_middleware(
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # -------------------------
-# 🔎 BASE LOCALE SIMPLE
+# 🔎 BASE LOCALE
 # -------------------------
 DATABASE = [
     {"id":1,"nom":"neem","dl50":5000,"type":"plante"},
@@ -39,13 +40,13 @@ DATABASE = [
 # -------------------------
 def compute_toxicity(dl50):
     if dl50 <= 50:
-        return "🔴 Très toxique", "Foie / système nerveux"
+        return "Very toxic", "Liver / nervous system"
     elif dl50 <= 300:
-        return "🟠 Toxique", "Foie / reins"
+        return "Toxic", "Liver / kidneys"
     elif dl50 <= 2000:
-        return "🟡 Modéré", "Digestif"
+        return "Moderate", "Digestive system"
     else:
-        return "🟢 Faible", "Aucun critique"
+        return "Low", "No critical organ"
 
 # -------------------------
 # 🔎 SEARCH
@@ -54,7 +55,6 @@ def compute_toxicity(dl50):
 def search(nom: str):
 
     nom = nom.lower()
-
     results = []
 
     for item in DATABASE:
@@ -77,7 +77,7 @@ def search(nom: str):
 
         scientifique = {
             "formula": props.get("MolecularFormula"),
-            "poids": props.get("MolecularWeight")
+            "weight": props.get("MolecularWeight")
         }
     except:
         scientifique = None
@@ -88,8 +88,9 @@ def search(nom: str):
         "suggestions": [x["nom"] for x in DATABASE if nom in x["nom"]]
     }
 
-from fastapi.responses import JSONResponse
-
+# -------------------------
+# 🧠 IA CHATGPT (STABLE)
+# -------------------------
 @app.get("/ai")
 def ai_analysis(nom: str):
 
@@ -113,20 +114,14 @@ def ai_analysis(nom: str):
 
         result = response.choices[0].message.content
 
-        # 🔥 FIX FINAL : enlever tous les caractères non ASCII
+        # 🔥 FIX ASCII (évite crash Render)
         result_clean = result.encode("ascii", "ignore").decode()
 
         return JSONResponse(content={"result": result_clean})
 
     except Exception as e:
-        return {"error": str(e)}
+        return JSONResponse(content={"error": str(e)})
 
-        result = response.choices[0].message.content
-
-        return JSONResponse(content={"result": result})
-
-    except Exception as e:
-        return {"error": str(e)}
 # -------------------------
 # ⚗️ INTERACTION
 # -------------------------
@@ -135,24 +130,21 @@ def interaction(noms: str):
 
     noms_list = [x.strip().lower() for x in noms.split(",")]
 
+    # ⚠️ règle simple
+    if "paracetamol" in noms_list and "methanol" in noms_list:
+        interaction_msg = "High hepatotoxic risk"
+    else:
+        interaction_msg = "No major interaction known"
+
     result = []
 
-    # ⚠️ règles simples (extensible)
-    if "paracetamol" in noms_list and "methanol" in noms_list:
-        interaction_msg = "⚠️ Risque hepatotoxique eleve"
-    else:
-        interaction_msg = "Aucune interaction majeure connue"
-
-    # 🌍 PubChem (placeholder scientifique)
     for n in noms_list:
         try:
             url = f"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{n}/JSON"
-            r = requests.get(url)
-            data = r.json()
-
-            info = "Donnees PubChem disponibles"
+            requests.get(url)
+            info = "PubChem data available"
         except:
-            info = "Pas de donnees"
+            info = "No data"
 
         result.append({"nom": n, "info": info})
 
@@ -174,7 +166,6 @@ def export(nom: str):
 
     doc = SimpleDocTemplate(file_path)
     styles = getSampleStyleSheet()
-
     content = []
 
     for item in results:
@@ -183,7 +174,7 @@ def export(nom: str):
 
     doc.build(content)
 
-    return FileResponse(file_path, filename="rapport_sentox.pdf")
+    return FileResponse(file_path, filename="sentox_report.pdf")
 
 # -------------------------
 # 🏠 ROOT
