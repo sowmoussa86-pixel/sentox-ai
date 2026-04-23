@@ -30,10 +30,12 @@ def search(nom: str):
     }
 
 # 🧠 IA CHATGPT
+from fastapi.responses import JSONResponse
+import unicodedata
+
 @app.get("/ai")
 def ai_analysis(nom: str):
 
-    # ⚠️ PAS D'ACCENTS
     prompt = f"Analyse toxicologique de {nom}. Donner toxicite, organes affectes, risques et recommandations."
 
     try:
@@ -45,11 +47,12 @@ def ai_analysis(nom: str):
             ]
         )
 
-        # ⚠️ conversion propre UTF-8 → ASCII safe
         result = response.choices[0].message.content
-        result_clean = result.encode("utf-8", "ignore").decode("utf-8")
 
-        return {"result": result_clean}
+        # 🔥 SUPPRIMER LES ACCENTS (clé du problème)
+        result_clean = unicodedata.normalize('NFKD', result).encode('ascii', 'ignore').decode('ascii')
+
+        return JSONResponse(content={"result": result_clean})
 
     except Exception as e:
         return {"error": str(e)}
