@@ -139,7 +139,8 @@ async function checkInteraction(){
 
     div.innerHTML = `<div class="card">${data.result}</div>`;
 }
-</script>
+<script>
+
 async function ficheComplete(){
     let val = document.getElementById("searchInput").value;
     let div = document.getElementById("resultats");
@@ -155,5 +156,7 @@ async function ficheComplete(){
         div.innerHTML = `<div class="card">Erreur</div>`;
     }
 }
+
+</script>
 </body>
 </html>
