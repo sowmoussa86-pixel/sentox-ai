@@ -97,6 +97,74 @@ def interaction(noms: str):
 # -------------------------
 # 🏠 ROOT
 # -------------------------
+# -------------------------
+# 📊 FICHE COMPLETE
+# -------------------------
+@app.get("/fiche")
+def fiche(nom: str):
+
+    prompt = f"""
+    Generate a FULL scientific toxicology report for {nom}.
+
+    If plant:
+    - botanical identification
+    - chemical composition
+    - description
+    - pharmacological activities
+    - toxicity (acute, chronic)
+    - interactions
+    - contraindications
+    - side effects
+    - indications
+    - dosage
+    - preparation
+    - risk populations
+
+    If drug:
+    - ADME (absorption, distribution, metabolism, elimination)
+    - half-life
+    - LD50
+    - therapeutic window
+    - toxic dose
+    - mechanisms of toxicity
+    - target organs
+    - symptoms
+    - carcinogenicity / mutagenicity
+    - antidotes
+    - interactions
+    - risk factors
+
+    If chemical:
+    - CAS number
+    - hazard pictograms
+    - exposure routes
+    - acute toxicity
+    - chronic toxicity
+    - VLEP
+    - PPE
+    - storage
+    - first aid
+    - spill management
+    - environmental impact
+
+    Make it structured and clear.
+    """
+
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}]
+        )
+
+        result = response.choices[0].message.content
+
+        # éviter bug accent
+        clean = result.encode("ascii", "ignore").decode()
+
+        return {"fiche": clean}
+
+    except Exception as e:
+        return {"error": str(e)}
 @app.get("/")
 def home():
     return {"message": "SENTOX PRO OK"} PRO OK"}
