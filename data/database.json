@@ -1,41 +1,36 @@
 [
-  {{
-  "nom": "neem",
-  "type": "plante",
+  {
+    "nom": "neem",
+    "type": "plante",
+    "description": "Arbre medicinal utilise en Afrique et en Inde pour ses proprietes antiseptiques et antiparasitaires",
+    "pharmacologie": [
+      "antibacterien",
+      "antifongique",
+      "anti-inflammatoire",
+      "antipaludique"
+    ],
+    "toxicologie": "faible a dose normale, toxique a forte dose",
+    "organes": "foie, systeme digestif",
+    "indications": [
+      "paludisme",
+      "infection",
+      "maladies de peau"
+    ],
+    "posologie": "decoction des feuilles ou huile",
+    "effets": [
+      "nausees",
+      "vomissements",
+      "hepatotoxicite rare"
+    ]
+  },
 
-  "description": "Arbre medicinal utilise en Afrique et en Inde pour ses proprietes antiseptiques et antiparasitaires",
-
-  "pharmacologie": [
-    "antibacterien",
-    "antifongique",
-    "anti-inflammatoire",
-    "antipaludique"
-  ],
-
-  "toxicologie": "faible a dose normale, toxique a forte dose",
-
-  "organes": "foie, systeme digestif",
-
-  "indications": [
-    "paludisme",
-    "infection",
-    "maladies de peau"
-  ],
-
-  "posologie": "decoction des feuilles ou huile",
-
-  "effets": [
-    "nausees",
-    "vomissements",
-    "hepatotoxicite rare"
-  ]
-}
   {
     "nom": "paracetamol",
     "type": "medicament",
     "dl50": 338,
     "toxicologie": "hepatotoxique"
   },
+
   {
     "nom": "benzene",
     "type": "chimique",
