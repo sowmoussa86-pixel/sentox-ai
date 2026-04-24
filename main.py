@@ -70,10 +70,7 @@ def search(nom: str):
         result = response.choices[0].message.content
 
         # éviter bug accents
-        clean = result.encode("ascii", "ignore").decode()
-
-        return {"source": "ai", "data": clean}
-
+       return {"source": "ai", "data": result}
     except:
         return {"error": "Substance non trouvée"}
 
@@ -123,9 +120,7 @@ def fiche(nom: str):
         result = response.choices[0].message.content
 
         # éviter erreur ASCII
-        clean = result.encode("ascii", "ignore").decode()
-
-        return {"fiche": clean}
+        return {"fiche": result}
 
     except Exception as e:
         return {"error": str(e)}
