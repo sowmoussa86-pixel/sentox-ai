@@ -108,11 +108,34 @@ async function rechercher(){
 
         if(data.source === "local"){
             data.data.forEach(x=>{
-                html += `<div class="card">
-                <h3>${x.nom}</h3>
-                Type: ${x.type}<br>
-                DL50: ${x.dl50 || "-"}
-                </div>`;
+
+                if(x.type === "plante"){
+                    html += `<div class="card">
+                    <h3>${x.nom}</h3>
+                    🌿 Type: plante<br>
+                    Pharmacologie: ${x.pharmacologie ? x.pharmacologie.join(", ") : "-"}<br>
+                    Toxicité: ${x.toxicologie || "-"}
+                    </div>`;
+                }
+
+                if(x.type === "medicament"){
+                    html += `<div class="card">
+                    <h3>${x.nom}</h3>
+                    💊 Type: médicament<br>
+                    DL50: ${x.dl50 || "-"}<br>
+                    Toxicité: ${x.toxicologie || "-"}
+                    </div>`;
+                }
+
+                if(x.type === "chimique"){
+                    html += `<div class="card">
+                    <h3>${x.nom}</h3>
+                    ☣️ Type: chimique<br>
+                    Formule: ${x.formula || "-"}<br>
+                    Danger: ${x.danger || "-"}
+                    </div>`;
+                }
+
             });
         }
 
@@ -160,7 +183,7 @@ async function ficheComplete(){
     let val = document.getElementById("searchInput").value;
     let div = document.getElementById("resultats");
 
-    div.innerHTML = "Analyse en cours...";
+    div.innerHTML = "Analyse complète en cours...";
 
     try{
         let res = await fetch(`${API}/fiche?nom=${encodeURIComponent(val)}`);
