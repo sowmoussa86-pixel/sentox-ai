@@ -61,6 +61,7 @@ body {
 <div class="search-box">
 <input id="searchInput" placeholder="Rechercher...">
 <button onclick="rechercher()">🔍</button>
+<button onclick="checkInteraction()">⚗️ Interaction</button>
 </div>
 
 <div id="resultats"></div>
@@ -111,6 +112,14 @@ async function rechercher(){
     div.innerHTML = html;
 }
 </script>
+async function checkInteraction(){
+    let val = document.getElementById("searchInput").value;
+    let div = document.getElementById("resultats");
 
+    let res = await fetch(`${API}/interaction?noms=${encodeURIComponent(val)}`);
+    let data = await res.json();
+
+    div.innerHTML = `<div class="card">${data.result}</div>`;
+}
 </body>
 </html>

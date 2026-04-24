@@ -82,6 +82,22 @@ def search(nom: str):
 # -------------------------
 # 🏠 ROOT
 # -------------------------
+@app.get("/interaction")
+def interaction(noms: str):
+
+    noms_list = [x.strip().lower() for x in noms.split(",")]
+
+    # 🔥 règles réalistes
+    if "paracetamol" in noms_list and "alcohol" in noms_list:
+        return {"result": "High risk of liver toxicity"}
+
+    if "warfarin" in noms_list and "aspirin" in noms_list:
+        return {"result": "High bleeding risk"}
+
+    if "benzene" in noms_list:
+        return {"result": "Chronic exposure risk: bone marrow toxicity"}
+
+    return {"result": "No major interaction known"}
 @app.get("/")
 def home():
     return {"message": "SENTOX PRO OK"}
