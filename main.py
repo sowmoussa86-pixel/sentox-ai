@@ -1,3 +1,7 @@
+import sys
+import io
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 # -*- coding: utf-8 -*-
 
 from fastapi import FastAPI
@@ -37,8 +41,8 @@ def search(nom: str):
     results = [x for x in DATABASE if nom in x["nom"].lower()]
 
     if results:
-        return {"source": "local", "data": results}
-
+        safe = result.encode("utf-8", errors="ignore").decode("utf-8")
+return {"source": "ai", "data": safe}
     # PubChem
     try:
         url = f"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{nom}/property/MolecularFormula,MolecularWeight/JSON"
@@ -109,7 +113,10 @@ def fiche(nom: str):
 
         result = response.choices[0].message.content
 
-        return {"fiche": result}
+        # 🔥 force UTF-8 propre
+        safe = result.encode("utf-8", errors="ignore").decode("utf-8")
+
+        return {"fiche": safe}
 
     except Exception as e:
         return {"error": str(e)}
