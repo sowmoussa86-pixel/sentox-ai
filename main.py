@@ -1,19 +1,14 @@
-import sys
-import io
-
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 # -*- coding: utf-8 -*-
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 import json
-import os
 import requests
-from openai import OpenAI
 
 app = FastAPI()
 
-# 🔐 CORS
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -22,10 +17,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 🔑 OpenAI
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-# 📂 DATABASE
+# DATABASE
 with open("data/database.json", encoding="utf-8") as f:
     DATABASE = json.load(f)
 
@@ -37,13 +29,12 @@ def search(nom: str):
 
     nom = nom.lower()
 
-    # base locale
     results = [x for x in DATABASE if nom in x["nom"].lower()]
 
     if results:
-        safe = result.encode("utf-8", errors="ignore").decode("utf-8")
-return {"source": "ai", "data": safe}
-    # PubChem
+        return JSONResponse(content={"source": "local", "data": results})
+
+    # PubChem fallback
     try:
         url = f"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{nom}/property/MolecularFormula,MolecularWeight/JSON"
         r = requests.get(url)
@@ -51,32 +42,16 @@ return {"source": "ai", "data": safe}
 
         props = data["PropertyTable"]["Properties"][0]
 
-        return {
+        return JSONResponse(content={
             "source": "pubchem",
             "data": {
                 "nom": nom,
                 "formula": props.get("MolecularFormula"),
                 "weight": props.get("MolecularWeight")
             }
-        }
+        })
     except:
-        pass
-
-    # IA fallback
-    try:
-        prompt = f"Give scientific and toxicological data for {nom}"
-
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}]
-        )
-
-        result = response.choices[0].message.content
-
-        return {"source": "ai", "data": result}
-
-    except:
-        return {"error": "Substance not found"}
+        return JSONResponse(content={"error": "Substance not found"})
 
 # -------------------------
 # ⚗️ INTERACTION
@@ -87,39 +62,77 @@ def interaction(noms: str):
     noms_list = [x.strip().lower() for x in noms.split(",")]
 
     if "paracetamol" in noms_list and "alcohol" in noms_list:
-        return {"result": "High liver toxicity risk"}
+        return JSONResponse(content={"result": "High liver toxicity risk"})
 
     if "warfarin" in noms_list and "aspirin" in noms_list:
-        return {"result": "High bleeding risk"}
+        return JSONResponse(content={"result": "High bleeding risk"})
 
     if "benzene" in noms_list:
-        return {"result": "Chronic toxicity (bone marrow)"}
+        return JSONResponse(content={"result": "Chronic toxicity (bone marrow)"})
 
-    return {"result": "No major interaction"}
+    return JSONResponse(content={"result": "No major interaction"})
 
 # -------------------------
-# 📊 FICHE COMPLETE
+# 📊 FICHE COMPLETE (SANS IA)
 # -------------------------
 @app.get("/fiche")
 def fiche(nom: str):
 
-    try:
-        prompt = f"Provide full toxicological report for {nom}"
+    nom = nom.lower()
 
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}]
-        )
+    if "paracetamol" in nom:
+        return JSONResponse(content={
+            "fiche": """
+Substance: Paracetamol
 
-        result = response.choices[0].message.content
+Type: Medicament
 
-        # 🔥 force UTF-8 propre
-        safe = result.encode("utf-8", errors="ignore").decode("utf-8")
+Pharmacology:
+- Analgesic
+- Antipyretic
 
-        return {"fiche": safe}
+Toxicity:
+- Hepatotoxic in overdose
 
-    except Exception as e:
-        return {"error": str(e)}
+Target organ:
+- Liver
+
+Symptoms:
+- Nausea
+- Vomiting
+- Liver failure
+
+Recommendation:
+- Respect dosage
+- Avoid alcohol
+"""
+        })
+
+    if "benzene" in nom:
+        return JSONResponse(content={
+            "fiche": """
+Substance: Benzene
+
+Type: Chemical
+
+Toxicity:
+- Carcinogenic
+- Chronic exposure dangerous
+
+Target:
+- Bone marrow
+
+Exposure:
+- Inhalation
+
+Precaution:
+- Use protective equipment
+"""
+        })
+
+    return JSONResponse(content={
+        "fiche": f"No detailed data available for {nom}"
+    })
 
 # -------------------------
 # ROOT
