@@ -16,10 +16,8 @@
     "type": "chimique",
     "formula": "C6H6",
     "danger": "cancerigene"
-  }
-]
-[
-  {"nom":"neem","type":"plante"},
+  },
+
   {"nom":"moringa","type":"plante"},
   {"nom":"gingembre","type":"plante"},
   {"nom":"curcuma","type":"plante"},
@@ -30,7 +28,6 @@
   {"nom":"quinquina","type":"plante"},
   {"nom":"artemisia","type":"plante"},
 
-  {"nom":"paracetamol","type":"medicament","dl50":338},
   {"nom":"ibuprofen","type":"medicament","dl50":636},
   {"nom":"aspirin","type":"medicament","dl50":200},
   {"nom":"amoxicillin","type":"medicament"},
@@ -41,7 +38,6 @@
   {"nom":"diazepam","type":"medicament"},
   {"nom":"warfarin","type":"medicament"},
 
-  {"nom":"benzene","type":"chimique","formula":"C6H6"},
   {"nom":"methanol","type":"chimique","formula":"CH3OH"},
   {"nom":"ethanol","type":"chimique","formula":"C2H6O"},
   {"nom":"chloroform","type":"chimique"},

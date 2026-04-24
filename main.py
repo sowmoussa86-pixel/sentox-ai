@@ -21,28 +21,25 @@ app.add_middleware(
 # 🔑 OpenAI
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-# 📂 Charger base locale
+# 📂 Charger base
 with open("data/database.json", encoding="utf-8") as f:
     DATABASE = json.load(f)
 
 # -------------------------
-# 🔎 SEARCH FINAL
+# 🔎 SEARCH
 # -------------------------
 @app.get("/search")
 def search(nom: str):
 
     nom = nom.lower()
-    results = []
 
-    # 🔹 1. BASE LOCALE
-    for item in DATABASE:
-        if nom in item["nom"].lower():
-            results.append(item)
+    # 🔹 BASE LOCALE
+    results = [x for x in DATABASE if nom in x["nom"].lower()]
 
     if results:
         return {"source": "local", "data": results}
 
-    # 🔹 2. PUBCHEM
+    # 🔹 PUBCHEM
     try:
         url = f"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{nom}/property/MolecularFormula,MolecularWeight/JSON"
         r = requests.get(url)
@@ -61,11 +58,9 @@ def search(nom: str):
     except:
         pass
 
-    # 🔹 3. IA
+    # 🔹 IA
     try:
-        prompt = f"""
-        Give scientific, pharmacological and toxicological data for {nom}.
-        """
+        prompt = f"Give toxicological and scientific data for {nom}"
 
         response = client.chat.completions.create(
             model="gpt-4o-mini",
@@ -73,21 +68,21 @@ def search(nom: str):
         )
 
         result = response.choices[0].message.content
+        result_clean = result.encode("ascii", "ignore").decode()
 
-        return {"source": "ai", "data": result}
+        return {"source": "ai", "data": result_clean}
 
     except:
         return {"error": "Substance non trouvée"}
 
 # -------------------------
-# 🏠 ROOT
+# ⚗️ INTERACTION
 # -------------------------
 @app.get("/interaction")
 def interaction(noms: str):
 
     noms_list = [x.strip().lower() for x in noms.split(",")]
 
-    # 🔥 règles réalistes
     if "paracetamol" in noms_list and "alcohol" in noms_list:
         return {"result": "High risk of liver toxicity"}
 
@@ -95,9 +90,13 @@ def interaction(noms: str):
         return {"result": "High bleeding risk"}
 
     if "benzene" in noms_list:
-        return {"result": "Chronic exposure risk: bone marrow toxicity"}
+        return {"result": "Chronic toxicity (bone marrow)"}
 
     return {"result": "No major interaction known"}
+
+# -------------------------
+# 🏠 ROOT
+# -------------------------
 @app.get("/")
 def home():
-    return {"message": "SENTOX PRO OK"}
+    return {"message": "SENTOX PRO OK"} PRO OK"}
