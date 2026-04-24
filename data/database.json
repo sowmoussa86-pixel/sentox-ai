@@ -1,9 +1,9 @@
 [
-  {
+  {{
   "nom": "neem",
   "type": "plante",
 
-  "description": "Arbre medicinal utilise en Afrique et en Inde pour ses proprietes antiseptiques",
+  "description": "Arbre medicinal utilise en Afrique et en Inde pour ses proprietes antiseptiques et antiparasitaires",
 
   "pharmacologie": [
     "antibacterien",
@@ -17,9 +17,9 @@
   "organes": "foie, systeme digestif",
 
   "indications": [
-    "infection",
     "paludisme",
-    "problemes de peau"
+    "infection",
+    "maladies de peau"
   ],
 
   "posologie": "decoction des feuilles ou huile",
