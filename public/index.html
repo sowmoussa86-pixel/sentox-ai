@@ -108,17 +108,42 @@ async function rechercher(){
         let html = "";
 
         if(data.source === "local"){
-            data.data.forEach(x=>{
-                html += `<div class="card">
-                <h3>${x.nom}</h3>
-                Type: ${x.type}<br>
-                DL50: ${x.dl50 || "-"}<br>
-                Toxicité: ${x.toxicologie || "-"}<br>
-                Formule: ${x.formula || "-"}<br>
-                Danger: ${x.danger || "-"}
-                </div>`;
-            });
+    data.data.forEach(x=>{
+
+        if(x.type === "plante"){
+            html += `<div class="card">
+            <h3>${x.nom}</h3>
+
+            <b>Description:</b> ${x.description || "-"}<br>
+            <b>Pharmacologie:</b> ${x.pharmacologie ? x.pharmacologie.join(", ") : "-"}<br>
+            <b>Toxicité:</b> ${x.toxicologie || "-"}<br>
+            <b>Organes:</b> ${x.organes || "-"}<br>
+            <b>Indications:</b> ${x.indications ? x.indications.join(", ") : "-"}<br>
+            <b>Posologie:</b> ${x.posologie || "-"}<br>
+            <b>Effets indésirables:</b> ${x.effets ? x.effets.join(", ") : "-"}
+            </div>`;
         }
+
+        if(x.type === "medicament"){
+            html += `<div class="card">
+            <h3>${x.nom}</h3>
+            💊 Type: médicament<br>
+            DL50: ${x.dl50 || "-"}<br>
+            Toxicité: ${x.toxicologie || "-"}
+            </div>`;
+        }
+
+        if(x.type === "chimique"){
+            html += `<div class="card">
+            <h3>${x.nom}</h3>
+            ☣️ Type: chimique<br>
+            Formule: ${x.formula || "-"}<br>
+            Danger: ${x.danger || "-"}
+            </div>`;
+        }
+
+    });
+}
 
         if(data.source === "pubchem"){
             html += `<div class="card">
