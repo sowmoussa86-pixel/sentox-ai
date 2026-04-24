@@ -100,10 +100,7 @@ def interaction(noms: str):
 def fiche(nom: str):
 
     try:
-        prompt = f"""
-        Provide a full toxicological and scientific report for {nom}.
-        Include risks, toxicity, organs, interactions and recommendations.
-        """
+        prompt = f"Provide full toxicological report for {nom}"
 
         response = client.chat.completions.create(
             model="gpt-4o-mini",
