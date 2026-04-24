@@ -165,6 +165,32 @@ def fiche(nom: str):
 
     except Exception as e:
         return {"error": str(e)}
+# -------------------------
+# 📊 FICHE COMPLETE
+# -------------------------
+@app.get("/fiche")
+def fiche(nom: str):
+
+    try:
+        prompt = f"""
+        Give a full scientific and toxicological report for {nom}.
+        Include pharmacology, toxicity, risks, and recommendations.
+        """
+
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}]
+        )
+
+        result = response.choices[0].message.content
+
+        # 🔥 éviter bug caractères
+        clean = result.encode("ascii", "ignore").decode()
+
+        return {"fiche": clean}
+
+    except Exception as e:
+        return {"error": str(e)}
 @app.get("/")
 def home():
     return {"message": "SENTOX PRO OK"} PRO OK"}
