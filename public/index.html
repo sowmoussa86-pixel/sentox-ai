@@ -1,124 +1,70 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>SENTOX PRO</title>
+<title>SENTOX</title>
 
 <style>
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
+    margin:0;
+    font-family:Arial;
     background: url("logo.png") no-repeat center center/cover;
-    height: 100vh;
+    height:100vh;
 }
 
-/* overlay léger pour lisibilité */
 .overlay {
-    height: 100vh;
-    background: rgba(255,255,255,0.2);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    height:100vh;
+    background:rgba(255,255,255,0.2);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
 }
 
-/* titre */
-.logo-title {
-    font-size: 60px;
-    font-weight: bold;
-    color: #16a34a;
-    margin-bottom: 20px;
-}
-
-/* barre de recherche */
 .search-box {
-    display: flex;
-    width: 60%;
-    max-width: 600px;
-    background: white;
-    border-radius: 50px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display:flex;
+    width:60%;
+    max-width:500px;
+    background:white;
+    border-radius:30px;
+    overflow:hidden;
 }
 
 .search-box input {
-    flex: 1;
-    padding: 15px;
-    border: none;
-    font-size: 16px;
-    outline: none;
+    flex:1;
+    padding:15px;
+    border:none;
 }
 
 .search-box button {
-    background: #16a34a;
-    border: none;
-    color: white;
-    padding: 15px 20px;
-    cursor: pointer;
-}
-
-/* boutons */
-.buttons {
-    margin-top: 20px;
-}
-
-.buttons button {
-    margin: 5px;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 8px;
-    background: #e5e7eb;
-    cursor: pointer;
-}
-
-/* résultats */
-#resultats {
-    margin-top: 30px;
-    width: 60%;
-    max-width: 700px;
+    background:green;
+    color:white;
+    border:none;
+    padding:15px;
 }
 
 .card {
-    background: white;
-    padding: 15px;
-    margin-top: 10px;
-    border-radius: 10px;
-}
-
-/* footer */
-.footer {
-    position: absolute;
-    bottom: 10px;
-    color: #065f46;
+    background:white;
+    margin-top:10px;
+    padding:15px;
+    border-radius:10px;
 }
 </style>
-
 </head>
 
 <body>
 
 <div class="overlay">
 
-<div class="logo-title">SENTOX</div>
+<h1>SENTOX</h1>
 
 <div class="search-box">
-    <input id="searchInput" placeholder="Rechercher une substance..." />
-    <button onclick="rechercher()">🔍</button>
-</div>
-
-<div class="buttons">
-    <button onclick="rechercher()">🔎 Recherche</button>
-    <button onclick="analyseIA()">🧠 IA</button>
-    <button onclick="interaction()">⚗️ Interaction</button>
-    <button onclick="exportPDF()">📄 PDF</button>
+<input id="searchInput" placeholder="Rechercher...">
+<button onclick="rechercher()">🔍</button>
 </div>
 
 <div id="resultats"></div>
 
-</div>
-
-<div class="footer">
-SENTOX - Plateforme web et Application mobile
 </div>
 
 <script>
@@ -135,109 +81,34 @@ async function rechercher(){
 
     let html = "";
 
-    // 🔹 CAS 1 : BASE LOCALE
+    // LOCAL
     if(data.source === "local"){
         data.data.forEach(x=>{
-            html += `
-            <div class="card">
-                <h3>${x.nom}</h3>
-                DL50: ${x.dl50 || "-"}<br>
-                Type: ${x.type || "-"}
+            html += `<div class="card">
+            <h3>${x.nom}</h3>
+            Type: ${x.type}
             </div>`;
         });
     }
 
-    // 🔹 CAS 2 : PUBCHEM
+    // PUBCHEM
     if(data.source === "pubchem"){
-        html += `
-        <div class="card">
-            <h3>${data.data.nom}</h3>
-            Formule: ${data.data.formula}<br>
-            Masse: ${data.data.weight}
+        html += `<div class="card">
+        Formule: ${data.data.formula}<br>
+        Masse: ${data.data.weight}
         </div>`;
     }
 
-    // 🔹 CAS 3 : IA
+    // IA
     if(data.source === "ai"){
-        html += `
-        <div class="card">
-            <h3>Analyse IA</h3>
-            ${data.data}
-        </div>`;
+        html += `<div class="card">${data.data}</div>`;
     }
 
-    // 🔹 CAS ERREUR
     if(data.error){
         html = `<div class="card">${data.error}</div>`;
     }
 
     div.innerHTML = html;
-}
-    let val = document.getElementById("searchInput").value;
-    let div = document.getElementById("resultats");
-
-    div.innerHTML = "Chargement...";
-
-    let res = await fetch(`${API}/search?nom=${encodeURIComponent(val)}`);
-    let data = await res.json();
-
-    let html = "";
-
-    data.local.forEach(x=>{
-        html += `
-        <div class="card">
-            <h3>${x.nom}</h3>
-            DL50: ${x.dl50}<br>
-            Danger: ${x.danger}<br>
-            Organe: ${x.organe}
-        </div>`;
-    });
-
-    if(data.scientifique){
-        html += `
-        <div class="card">
-            Formule: ${data.scientifique.formula}<br>
-            Poids: ${data.scientifique.weight}
-        </div>`;
-    }
-
-    div.innerHTML = html;
-}
-
-async function analyseIA(){
-    let val = document.getElementById("searchInput").value;
-    let div = document.getElementById("resultats");
-
-    div.innerHTML = "Analyse IA...";
-
-    let res = await fetch(`${API}/ai?nom=${encodeURIComponent(val)}`);
-    let data = await res.json();
-
-    div.innerHTML = `<div class="card">${data.result || data.error}</div>`;
-}
-
-async function interaction(){
-    let val = document.getElementById("searchInput").value;
-    let div = document.getElementById("resultats");
-
-    if(!val.includes(",")){
-        div.innerHTML = "Entrer plusieurs substances (ex: paracetamol,methanol)";
-        return;
-    }
-
-    let res = await fetch(`${API}/interaction?noms=${encodeURIComponent(val)}`);
-    let data = await res.json();
-
-    div.innerHTML = `
-    <div class="card">
-        <h3>Interaction</h3>
-        ${data.interaction}
-    </div>`;
-}
-
-function exportPDF(){
-    let val = document.getElementById("searchInput").value;
-    window.open(`${API}/export?nom=${encodeURIComponent(val)}`);
 }
 </script>
 

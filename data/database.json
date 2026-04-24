@@ -1,118 +1,20 @@
 [
-{"id":1,"nom":"neem","dl50":5000,"type":"plante"},
-{"id":2,"nom":"paracetamol","dl50":338,"type":"medicament"},
-{"id":3,"nom":"methanol","dl50":5628,"type":"chimique"},
-{"id":4,"nom":"ibuprofen","dl50":636,"type":"medicament"},
-{"id":5,"nom":"aspirine","dl50":200,"type":"medicament"},
-
-{"id":6,"nom":"cafeine","dl50":192,"type":"chimique"},
-{"id":7,"nom":"nicotine","dl50":50,"type":"toxique"},
-{"id":8,"nom":"quinine","dl50":660,"type":"medicament"},
-{"id":9,"nom":"arsenic","dl50":15,"type":"toxique"},
-{"id":10,"nom":"chloroquine","dl50":620,"type":"medicament"},
-
-{"id":11,"nom":"gingembre","dl50":2000,"type":"plante"},
-{"id":12,"nom":"curcuma","dl50":2000,"type":"plante"},
-{"id":13,"nom":"ail","dl50":3000,"type":"plante"},
-{"id":14,"nom":"oignon","dl50":3000,"type":"plante"},
-{"id":15,"nom":"moringa","dl50":5000,"type":"plante"},
-
-{"id":16,"nom":"atropine","dl50":453,"type":"toxique"},
-{"id":17,"nom":"cyanure","dl50":6,"type":"toxique"},
-{"id":18,"nom":"ethanol","dl50":7060,"type":"chimique"},
-{"id":19,"nom":"benzene","dl50":930,"type":"chimique"},
-{"id":20,"nom":"formaldehyde","dl50":100,"type":"chimique"},
-
-{"id":21,"nom":"diclofenac","dl50":59,"type":"medicament"},
-{"id":22,"nom":"amoxicilline","dl50":5000,"type":"medicament"},
-{"id":23,"nom":"metformin","dl50":1500,"type":"medicament"},
-{"id":24,"nom":"insuline","dl50":100,"type":"medicament"},
-{"id":25,"nom":"morphine","dl50":200,"type":"medicament"},
-
-{"id":26,"nom":"digitalis","dl50":50,"type":"plante"},
-{"id":27,"nom":"belladone","dl50":80,"type":"plante"},
-{"id":28,"nom":"aloe vera","dl50":5000,"type":"plante"},
-{"id":29,"nom":"baobab","dl50":5000,"type":"plante"},
-{"id":30,"nom":"hibiscus","dl50":5000,"type":"plante"},
-
-{"id":31,"nom":"lead","dl50":500,"type":"toxique"},
-{"id":32,"nom":"mercury","dl50":1,"type":"toxique"},
-{"id":33,"nom":"cadmium","dl50":5,"type":"toxique"},
-{"id":34,"nom":"uranium","dl50":114,"type":"toxique"},
-{"id":35,"nom":"chlorine","dl50":293,"type":"chimique"},
-
-{"id":36,"nom":"ketamine","dl50":229,"type":"medicament"},
-{"id":37,"nom":"diazepam","dl50":720,"type":"medicament"},
-{"id":38,"nom":"lidocaine","dl50":300,"type":"medicament"},
-{"id":39,"nom":"penicillin","dl50":4000,"type":"medicament"},
-{"id":40,"nom":"rifampicin","dl50":885,"type":"medicament"},
-
-{"id":41,"nom":"cannabis","dl50":1270,"type":"plante"},
-{"id":42,"nom":"cocaine","dl50":95,"type":"toxique"},
-{"id":43,"nom":"heroin","dl50":21,"type":"toxique"},
-{"id":44,"nom":"codeine","dl50":427,"type":"medicament"},
-{"id":45,"nom":"tramadol","dl50":350,"type":"medicament"},
-
-{"id":46,"nom":"eucalyptus","dl50":2480,"type":"plante"},
-{"id":47,"nom":"lavande","dl50":5000,"type":"plante"},
-{"id":48,"nom":"menthe","dl50":5000,"type":"plante"},
-{"id":49,"nom":"citronnelle","dl50":5000,"type":"plante"},
-{"id":50,"nom":"karite","dl50":5000,"type":"plante"},
-
-{"id":51,"nom":"camomille","dl50":5000,"type":"plante"},
-{"id":52,"nom":"romarin","dl50":5000,"type":"plante"},
-{"id":53,"nom":"thym","dl50":5000,"type":"plante"},
-{"id":54,"nom":"basilic","dl50":5000,"type":"plante"},
-{"id":55,"nom":"anis","dl50":5000,"type":"plante"},
-
-{"id":56,"nom":"fenouil","dl50":5000,"type":"plante"},
-{"id":57,"nom":"poivre noir","dl50":330,"type":"plante"},
-{"id":58,"nom":"clou de girofle","dl50":2650,"type":"plante"},
-{"id":59,"nom":"cannelle","dl50":2220,"type":"plante"},
-{"id":60,"nom":"papaye","dl50":5000,"type":"plante"},
-
-{"id":61,"nom":"mangue","dl50":5000,"type":"plante"},
-{"id":62,"nom":"orange","dl50":5000,"type":"plante"},
-{"id":63,"nom":"citron","dl50":5000,"type":"plante"},
-{"id":64,"nom":"banane","dl50":5000,"type":"plante"},
-{"id":65,"nom":"avocat","dl50":5000,"type":"plante"},
-
-{"id":66,"nom":"ananas","dl50":5000,"type":"plante"},
-{"id":67,"nom":"goyave","dl50":5000,"type":"plante"},
-{"id":68,"nom":"tamarin","dl50":5000,"type":"plante"},
-{"id":69,"nom":"baie de goji","dl50":5000,"type":"plante"},
-{"id":70,"nom":"grenade","dl50":5000,"type":"plante"},
-
-{"id":71,"nom":"amoxiclav","dl50":5000,"type":"medicament"},
-{"id":72,"nom":"azithromycine","dl50":2000,"type":"medicament"},
-{"id":73,"nom":"ceftriaxone","dl50":2000,"type":"medicament"},
-{"id":74,"nom":"ciprofloxacine","dl50":500,"type":"medicament"},
-{"id":75,"nom":"doxycycline","dl50":300,"type":"medicament"},
-{"id":76,"nom":"gentamicine","dl50":200,"type":"medicament"},
-{"id":77,"nom":"vancomycine","dl50":319,"type":"medicament"},
-{"id":78,"nom":"clindamycine","dl50":500,"type":"medicament"},
-{"id":79,"nom":"erythromycine","dl50":3000,"type":"medicament"},
-{"id":80,"nom":"isoniazide","dl50":150,"type":"medicament"},
-
-{"id":81,"nom":"warfarine","dl50":58,"type":"medicament"},
-{"id":82,"nom":"heparine","dl50":1000,"type":"medicament"},
-{"id":83,"nom":"atenolol","dl50":2000,"type":"medicament"},
-{"id":84,"nom":"propranolol","dl50":500,"type":"medicament"},
-{"id":85,"nom":"amlodipine","dl50":1500,"type":"medicament"},
-{"id":86,"nom":"losartan","dl50":2000,"type":"medicament"},
-{"id":87,"nom":"captopril","dl50":424,"type":"medicament"},
-{"id":88,"nom":"enalapril","dl50":3000,"type":"medicament"},
-{"id":89,"nom":"simvastatine","dl50":5000,"type":"medicament"},
-{"id":90,"nom":"atorvastatine","dl50":5000,"type":"medicament"},
-
-{"id":91,"nom":"glucose","dl50":25800,"type":"chimique"},
-{"id":92,"nom":"sodium chloride","dl50":3000,"type":"chimique"},
-{"id":93,"nom":"potassium chloride","dl50":2600,"type":"chimique"},
-{"id":94,"nom":"ammonia","dl50":350,"type":"chimique"},
-{"id":95,"nom":"acetone","dl50":5800,"type":"chimique"},
-{"id":96,"nom":"toluene","dl50":5000,"type":"chimique"},
-{"id":97,"nom":"xylene","dl50":4300,"type":"chimique"},
-{"id":98,"nom":"phenol","dl50":317,"type":"chimique"},
-{"id":99,"nom":"hydrogen peroxide","dl50":801,"type":"chimique"},
-{"id":100,"nom":"nitric acid","dl50":430,"type":"chimique"}
+  {
+    "nom": "neem",
+    "type": "plante",
+    "pharmacologie": ["antibacterien", "antifongique"],
+    "toxicologie": "faible"
+  },
+  {
+    "nom": "paracetamol",
+    "type": "medicament",
+    "dl50": 338,
+    "toxicologie": "hepatotoxique"
+  },
+  {
+    "nom": "benzene",
+    "type": "chimique",
+    "formula": "C6H6",
+    "danger": "cancerigene"
+  }
 ]
