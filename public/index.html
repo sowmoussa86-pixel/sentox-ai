@@ -34,7 +34,6 @@ body {
     background:white;
     border-radius:50px;
     overflow:hidden;
-    box-shadow:0 5px 20px rgba(0,0,0,0.2);
 }
 
 .search-box input {
@@ -64,6 +63,8 @@ body {
     padding:15px;
     margin-top:10px;
     border-radius:10px;
+    width:70%;
+    max-width:700px;
 }
 </style>
 </head>
@@ -75,14 +76,14 @@ body {
 <div class="logo-title">SENTOX</div>
 
 <div class="search-box">
-<input id="searchInput" placeholder="Rechercher...">
+<input id="searchInput" placeholder="Rechercher une substance...">
 <button onclick="rechercher()">🔍</button>
-<button onclick="ficheComplete()">📊 Fiche complète</button>
 </div>
 
 <div class="buttons">
 <button onclick="rechercher()">🔎 Recherche</button>
 <button onclick="checkInteraction()">⚗️ Interaction</button>
+<button onclick="ficheComplete()">📊 Fiche complète</button>
 </div>
 
 <div id="resultats"></div>
@@ -108,34 +109,14 @@ async function rechercher(){
 
         if(data.source === "local"){
             data.data.forEach(x=>{
-
-                if(x.type === "plante"){
-                    html += `<div class="card">
-                    <h3>${x.nom}</h3>
-                    🌿 Type: plante<br>
-                    Pharmacologie: ${x.pharmacologie ? x.pharmacologie.join(", ") : "-"}<br>
-                    Toxicité: ${x.toxicologie || "-"}
-                    </div>`;
-                }
-
-                if(x.type === "medicament"){
-                    html += `<div class="card">
-                    <h3>${x.nom}</h3>
-                    💊 Type: médicament<br>
-                    DL50: ${x.dl50 || "-"}<br>
-                    Toxicité: ${x.toxicologie || "-"}
-                    </div>`;
-                }
-
-                if(x.type === "chimique"){
-                    html += `<div class="card">
-                    <h3>${x.nom}</h3>
-                    ☣️ Type: chimique<br>
-                    Formule: ${x.formula || "-"}<br>
-                    Danger: ${x.danger || "-"}
-                    </div>`;
-                }
-
+                html += `<div class="card">
+                <h3>${x.nom}</h3>
+                Type: ${x.type}<br>
+                DL50: ${x.dl50 || "-"}<br>
+                Toxicité: ${x.toxicologie || "-"}<br>
+                Formule: ${x.formula || "-"}<br>
+                Danger: ${x.danger || "-"}
+                </div>`;
             });
         }
 
@@ -172,7 +153,7 @@ async function checkInteraction(){
         let res = await fetch(`${API}/interaction?noms=${encodeURIComponent(val)}`);
         let data = await res.json();
 
-        div.innerHTML = `<div class="card">${data.result}</div>`;
+        div.innerHTML += `<div class="card">${data.result}</div>`;
     } catch(e){
         div.innerHTML = "Erreur interaction";
     }
@@ -183,70 +164,24 @@ async function ficheComplete(){
     let val = document.getElementById("searchInput").value;
     let div = document.getElementById("resultats");
 
-    div.innerHTML = "Analyse complète en cours...";
+    div.innerHTML += "<div class='card'>Analyse complète en cours...</div>";
 
     try{
         let res = await fetch(`${API}/fiche?nom=${encodeURIComponent(val)}`);
         let data = await res.json();
 
         if(data.fiche){
-            div.innerHTML = `<div class="card"><pre>${data.fiche}</pre></div>`;
+            div.innerHTML += `<div class="card"><pre>${data.fiche}</pre></div>`;
         } else {
-            div.innerHTML = `<div class="card">Erreur fiche</div>`;
+            div.innerHTML += `<div class="card">Erreur fiche</div>`;
         }
 
     } catch(e){
-        div.innerHTML = "Erreur serveur fiche";
+        div.innerHTML += "<div class='card'>Erreur serveur fiche</div>";
     }
 }
 
 </script>
 
-    if(data.source === "pubchem"){
-        html += `<div class="card">
-        Formule: ${data.data.formula}<br>
-        Masse: ${data.data.weight}
-        </div>`;
-    }
-
-    if(data.source === "ai"){
-        html += `<div class="card">${data.data}</div>`;
-    }
-
-    if(data.error){
-        html = `<div class="card">${data.error}</div>`;
-    }
-
-    div.innerHTML = html;
-}
-
-async function checkInteraction(){
-    let val = document.getElementById("searchInput").value;
-    let div = document.getElementById("resultats");
-
-    let res = await fetch(`${API}/interaction?noms=${encodeURIComponent(val)}`);
-    let data = await res.json();
-
-    div.innerHTML = `<div class="card">${data.result}</div>`;
-}
-<script>
-
-async function ficheComplete(){
-    let val = document.getElementById("searchInput").value;
-    let div = document.getElementById("resultats");
-
-    div.innerHTML = "Analyse en cours...";
-
-    let res = await fetch(`${API}/fiche?nom=${encodeURIComponent(val)}`);
-    let data = await res.json();
-
-    if(data.fiche){
-        div.innerHTML = `<div class="card"><pre>${data.fiche}</pre></div>`;
-    } else {
-        div.innerHTML = `<div class="card">Erreur</div>`;
-    }
-}
-
-</script>
 </body>
 </html>
