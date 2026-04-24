@@ -90,27 +90,94 @@ body {
 </div>
 
 <script>
+
 const API = "https://sentox-ai-1.onrender.com";
 
+// 🔎 RECHERCHE
 async function rechercher(){
     let val = document.getElementById("searchInput").value;
     let div = document.getElementById("resultats");
 
     div.innerHTML = "Chargement...";
 
-    let res = await fetch(`${API}/search?nom=${encodeURIComponent(val)}`);
-    let data = await res.json();
+    try{
+        let res = await fetch(`${API}/search?nom=${encodeURIComponent(val)}`);
+        let data = await res.json();
 
-    let html = "";
+        let html = "";
 
-    if(data.source === "local"){
-        data.data.forEach(x=>{
+        if(data.source === "local"){
+            data.data.forEach(x=>{
+                html += `<div class="card">
+                <h3>${x.nom}</h3>
+                Type: ${x.type}<br>
+                DL50: ${x.dl50 || "-"}
+                </div>`;
+            });
+        }
+
+        if(data.source === "pubchem"){
             html += `<div class="card">
-            <h3>${x.nom}</h3>
-            Type: ${x.type}
+            Formule: ${data.data.formula}<br>
+            Masse: ${data.data.weight}
             </div>`;
-        });
+        }
+
+        if(data.source === "ai"){
+            html += `<div class="card">${data.data}</div>`;
+        }
+
+        if(data.error){
+            html = `<div class="card">${data.error}</div>`;
+        }
+
+        div.innerHTML = html;
+
+    } catch(e){
+        div.innerHTML = "Erreur serveur";
     }
+}
+
+// ⚗️ INTERACTION
+async function checkInteraction(){
+    let val = document.getElementById("searchInput").value;
+    let div = document.getElementById("resultats");
+
+    div.innerHTML = "Analyse interaction...";
+
+    try{
+        let res = await fetch(`${API}/interaction?noms=${encodeURIComponent(val)}`);
+        let data = await res.json();
+
+        div.innerHTML = `<div class="card">${data.result}</div>`;
+    } catch(e){
+        div.innerHTML = "Erreur interaction";
+    }
+}
+
+// 📊 FICHE COMPLETE
+async function ficheComplete(){
+    let val = document.getElementById("searchInput").value;
+    let div = document.getElementById("resultats");
+
+    div.innerHTML = "Analyse en cours...";
+
+    try{
+        let res = await fetch(`${API}/fiche?nom=${encodeURIComponent(val)}`);
+        let data = await res.json();
+
+        if(data.fiche){
+            div.innerHTML = `<div class="card"><pre>${data.fiche}</pre></div>`;
+        } else {
+            div.innerHTML = `<div class="card">Erreur fiche</div>`;
+        }
+
+    } catch(e){
+        div.innerHTML = "Erreur serveur fiche";
+    }
+}
+
+</script>
 
     if(data.source === "pubchem"){
         html += `<div class="card">
