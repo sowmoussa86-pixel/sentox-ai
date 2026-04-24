@@ -33,13 +33,13 @@ def search(nom: str):
 
     nom = nom.lower()
 
-    # 🔹 base locale
+    # base locale
     results = [x for x in DATABASE if nom in x["nom"].lower()]
 
     if results:
         return {"source": "local", "data": results}
 
-    # 🔹 PubChem
+    # PubChem
     try:
         url = f"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{nom}/property/MolecularFormula,MolecularWeight/JSON"
         r = requests.get(url)
@@ -58,7 +58,7 @@ def search(nom: str):
     except:
         pass
 
-    # 🔹 IA fallback
+    # IA fallback
     try:
         prompt = f"Give scientific and toxicological data for {nom}"
 
@@ -69,10 +69,10 @@ def search(nom: str):
 
         result = response.choices[0].message.content
 
-        # éviter bug accents
-       return {"source": "ai", "data": result}
+        return {"source": "ai", "data": result}
+
     except:
-        return {"error": "Substance non trouvée"}
+        return {"error": "Substance not found"}
 
 # -------------------------
 # ⚗️ INTERACTION
@@ -83,7 +83,7 @@ def interaction(noms: str):
     noms_list = [x.strip().lower() for x in noms.split(",")]
 
     if "paracetamol" in noms_list and "alcohol" in noms_list:
-        return {"result": "High risk of liver toxicity"}
+        return {"result": "High liver toxicity risk"}
 
     if "warfarin" in noms_list and "aspirin" in noms_list:
         return {"result": "High bleeding risk"}
@@ -91,7 +91,7 @@ def interaction(noms: str):
     if "benzene" in noms_list:
         return {"result": "Chronic toxicity (bone marrow)"}
 
-    return {"result": "No major interaction known"}
+    return {"result": "No major interaction"}
 
 # -------------------------
 # 📊 FICHE COMPLETE
@@ -101,15 +101,8 @@ def fiche(nom: str):
 
     try:
         prompt = f"""
-        Generate a full scientific toxicological report for {nom}.
-
-        Include:
-        - pharmacology
-        - toxicity (acute, chronic)
-        - risks
-        - organs affected
-        - interactions
-        - recommendations
+        Provide a full toxicological and scientific report for {nom}.
+        Include risks, toxicity, organs, interactions and recommendations.
         """
 
         response = client.chat.completions.create(
@@ -119,14 +112,13 @@ def fiche(nom: str):
 
         result = response.choices[0].message.content
 
-        # éviter erreur ASCII
         return {"fiche": result}
 
     except Exception as e:
         return {"error": str(e)}
 
 # -------------------------
-# 🏠 ROOT
+# ROOT
 # -------------------------
 @app.get("/")
 def home():

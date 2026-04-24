@@ -147,8 +147,6 @@ async function checkInteraction(){
     let val = document.getElementById("searchInput").value;
     let div = document.getElementById("resultats");
 
-    div.innerHTML = "Analyse interaction...";
-
     try{
         let res = await fetch(`${API}/interaction?noms=${encodeURIComponent(val)}`);
         let data = await res.json();
@@ -163,8 +161,6 @@ async function checkInteraction(){
 async function ficheComplete(){
     let val = document.getElementById("searchInput").value;
     let div = document.getElementById("resultats");
-
-    div.innerHTML += "<div class='card'>Analyse complète en cours...</div>";
 
     try{
         let res = await fetch(`${API}/fiche?nom=${encodeURIComponent(val)}`);
