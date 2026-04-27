@@ -22,15 +22,15 @@ body {
 }
 
 .logo-title {
-    font-size:60px;
+    font-size:40px;
     color:#15803d;
-    margin-bottom:30px;
+    margin-bottom:20px;
 }
 
 .search-box {
     display:flex;
-    width:70%;
-    max-width:600px;
+    width:90%;
+    max-width:500px;
     background:white;
     border-radius:50px;
     overflow:hidden;
@@ -38,12 +38,12 @@ body {
 
 .search-box input {
     flex:1;
-    padding:18px;
+    padding:15px;
     border:none;
 }
 
 .search-box button {
-    padding:18px;
+    padding:15px;
     border:none;
     background:#16a34a;
     color:white;
@@ -61,10 +61,10 @@ body {
 .card {
     background:white;
     padding:15px;
-    margin-top:10px;
+    margin:10px auto;
     border-radius:10px;
-    width:70%;
-    max-width:700px;
+    width:90%;
+    max-width:600px;
 }
 </style>
 </head>
@@ -92,7 +92,9 @@ body {
 
 <script>
 
+// 🔥 API CORRIGÉE (IMPORTANT)
 const API = "https://sentox-ai-backend.onrender.com";
+
 
 // 🔎 RECHERCHE
 async function rechercher(){
@@ -102,48 +104,25 @@ async function rechercher(){
     div.innerHTML = "Chargement...";
 
     try{
-        let res = await fetch(`${API}/search?nom=${encodeURIComponent(val)}`);
+        let res = await fetch(${API}/search?nom=${encodeURIComponent(val)});
         let data = await res.json();
 
         let html = "";
 
         if(data.source === "local"){
-    data.data.forEach(x=>{
-
-        if(x.type === "plante"){
-            html += `<div class="card">
-            <h3>${x.nom}</h3>
-
-            <b>Description:</b> ${x.description || "-"}<br>
-            <b>Pharmacologie:</b> ${x.pharmacologie ? x.pharmacologie.join(", ") : "-"}<br>
-            <b>Toxicité:</b> ${x.toxicologie || "-"}<br>
-            <b>Organes:</b> ${x.organes || "-"}<br>
-            <b>Indications:</b> ${x.indications ? x.indications.join(", ") : "-"}<br>
-            <b>Posologie:</b> ${x.posologie || "-"}<br>
-            <b>Effets indésirables:</b> ${x.effets ? x.effets.join(", ") : "-"}
-            </div>`;
+            data.data.forEach(x=>{
+                html += `<div class="card">
+                <h3>${x.nom}</h3>
+                <b>Description:</b> ${x.description || "-"}<br>
+                <b>Pharmacologie:</b> ${x.pharmacologie ? x.pharmacologie.join(", ") : "-"}<br>
+                <b>Toxicité:</b> ${x.toxicologie || "-"}<br>
+                <b>Organes:</b> ${x.organes || "-"}<br>
+                <b>Indications:</b> ${x.indications ? x.indications.join(", ") : "-"}<br>
+                <b>Posologie:</b> ${x.posologie || "-"}<br>
+                <b>Effets:</b> ${x.effets ? x.effets.join(", ") : "-"}
+                </div>`;
+            });
         }
-
-        if(x.type === "medicament"){
-            html += `<div class="card">
-            <h3>${x.nom}</h3>
-            💊 Type: médicament<br>
-            DL50: ${x.dl50 || "-"}<br>
-            Toxicité: ${x.toxicologie || "-"}
-            </div>`;
-        }
-
-        if(x.type === "chimique"){
-            html += `<div class="card">
-            <h3>${x.nom}</h3>
-            ☣️ Type: chimique<br>
-            Formule: ${x.formula || "-"}<br>
-            Danger: ${x.danger || "-"}
-            </div>`;
-        }
-
-    });
-}
 
         if(data.source === "pubchem"){
             html += `<div class="card">
@@ -152,20 +131,17 @@ async function rechercher(){
             </div>`;
         }
 
-        if(data.source === "ai"){
-            html += `<div class="card">${data.data}</div>`;
-        }
-
         if(data.error){
-            html = `<div class="card">${data.error}</div>`;
+            html = <div class="card">${data.error}</div>;
         }
 
         div.innerHTML = html;
 
     } catch(e){
-        div.innerHTML = "Erreur serveur";
+        div.innerHTML = "<div class='card'>Erreur serveur</div>";
     }
 }
+
 
 // ⚗️ INTERACTION
 async function checkInteraction(){
@@ -173,14 +149,15 @@ async function checkInteraction(){
     let div = document.getElementById("resultats");
 
     try{
-        let res = await fetch(`${API}/interaction?noms=${encodeURIComponent(val)}`);
+        let res = await fetch(${API}/interaction?noms=${encodeURIComponent(val)});
         let data = await res.json();
 
-        div.innerHTML += `<div class="card">${data.result}</div>`;
+        div.innerHTML += <div class="card">${data.result}</div>;
     } catch(e){
-        div.innerHTML = "Erreur interaction";
+        div.innerHTML = "<div class='card'>Erreur interaction</div>";
     }
 }
+
 
 // 📊 FICHE COMPLETE
 async function ficheComplete(){
@@ -191,22 +168,17 @@ async function ficheComplete(){
         let res = await fetch(${API}/fiche?nom=${encodeURIComponent(val)});
         let data = await res.json();
 
-        let html = "";
-
         if(data.fiche){
-            html = `
+            div.innerHTML = `
             <div class="card">
                 <h3>📊 Fiche complète</h3>
-                <pre style="white-space: pre-wrap; font-family: Arial;">
+                <pre style="white-space: pre-wrap;">
 ${data.fiche}
                 </pre>
-            </div>
-            `;
+            </div>`;
         } else {
-            html = <div class="card">Aucune fiche disponible</div>;
+            div.innerHTML = <div class="card">Aucune fiche disponible</div>;
         }
-
-        div.innerHTML = html;
 
     } catch(e){
         div.innerHTML = "<div class='card'>Erreur fiche</div>";
