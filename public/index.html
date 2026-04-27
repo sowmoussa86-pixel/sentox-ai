@@ -6,39 +6,65 @@
 
 <style>
 body{
+    margin:0;
     font-family: Arial;
     text-align:center;
-    background:#f2f2f2;
+
+    background: url("logo.png") no-repeat center center;
+    background-size: cover;
 }
+
+.overlay{
+    background: rgba(255,255,255,0.85);
+    min-height:100vh;
+    padding-top:40px;
+}
+
 h1{
     color:green;
+    margin-bottom:20px;
 }
+
 input{
     width:80%;
-    padding:12px;
-    border-radius:10px;
-    border:2px solid black;
+    max-width:400px;
+    padding:15px;
+    border-radius:12px;
+    border:2px solid #333;
+    font-size:16px;
 }
+
 button{
-    padding:12px;
-    margin:5px;
+    padding:12px 20px;
+    margin:8px;
     border:none;
-    border-radius:10px;
+    border-radius:12px;
     background:green;
     color:white;
     font-weight:bold;
+    font-size:15px;
 }
+
+button:hover{
+    background:#0a8a0a;
+}
+
 .card{
     background:white;
     padding:15px;
-    margin:10px;
-    border-radius:10px;
+    margin:15px auto;
+    width:90%;
+    max-width:500px;
+    border-radius:12px;
+    text-align:left;
 }
 </style>
 
 </head>
 
 <body>
+
+<div class="overlay">
 
 <h1>SENTOX</h1>
 
@@ -52,10 +78,13 @@ button{
 
 <div id="resultats"></div>
 
+</div>
+
 <script>
 
 const API = "https://sentox-ai-backend.onrender.com";
 
+// 🔎 RECHERCHE
 async function rechercher(){
     let val = document.getElementById("searchInput").value;
     let div = document.getElementById("resultats");
@@ -63,9 +92,24 @@ async function rechercher(){
     let res = await fetch(API + "/search?nom=" + val);
     let data = await res.json();
 
-    div.innerHTML = "<div class='card'>" + JSON.stringify(data) + "</div>";
+    if(data.data){
+        let item = data.data[0];
+
+        div.innerHTML = `
+        <div class="card">
+        <b>Nom :</b> ${item.nom}<br>
+        <b>Type :</b> ${item.type}<br>
+        <b>Description :</b> ${item.description}<br>
+        <b>Toxicité :</b> ${item.toxicologie}<br>
+        <b>Organes :</b> ${item.organess || item.organes}
+        </div>`;
+    } else {
+        div.innerHTML = "<div class='card'>Aucun résultat</div>";
+    }
 }
 
+
+// 🧪 INTERACTION
 async function interaction(){
     let val = document.getElementById("searchInput").value;
     let div = document.getElementById("resultats");
@@ -73,9 +117,11 @@ async function interaction(){
     let res = await fetch(API + "/interaction?noms=" + val);
     let data = await res.json();
 
-    div.innerHTML = "<div class='card'>" + data.result + "</div>";
+    div.innerHTML = <div class="card"><b>Résultat :</b> ${data.result}</div>;
 }
 
+
+// 📊 FICHE COMPLETE
 async function fiche(){
     let val = document.getElementById("searchInput").value;
     let div = document.getElementById("resultats");
@@ -83,7 +129,27 @@ async function fiche(){
     let res = await fetch(API + "/fiche?nom=" + val);
     let data = await res.json();
 
-    div.innerHTML = "<div class='card'>" + JSON.stringify(data) + "</div>";
+    if(data.fiche){
+
+        let f = data.fiche;
+
+        div.innerHTML = `
+        <div class="card">
+        <h3>📊 Fiche toxicologique</h3>
+        <b>Nom :</b> ${f.nom}<br>
+        <b>Type :</b> ${f.type}<br>
+        <b>Description :</b> ${f.description}<br>
+        <b>Pharmacologie :</b> ${f.pharmacologie}<br>
+        <b>Toxicité :</b> ${f.toxicologie}<br>
+        <b>Organes :</b> ${f.organes}<br>
+        <b>Indications :</b> ${f.indications}<br>
+        <b>Posologie :</b> ${f.posologie}<br>
+        <b>Effets :</b> ${f.effets}
+        </div>
+        `;
+    } else {
+        div.innerHTML = "<div class='card'>Fiche non disponible</div>";
+    }
 }
 
 </script>
