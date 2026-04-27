@@ -188,44 +188,27 @@ async function ficheComplete(){
     let div = document.getElementById("resultats");
 
     try{
-        let res = await fetch(`${API}/fiche?nom=${encodeURIComponent(val)}`);
+        let res = await fetch(${API}/fiche?nom=${encodeURIComponent(val)});
         let data = await res.json();
 
-        // ❌ IMPORTANT : on remplace (pas +=)
         let html = "";
 
         if(data.fiche){
-            html += `
+            html = `
             <div class="card">
-            <h3>📊 Fiche complète</h3>
-
-            <b>Nom:</b> ${data.fiche.nom}<br>
-            <b>Type:</b> ${data.fiche.type}<br>
-            <b>Description:</b> ${data.fiche.description || "-"}<br>
-            <b>Pharmacologie:</b> ${(data.fiche.pharmacologie || []).join(", ")}<br>
-            <b>Toxicité:</b> ${data.fiche.toxicologie || "-"}<br>
-            <b>Organes:</b> ${data.fiche.organes || "-"}<br>
-            <b>Indications:</b> ${(data.fiche.indications || []).join(", ")}<br>
-            <b>Posologie:</b> ${data.fiche.posologie || "-"}<br>
-            <b>Effets:</b> ${(data.fiche.effets || []).join(", ")}
-            </div>`;
-        }
-
-        if(data.interpretation){
-            html += `
-            <div class="card">
-            <h3>🧠 Interprétation toxicologique</h3>
-            ${data.interpretation}
-            </div>`;
-        }
-
-        if(data.error){
-            html = `<div class="card">${data.error}</div>`;
+                <h3>📊 Fiche complète</h3>
+                <pre style="white-space: pre-wrap; font-family: Arial;">
+${data.fiche}
+                </pre>
+            </div>
+            `;
+        } else {
+            html = <div class="card">Aucune fiche disponible</div>;
         }
 
         div.innerHTML = html;
 
-    }catch(e){
+    } catch(e){
         div.innerHTML = "<div class='card'>Erreur fiche</div>";
     }
 }
