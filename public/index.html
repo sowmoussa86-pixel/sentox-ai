@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,20 +7,17 @@
 
 <style>
 body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#f2f2f2;
+    font-family:Arial;
     text-align:center;
+    background:#f2f2f2;
 }
 
 h1{
     color:#15803d;
-    margin-top:20px;
 }
 
 input{
     width:85%;
-    max-width:400px;
     padding:12px;
     margin:10px;
     border-radius:10px;
@@ -28,32 +25,22 @@ input{
 }
 
 button{
-    padding:10px 15px;
+    padding:10px;
     margin:5px;
     border:none;
     border-radius:8px;
     background:#16a34a;
     color:white;
-    font-size:14px;
-    cursor:pointer;
-}
-
-button:active{
-    background:#14532d;
 }
 
 .card{
     background:white;
-    margin:10px auto;
+    margin:10px;
     padding:15px;
     border-radius:10px;
     text-align:left;
-    width:90%;
-    max-width:500px;
-    box-shadow:0 2px 5px rgba(0,0,0,0.1);
 }
 </style>
-
 </head>
 
 <body>
@@ -64,18 +51,19 @@ button:active{
 
 <br>
 
-<button onclick="rechercher()">🔎 Recherche</button>
-<button onclick="interaction()">⚗️ Interaction</button>
-<button onclick="fiche()">📊 Fiche</button>
+<button id="btnSearch">🔎 Recherche</button>
+<button id="btnInteraction">⚗️ Interaction</button>
+<button id="btnFiche">📊 Fiche</button>
 
 <div id="resultats"></div>
 
-<!-- 🔥 SCRIPT EN BAS (IMPORTANT) -->
 <script>
 
-// 🔥 API HTTPS (CRITIQUE)
-const API = "https://sentox-ai-backend.onrender.com";
+// 🔥 TEST JS
+console.log("JS chargé");
 
+// 🔥 API
+const API = "https://sentox-ai-backend.onrender.com";
 
 // 🔎 RECHERCHE
 async function rechercher(){
@@ -92,75 +80,47 @@ async function rechercher(){
 
         if(data.source === "local"){
             data.data.forEach(x=>{
-                html += `
-                <div class="card">
-                <b>${x.nom}</b><br>
-                Description: ${x.description || "-"}<br>
-                Toxicité: ${x.toxicologie || "-"}
-                </div>`;
+                html += <div class="card">${x.nom}</div>;
             });
         }
 
         else if(data.source === "pubchem"){
-            html = `
-            <div class="card">
-            Formule: ${data.data.formula}<br>
-            Masse: ${data.data.weight}
-            </div>`;
-        }
-
-        else if(data.error){
-            html = <div class="card">${data.error}</div>;
+            html = <div class="card">Formule: ${data.data.formula}</div>;
         }
 
         div.innerHTML = html;
 
     }catch(e){
-        div.innerHTML = "<div class='card'>Erreur serveur</div>";
+        div.innerHTML = "<div class='card'>Erreur</div>";
     }
 }
-
 
 // ⚗️ INTERACTION
 async function interaction(){
     let val = document.getElementById("searchInput").value;
     let div = document.getElementById("resultats");
 
-    try{
-        let res = await fetch(API + "/interaction?noms=" + encodeURIComponent(val));
-        let data = await res.json();
+    let res = await fetch(API + "/interaction?noms=" + encodeURIComponent(val));
+    let data = await res.json();
 
-        div.innerHTML = <div class="card">${data.result}</div>;
-    }catch(e){
-        div.innerHTML = "<div class='card'>Erreur interaction</div>";
-    }
+    div.innerHTML = <div class="card">${data.result}</div>;
 }
-
 
 // 📊 FICHE
 async function fiche(){
     let val = document.getElementById("searchInput").value;
     let div = document.getElementById("resultats");
 
-    try{
-        let res = await fetch(API + "/fiche?nom=" + encodeURIComponent(val));
-        let data = await res.json();
+    let res = await fetch(API + "/fiche?nom=" + encodeURIComponent(val));
+    let data = await res.json();
 
-        if(data.fiche){
-            div.innerHTML = `
-            <div class="card">
-            <pre style="white-space: pre-wrap;">
-${data.fiche}
-            </pre>
-            </div>`;
-        } else {
-            div.innerHTML = "<div class='card'>Aucune fiche disponible</div>";
-        }
-
-    }catch(e){
-        div.innerHTML = "<div class='card'>Erreur fiche</div>";
-    }
+    div.innerHTML = <div class="card"><pre>${data.fiche}</pre></div>;
 }
+
+// 🔥 BIND EVENTS (IMPORTANT)
+document.getElementById("btnSearch").addEventListener("click", rechercher);
+document.getElementById("btnInteraction").addEventListener("click", interaction);
+document.getElementById("btnFiche").addEventListener("click", fiche);
 
 </script>
 
