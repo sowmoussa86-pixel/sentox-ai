@@ -92,7 +92,7 @@ body {
 
 <script>
 
-const API = "https://sentox-ai-1.onrender.com";
+const API = "https://sentox-ai-backend.onrender.com";
 
 // 🔎 RECHERCHE
 async function rechercher(){
@@ -191,14 +191,42 @@ async function ficheComplete(){
         let res = await fetch(`${API}/fiche?nom=${encodeURIComponent(val)}`);
         let data = await res.json();
 
+        // ❌ IMPORTANT : on remplace (pas +=)
+        let html = "";
+
         if(data.fiche){
-            div.innerHTML += `<div class="card"><pre>${data.fiche}</pre></div>`;
-        } else {
-            div.innerHTML += `<div class="card">Erreur fiche</div>`;
+            html += `
+            <div class="card">
+            <h3>📊 Fiche complète</h3>
+
+            <b>Nom:</b> ${data.fiche.nom}<br>
+            <b>Type:</b> ${data.fiche.type}<br>
+            <b>Description:</b> ${data.fiche.description || "-"}<br>
+            <b>Pharmacologie:</b> ${(data.fiche.pharmacologie || []).join(", ")}<br>
+            <b>Toxicité:</b> ${data.fiche.toxicologie || "-"}<br>
+            <b>Organes:</b> ${data.fiche.organes || "-"}<br>
+            <b>Indications:</b> ${(data.fiche.indications || []).join(", ")}<br>
+            <b>Posologie:</b> ${data.fiche.posologie || "-"}<br>
+            <b>Effets:</b> ${(data.fiche.effets || []).join(", ")}
+            </div>`;
         }
 
-    } catch(e){
-        div.innerHTML += "<div class='card'>Erreur serveur fiche</div>";
+        if(data.interpretation){
+            html += `
+            <div class="card">
+            <h3>🧠 Interprétation toxicologique</h3>
+            ${data.interpretation}
+            </div>`;
+        }
+
+        if(data.error){
+            html = `<div class="card">${data.error}</div>`;
+        }
+
+        div.innerHTML = html;
+
+    }catch(e){
+        div.innerHTML = "<div class='card'>Erreur fiche</div>";
     }
 }
 

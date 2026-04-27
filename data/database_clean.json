@@ -1,0 +1,6858 @@
+[
+  {
+    "nom": "neem",
+    "type": "plante",
+    "description": "Arbre medicinal utilise en Afrique et en Inde pour ses proprietes antiseptiques et antiparasitaires",
+    "pharmacologie": [
+      "antibacterien",
+      "antifongique",
+      "anti-inflammatoire",
+      "antipaludique"
+    ],
+    "toxicologie": "faible a dose normale, toxique a forte dose",
+    "organes": "foie, systeme digestif",
+    "indications": [
+      "paludisme",
+      "infection",
+      "maladies de peau"
+    ],
+    "posologie": "decoction des feuilles ou huile",
+    "effets": [
+      "nausees",
+      "vomissements",
+      "hepatotoxicite rare"
+    ]
+  },
+  {
+    "nom": "paracetamol",
+    "type": "medicament",
+    "dl50": 338,
+    "toxicologie": "hepatotoxique"
+  },
+  {
+    "nom": "achyranthes aspera",
+    "type": "plante",
+    "description": "Plante utilisee pour troubles respiratoires et digestifs",
+    "pharmacologie": [
+      "anti-inflammatoire",
+      "antitussif"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "respiratoire",
+    "indications": [
+      "toux",
+      "asthme"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "irritation"
+    ]
+  },
+  {
+    "nom": "adenium obesum",
+    "type": "plante",
+    "description": "Plante ornementale tres toxique utilisee en medecine traditionnelle",
+    "pharmacologie": [
+      "cardiotoxique"
+    ],
+    "toxicologie": "elevee",
+    "dl50": "250 mg/kg",
+    "organes": "coeur",
+    "indications": [
+      "usage traditionnel controle"
+    ],
+    "posologie": "dangereux",
+    "effets": [
+      "troubles cardiaques"
+    ]
+  },
+  {
+    "nom": "afzelia africana",
+    "type": "plante",
+    "description": "Plante utilisee pour douleurs et infections",
+    "pharmacologie": [
+      "analgesique",
+      "antibacterien"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "douleurs",
+      "infection"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "anogeissus leiocarpa",
+    "type": "plante",
+    "description": "Plante antiseptique africaine",
+    "pharmacologie": [
+      "antibacterien",
+      "antifongique"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "peau",
+    "indications": [
+      "plaies",
+      "infection"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "bridelia ferruginea",
+    "type": "plante",
+    "description": "Plante utilisee pour troubles digestifs",
+    "pharmacologie": [
+      "antidiarrheique"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "diarrhee"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "capparis tomentosa",
+    "type": "plante",
+    "description": "Plante medicinale africaine anti-inflammatoire",
+    "pharmacologie": [
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "douleur"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "troubles digestifs"
+    ]
+  },
+  {
+    "nom": "cassia occidentalis",
+    "type": "plante",
+    "description": "Plante laxative et toxique a forte dose",
+    "pharmacologie": [
+      "laxatif"
+    ],
+    "toxicologie": "elevee",
+    "dl50": "600 mg/kg",
+    "organes": "foie",
+    "indications": [
+      "constipation"
+    ],
+    "posologie": "controlee",
+    "effets": [
+      "hepatotoxicite"
+    ]
+  },
+  {
+    "nom": "ceiba pentandra",
+    "type": "plante",
+    "description": "Arbre utilise en medecine traditionnelle",
+    "pharmacologie": [
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "douleurs"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "chrysophyllum albidum",
+    "type": "plante",
+    "description": "Fruit africain medicinale",
+    "pharmacologie": [
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "fatigue"
+    ],
+    "posologie": "fruit",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "cissus quadrangularis",
+    "type": "plante",
+    "description": "Plante utilisee pour fractures osseuses",
+    "pharmacologie": [
+      "osteogenique"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "os",
+    "indications": [
+      "fractures"
+    ],
+    "posologie": "extrait",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "cola acuminata",
+    "type": "plante",
+    "description": "Noix de kola stimulante",
+    "pharmacologie": [
+      "stimulant"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1500 mg/kg",
+    "organes": "systeme nerveux",
+    "indications": [
+      "fatigue"
+    ],
+    "posologie": "graines",
+    "effets": [
+      "insomnie"
+    ]
+  },
+  {
+    "nom": "afzelia bella",
+    "type": "plante",
+    "description": "Arbre africain utilise pour troubles digestifs et infections",
+    "pharmacologie": [
+      "antimicrobien",
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg (approx)",
+    "organes": "digestif",
+    "indications": [
+      "diarrhee",
+      "infection"
+    ],
+    "posologie": "decoction ecorce",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "alstonia boonei",
+    "type": "plante",
+    "description": "Arbre medicinal utilise contre la fievre et le paludisme",
+    "pharmacologie": [
+      "antipaludique",
+      "analgesique"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg (approx)",
+    "organes": "foie",
+    "indications": [
+      "fievre",
+      "paludisme"
+    ],
+    "posologie": "decoction ecorce",
+    "effets": [
+      "troubles digestifs"
+    ]
+  },
+  {
+    "nom": "annickia chlorantha",
+    "type": "plante",
+    "description": "Plante riche en alcaloides utilisee contre infections",
+    "pharmacologie": [
+      "antibacterien"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1500 mg/kg (approx)",
+    "organes": "foie",
+    "indications": [
+      "infection"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "hepatotoxicite possible"
+    ]
+  },
+  {
+    "nom": "anthocleista vogelii",
+    "type": "plante",
+    "description": "Plante africaine utilisee pour troubles digestifs",
+    "pharmacologie": [
+      "laxatif"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1800 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "constipation"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "diarrhee"
+    ]
+  },
+  {
+    "nom": "apodytes dimidiata",
+    "type": "plante",
+    "description": "Arbre medicinale utilise contre douleurs",
+    "pharmacologie": [
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "douleur"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "bersama abyssinica",
+    "type": "plante",
+    "description": "Plante africaine medicinale",
+    "pharmacologie": [
+      "antimicrobien"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "infection"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "irritation"
+    ]
+  },
+  {
+    "nom": "boerhavia diffusa",
+    "type": "plante",
+    "description": "Plante diuretique utilisee pour reins",
+    "pharmacologie": [
+      "diuretique"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "rein",
+    "indications": [
+      "retention hydrique"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "deshydratation"
+    ]
+  },
+  {
+    "nom": "carissa edulis",
+    "type": "plante",
+    "description": "Plante utilisee contre douleurs et infections",
+    "pharmacologie": [
+      "analgesique",
+      "antimicrobien"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "systeme nerveux",
+    "indications": [
+      "douleur"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "somnolence"
+    ]
+  },
+  {
+    "nom": "cassia abbreviata",
+    "type": "plante",
+    "description": "Plante africaine medicinale",
+    "pharmacologie": [
+      "antipaludique"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1500 mg/kg",
+    "organes": "foie",
+    "indications": [
+      "paludisme"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "troubles digestifs"
+    ]
+  },
+  {
+    "nom": "celtis integrifolia",
+    "type": "plante",
+    "description": "Plante utilisee en medecine traditionnelle",
+    "pharmacologie": [
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "fatigue"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "clerodendrum volubile",
+    "type": "plante",
+    "description": "Plante alimentaire et medicinale",
+    "pharmacologie": [
+      "antioxydant",
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "metabolique",
+    "indications": [
+      "nutrition"
+    ],
+    "posologie": "feuilles",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "combretum glutinosum",
+    "type": "plante",
+    "description": "Plante africaine utilisee pour infections",
+    "pharmacologie": [
+      "antibacterien"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "infection"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "croton zambesicus",
+    "type": "plante",
+    "description": "Plante medicinale africaine",
+    "pharmacologie": [
+      "antipaludique"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1500 mg/kg",
+    "organes": "foie",
+    "indications": [
+      "paludisme"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "troubles digestifs"
+    ]
+  },
+  {
+    "nom": "dioscorea dumetorum",
+    "type": "plante",
+    "description": "Igname sauvage medicinale",
+    "pharmacologie": [
+      "antidiabetique"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "metabolique",
+    "indications": [
+      "diabete"
+    ],
+    "posologie": "preparee",
+    "effets": [
+      "toxicite si mal prepare"
+    ]
+  },
+  {
+    "nom": "dracaena arborea",
+    "type": "plante",
+    "description": "Plante africaine medicinale",
+    "pharmacologie": [
+      "antimicrobien"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "infection"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "eclipta alba",
+    "type": "plante",
+    "description": "Plante hepatoprotectrice",
+    "pharmacologie": [
+      "hepatoprotecteur"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "foie",
+    "indications": [
+      "troubles hepatiques"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "ficus thonningii",
+    "type": "plante",
+    "description": "Plante africaine medicinale",
+    "pharmacologie": [
+      "digestif"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "ulcere"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "gossypium herbaceum",
+    "type": "plante",
+    "description": "Coton utilise en medecine traditionnelle",
+    "pharmacologie": [
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "douleur"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "troubles digestifs"
+    ]
+  },
+  {
+    "nom": "hibiscus sabdariffa",
+    "type": "plante",
+    "description": "Bissap utilise pour hypertension",
+    "pharmacologie": [
+      "hypotenseur",
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "coeur",
+    "indications": [
+      "hypertension"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "hypotension"
+    ]
+  },
+  {
+    "nom": "hyphaene thebaica",
+    "type": "plante",
+    "description": "Palmier doum medicinale",
+    "pharmacologie": [
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "nutrition"
+    ],
+    "posologie": "fruit",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "kigelia africana",
+    "type": "plante",
+    "description": "Saucissonnier utilise pour peau",
+    "pharmacologie": [
+      "cicatrisant",
+      "antimicrobien"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "peau",
+    "indications": [
+      "plaies"
+    ],
+    "posologie": "application",
+    "effets": [
+      "irritation"
+    ]
+  },
+  {
+    "nom": "lophira alata",
+    "type": "plante",
+    "description": "Plante africaine medicinale",
+    "pharmacologie": [
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "douleur"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "mezoneuron benthamianum",
+    "type": "plante",
+    "description": "Plante africaine medicinale",
+    "pharmacologie": [
+      "antipaludique"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1500 mg/kg",
+    "organes": "foie",
+    "indications": [
+      "paludisme"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "troubles digestifs"
+    ]
+  },
+  {
+    "nom": "momordica charantia",
+    "type": "plante",
+    "description": "Margose utilisee pour diabete",
+    "pharmacologie": [
+      "antidiabetique"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "metabolique",
+    "indications": [
+      "diabete"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "hypoglycemie"
+    ]
+  },
+  {
+    "nom": "moringa stenopetala",
+    "type": "plante",
+    "description": "Variete de moringa medicinale",
+    "pharmacologie": [
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "nutrition"
+    ],
+    "posologie": "feuilles",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "nuxia congesta",
+    "type": "plante",
+    "description": "Plante africaine medicinale",
+    "pharmacologie": [
+      "antimicrobien"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "respiratoire",
+    "indications": [
+      "toux"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "ocimum gratissimum",
+    "type": "plante",
+    "description": "Basilic africain antiseptique",
+    "pharmacologie": [
+      "antibacterien",
+      "antifongique"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "infection"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "olax viridis",
+    "type": "plante",
+    "description": "Plante medicinale africaine",
+    "pharmacologie": [
+      "analgesique"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "systeme nerveux",
+    "indications": [
+      "douleur"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "somnolence"
+    ]
+  },
+  {
+    "nom": "piliostigma thonningii",
+    "type": "plante",
+    "description": "Plante africaine medicinale",
+    "pharmacologie": [
+      "antidiarrheique"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "diarrhee"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "psidium guajava",
+    "type": "plante",
+    "description": "Goyavier utilise contre diarrhee",
+    "pharmacologie": [
+      "antidiarrheique",
+      "antimicrobien"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "diarrhee"
+    ],
+    "posologie": "infusion feuilles",
+    "effets": [
+      "constipation"
+    ]
+  },
+  {
+    "nom": "rauvwolfia vomitoria",
+    "type": "plante",
+    "description": "Plante sedative africaine",
+    "pharmacologie": [
+      "sedatif",
+      "antihypertenseur"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1500 mg/kg",
+    "organes": "systeme nerveux",
+    "indications": [
+      "hypertension"
+    ],
+    "posologie": "controlee",
+    "effets": [
+      "somnolence"
+    ]
+  },
+  {
+    "nom": "senna alata",
+    "type": "plante",
+    "description": "Plante antifongique",
+    "pharmacologie": [
+      "antifongique"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "peau",
+    "indications": [
+      "mycoses"
+    ],
+    "posologie": "application",
+    "effets": [
+      "irritation"
+    ]
+  },
+  {
+    "nom": "sida acuta",
+    "type": "plante",
+    "description": "Plante medicinale africaine",
+    "pharmacologie": [
+      "antimicrobien"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "infection"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "troubles digestifs"
+    ]
+  },
+  {
+    "nom": "solanum incanum",
+    "type": "plante",
+    "description": "Plante medicinale africaine",
+    "pharmacologie": [
+      "analgesique"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1500 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "douleur"
+    ],
+    "posologie": "controlee",
+    "effets": [
+      "toxicite"
+    ]
+  },
+  {
+    "nom": "terminalia avicennioides",
+    "type": "plante",
+    "description": "Plante medicinale africaine",
+    "pharmacologie": [
+      "antibacterien"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "infection"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "vetiveria nigritana",
+    "type": "plante",
+    "description": "Plante aromatique medicinale",
+    "pharmacologie": [
+      "calmant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "systeme nerveux",
+    "indications": [
+      "stress"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "vitex doniana",
+    "type": "plante",
+    "description": "Prunier africain medicinale",
+    "pharmacologie": [
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "nutrition"
+    ],
+    "posologie": "fruit",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "ximenia americana",
+    "type": "plante",
+    "description": "Plante africaine medicinale",
+    "pharmacologie": [
+      "antimicrobien"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "peau",
+    "indications": [
+      "infection"
+    ],
+    "posologie": "application",
+    "effets": [
+      "irritation"
+    ]
+  },
+  {
+    "nom": "commiphora africana",
+    "type": "plante",
+    "description": "Plante utilisee pour douleurs",
+    "pharmacologie": [
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "articulations",
+    "indications": [
+      "douleur"
+    ],
+    "posologie": "resine",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "cucumis metuliferus",
+    "type": "plante",
+    "description": "Fruit africain nutritif",
+    "pharmacologie": [
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "nutrition"
+    ],
+    "posologie": "fruit",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "dalbergia melanoxylon",
+    "type": "plante",
+    "description": "Plante medicinale africaine",
+    "pharmacologie": [
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "douleur"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "dialium guineense",
+    "type": "plante",
+    "description": "Fruit medicinale africain",
+    "pharmacologie": [
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "fatigue"
+    ],
+    "posologie": "fruit",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "diospyros mespiliformis",
+    "type": "plante",
+    "description": "Plante africaine medicinale",
+    "pharmacologie": [
+      "antimicrobien"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "infection"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "elaeis guineensis",
+    "type": "plante",
+    "description": "Palmier a huile aux proprietes nutritionnelles",
+    "pharmacologie": [
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "metabolique",
+    "indications": [
+      "nutrition"
+    ],
+    "posologie": "huile",
+    "effets": [
+      "prise de poids"
+    ]
+  },
+  {
+    "nom": "erythrina senegalensis",
+    "type": "plante",
+    "description": "Plante sedative africaine",
+    "pharmacologie": [
+      "sedatif"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1500 mg/kg",
+    "organes": "systeme nerveux",
+    "indications": [
+      "anxiete"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "somnolence"
+    ]
+  },
+  {
+    "nom": "fagara zanthoxyloides",
+    "type": "plante",
+    "description": "Plante utilisee pour douleurs dentaires",
+    "pharmacologie": [
+      "analgesique"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "systeme nerveux",
+    "indications": [
+      "douleur dentaire"
+    ],
+    "posologie": "racine",
+    "effets": [
+      "irritation"
+    ]
+  },
+  {
+    "nom": "ficus exasperata",
+    "type": "plante",
+    "description": "Plante utilisee pour hypertension",
+    "pharmacologie": [
+      "antihypertenseur"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "coeur",
+    "indications": [
+      "hypertension"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "hypotension"
+    ]
+  },
+  {
+    "nom": "garcinia kola",
+    "type": "plante",
+    "description": "Noix amere medicinale africaine",
+    "pharmacologie": [
+      "stimulant",
+      "antibacterien"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1500 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "fatigue"
+    ],
+    "posologie": "graines",
+    "effets": [
+      "insomnie"
+    ]
+  },
+  {
+    "nom": "heinsia crinita",
+    "type": "plante",
+    "description": "Plante alimentaire medicinale",
+    "pharmacologie": [
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "nutrition"
+    ],
+    "posologie": "feuilles",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "hymenocardia acida",
+    "type": "plante",
+    "description": "Plante medicinale africaine",
+    "pharmacologie": [
+      "antimicrobien"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "infection"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "icacina senegalensis",
+    "type": "plante",
+    "description": "Plante medicinale africaine",
+    "pharmacologie": [
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "douleur"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "troubles digestifs"
+    ]
+  },
+  {
+    "nom": "jatropha curcas",
+    "type": "plante",
+    "description": "Plante toxique utilisee en medecine traditionnelle",
+    "pharmacologie": [
+      "purgatif"
+    ],
+    "toxicologie": "elevee",
+    "dl50": "300 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "constipation"
+    ],
+    "posologie": "dangereux",
+    "effets": [
+      "vomissements"
+    ]
+  },
+  {
+    "nom": "khaya ivorensis",
+    "type": "plante",
+    "description": "Arbre medicinale africain",
+    "pharmacologie": [
+      "antipaludique"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1500 mg/kg",
+    "organes": "foie",
+    "indications": [
+      "paludisme"
+    ],
+    "posologie": "ecorce",
+    "effets": [
+      "hepatotoxicite"
+    ]
+  },
+  {
+    "nom": "landolphia owariensis",
+    "type": "plante",
+    "description": "Plante medicinale africaine",
+    "pharmacologie": [
+      "antimicrobien"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "infection"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "lawsonia inermis",
+    "type": "plante",
+    "description": "Henne utilise pour peau et cheveux",
+    "pharmacologie": [
+      "antifongique"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "peau",
+    "indications": [
+      "soins cutanes"
+    ],
+    "posologie": "application",
+    "effets": [
+      "allergie rare"
+    ]
+  },
+  {
+    "nom": "maerua angolensis",
+    "type": "plante",
+    "description": "Plante medicinale africaine",
+    "pharmacologie": [
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "douleur"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "benzene",
+    "type": "chimique",
+    "formula": "C6H6",
+    "danger": "cancerigene"
+  },
+  {
+    "nom": "moringa",
+    "type": "plante",
+    "description": "Arbre tropical riche en nutriments utilise en medecine traditionnelle",
+    "pharmacologie": [
+      "antioxydant",
+      "anti-inflammatoire",
+      "antidiabetique"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "foie, rein",
+    "indications": [
+      "fatigue",
+      "diabete",
+      "malnutrition"
+    ],
+    "posologie": "poudre de feuilles 1-2 cuilleres/jour",
+    "effets": [
+      "troubles digestifs rares"
+    ]
+  },
+  {
+    "nom": "gingembre",
+    "type": "plante",
+    "description": "Racine utilisee pour ses proprietes digestives et anti-nausee",
+    "pharmacologie": [
+      "antiemetic",
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "faible",
+    "dl50": "2000 mg/kg",
+    "organes": "systeme digestif",
+    "indications": [
+      "nausees",
+      "digestion",
+      "rhume"
+    ],
+    "posologie": "infusion ou poudre",
+    "effets": [
+      "brulures gastriques"
+    ]
+  },
+  {
+    "nom": "curcuma",
+    "type": "plante",
+    "description": "Plante riche en curcumine utilisee comme anti-inflammatoire",
+    "pharmacologie": [
+      "anti-inflammatoire",
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "2000 mg/kg",
+    "organes": "foie",
+    "indications": [
+      "inflammation",
+      "douleurs"
+    ],
+    "posologie": "1-3 g/jour",
+    "effets": [
+      "troubles digestifs"
+    ]
+  },
+  {
+    "nom": "aloe vera",
+    "type": "plante",
+    "description": "Plante utilisee pour les soins de la peau",
+    "pharmacologie": [
+      "cicatrisant",
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "moderee en ingestion",
+    "dl50": "5000 mg/kg",
+    "organes": "systeme digestif",
+    "indications": [
+      "brulures",
+      "plaies"
+    ],
+    "posologie": "gel local",
+    "effets": [
+      "diarrhee si ingeré"
+    ]
+  },
+  {
+    "nom": "hibiscus",
+    "type": "plante",
+    "description": "Plante utilisee pour reduire la tension arterielle",
+    "pharmacologie": [
+      "hypotenseur",
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "coeur",
+    "indications": [
+      "hypertension"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "hypotension"
+    ]
+  },
+  {
+    "nom": "kinkeliba",
+    "type": "plante",
+    "description": "Plante africaine utilisee pour le foie",
+    "pharmacologie": [
+      "hepatoprotecteur"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "foie",
+    "indications": [
+      "detox",
+      "fatigue"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "artemisia",
+    "type": "plante",
+    "description": "Plante antipaludique",
+    "pharmacologie": [
+      "antipaludique"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2500 mg/kg",
+    "organes": "foie",
+    "indications": [
+      "paludisme"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "toxicite hepatique"
+    ]
+  },
+  {
+    "nom": "baobab",
+    "type": "plante",
+    "description": "Fruit riche en vitamine C",
+    "pharmacologie": [
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "systeme digestif",
+    "indications": [
+      "fatigue"
+    ],
+    "posologie": "poudre",
+    "effets": [
+      "ballonnements"
+    ]
+  },
+  {
+    "nom": "quinquina",
+    "type": "plante",
+    "description": "Source de quinine",
+    "pharmacologie": [
+      "antipaludique"
+    ],
+    "toxicologie": "elevee",
+    "dl50": "500 mg/kg",
+    "organes": "systeme nerveux",
+    "indications": [
+      "paludisme"
+    ],
+    "posologie": "dose controlee",
+    "effets": [
+      "troubles auditifs"
+    ]
+  },
+  {
+    "nom": "ail",
+    "type": "plante",
+    "description": "Plante medicinale cardiovasculaire",
+    "pharmacologie": [
+      "antihypertenseur",
+      "antibacterien"
+    ],
+    "toxicologie": "faible",
+    "dl50": "3000 mg/kg",
+    "organes": "coeur",
+    "indications": [
+      "hypertension"
+    ],
+    "posologie": "cru ou extrait",
+    "effets": [
+      "odeur corporelle"
+    ]
+  },
+  {
+    "nom": "oignon",
+    "type": "plante",
+    "description": "Plante alimentaire aux proprietes antioxidantes",
+    "pharmacologie": [
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "3000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "immunite"
+    ],
+    "posologie": "aliment",
+    "effets": [
+      "irritation"
+    ]
+  },
+  {
+    "nom": "menthe",
+    "type": "plante",
+    "description": "Plante digestive",
+    "pharmacologie": [
+      "antispasmodique"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "ballonnements"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "reflux"
+    ]
+  },
+  {
+    "nom": "thym",
+    "type": "plante",
+    "description": "Plante antiseptique",
+    "pharmacologie": [
+      "antibacterien"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "respiratoire",
+    "indications": [
+      "toux"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "irritation"
+    ]
+  },
+  {
+    "nom": "clou de girofle",
+    "type": "plante",
+    "description": "Plante antiseptique buccale",
+    "pharmacologie": [
+      "analgesique"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1000 mg/kg",
+    "organes": "foie",
+    "indications": [
+      "douleur dentaire"
+    ],
+    "posologie": "huile",
+    "effets": [
+      "toxicite hepatique"
+    ]
+  },
+  {
+    "nom": "feuille de goyave",
+    "type": "plante",
+    "description": "Plante utilisee contre la diarrhee",
+    "pharmacologie": [
+      "antidiarrheique"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "diarrhee"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "constipation"
+    ]
+  },
+  {
+    "nom": "khaya senegalensis",
+    "type": "plante",
+    "description": "Arbre africain utilise pour traiter le paludisme et les infections",
+    "pharmacologie": [
+      "antipaludique",
+      "antibacterien"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1500 mg/kg",
+    "organes": "foie",
+    "indications": [
+      "paludisme",
+      "fievre"
+    ],
+    "posologie": "decoction d'ecorce",
+    "effets": [
+      "hepatotoxicite possible"
+    ]
+  },
+  {
+    "nom": "combretum micranthum",
+    "type": "plante",
+    "description": "Kinkeliba utilise pour detoxifier le foie",
+    "pharmacologie": [
+      "hepatoprotecteur",
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "foie",
+    "indications": [
+      "fatigue",
+      "detox"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "sclerocarya birrea",
+    "type": "plante",
+    "description": "Arbre du marula utilise pour ses proprietes anti-inflammatoires",
+    "pharmacologie": [
+      "anti-inflammatoire",
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "douleurs",
+      "inflammation"
+    ],
+    "posologie": "extrait",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "aframomum melegueta",
+    "type": "plante",
+    "description": "Poivre africain aux proprietes stimulantes",
+    "pharmacologie": [
+      "stimulant",
+      "antimicrobien"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "fatigue",
+      "infection"
+    ],
+    "posologie": "graines",
+    "effets": [
+      "irritation gastrique"
+    ]
+  },
+  {
+    "nom": "annona senegalensis",
+    "type": "plante",
+    "description": "Plante utilisee contre les infections et douleurs",
+    "pharmacologie": [
+      "analgesique",
+      "antibacterien"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1800 mg/kg",
+    "organes": "systeme nerveux",
+    "indications": [
+      "douleur",
+      "infection"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "somnolence"
+    ]
+  },
+  {
+    "nom": "cassia sieberiana",
+    "type": "plante",
+    "description": "Plante laxative utilisee en medecine traditionnelle",
+    "pharmacologie": [
+      "laxatif"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1200 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "constipation"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "diarrhee"
+    ]
+  },
+  {
+    "nom": "detarium microcarpum",
+    "type": "plante",
+    "description": "Plante nutritive et medicinale",
+    "pharmacologie": [
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "fatigue"
+    ],
+    "posologie": "fruit",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "xylopia aethiopica",
+    "type": "plante",
+    "description": "Epice medicinale utilisee pour infections",
+    "pharmacologie": [
+      "antibacterien",
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "infection",
+      "douleur"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "irritation"
+    ]
+  },
+  {
+    "nom": "ziziphus mauritiana",
+    "type": "plante",
+    "description": "Arbre utilise pour troubles digestifs",
+    "pharmacologie": [
+      "digestif",
+      "calmant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "ulcere",
+      "stress"
+    ],
+    "posologie": "fruit",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "tamarindus indica",
+    "type": "plante",
+    "description": "Tamarin utilise pour digestion",
+    "pharmacologie": [
+      "laxatif",
+      "digestif"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "constipation"
+    ],
+    "posologie": "fruit",
+    "effets": [
+      "diarrhee"
+    ]
+  },
+  {
+    "nom": "adansonia digitata",
+    "type": "plante",
+    "description": "Baobab riche en vitamine C",
+    "pharmacologie": [
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "fatigue"
+    ],
+    "posologie": "poudre",
+    "effets": [
+      "ballonnements"
+    ]
+  },
+  {
+    "nom": "parkia biglobosa",
+    "type": "plante",
+    "description": "Nere utilise en alimentation et medecine",
+    "pharmacologie": [
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "nutrition"
+    ],
+    "posologie": "graines",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "vitellaria paradoxa",
+    "type": "plante",
+    "description": "Karite utilise pour peau",
+    "pharmacologie": [
+      "cicatrisant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "peau",
+    "indications": [
+      "brulures"
+    ],
+    "posologie": "beurre",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "euphorbia hirta",
+    "type": "plante",
+    "description": "Plante utilisee contre diarrhee",
+    "pharmacologie": [
+      "antidiarrheique"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1500 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "diarrhee"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "irritation"
+    ]
+  },
+  {
+    "nom": "leptadenia hastata",
+    "type": "plante",
+    "description": "Plante utilisee en nutrition et medecine",
+    "pharmacologie": [
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "fatigue"
+    ],
+    "posologie": "feuilles",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "newbouldia laevis",
+    "type": "plante",
+    "description": "Plante utilisee pour infections",
+    "pharmacologie": [
+      "antibacterien"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1800 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "infection"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "troubles digestifs"
+    ]
+  },
+  {
+    "nom": "senna occidentalis",
+    "type": "plante",
+    "description": "Plante laxative",
+    "pharmacologie": [
+      "laxatif"
+    ],
+    "toxicologie": "elevee",
+    "dl50": "800 mg/kg",
+    "organes": "foie",
+    "indications": [
+      "constipation"
+    ],
+    "posologie": "controlee",
+    "effets": [
+      "toxicite hepatique"
+    ]
+  },
+  {
+    "nom": "boswellia dalzielii",
+    "type": "plante",
+    "description": "Plante anti-inflammatoire",
+    "pharmacologie": [
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "articulations",
+    "indications": [
+      "douleur"
+    ],
+    "posologie": "resine",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "ficus sycomorus",
+    "type": "plante",
+    "description": "Plante utilisee pour digestion",
+    "pharmacologie": [
+      "digestif"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "troubles digestifs"
+    ],
+    "posologie": "fruit",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "alchornea cordifolia",
+    "type": "plante",
+    "description": "Plante utilisee pour infections et plaies",
+    "pharmacologie": [
+      "antibacterien",
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "faible",
+    "dl50": "4000 mg/kg",
+    "organes": "peau, digestif",
+    "indications": [
+      "infection",
+      "plaies"
+    ],
+    "posologie": "decoction feuilles",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "azadirachta indica",
+    "type": "plante",
+    "description": "Neem utilise contre infections et parasites",
+    "pharmacologie": [
+      "antibacterien",
+      "antiparasitaire"
+    ],
+    "toxicologie": "faible a moderee",
+    "dl50": "5000 mg/kg",
+    "organes": "foie",
+    "indications": [
+      "paludisme",
+      "infection"
+    ],
+    "posologie": "decoction feuilles",
+    "effets": [
+      "troubles digestifs"
+    ]
+  },
+  {
+    "nom": "bixa orellana",
+    "type": "plante",
+    "description": "Roucou utilise pour peau et infections",
+    "pharmacologie": [
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "peau",
+    "indications": [
+      "infection cutanee"
+    ],
+    "posologie": "application locale",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "calotropis procera",
+    "type": "plante",
+    "description": "Plante toxique utilisee en medecine traditionnelle",
+    "pharmacologie": [
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "elevee",
+    "dl50": "300 mg/kg",
+    "organes": "coeur, foie",
+    "indications": [
+      "douleurs"
+    ],
+    "posologie": "usage controle",
+    "effets": [
+      "toxicite cardiaque"
+    ]
+  },
+  {
+    "nom": "cymbopogon citratus",
+    "type": "plante",
+    "description": "Citronnelle utilisee pour digestion et relaxation",
+    "pharmacologie": [
+      "antispasmodique",
+      "calmant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "stress",
+      "ballonnements"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "daniellia oliveri",
+    "type": "plante",
+    "description": "Arbre utilise pour infections",
+    "pharmacologie": [
+      "antibacterien"
+    ],
+    "toxicologie": "faible",
+    "dl50": "4500 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "infection"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "entada africana",
+    "type": "plante",
+    "description": "Plante utilisee pour douleurs",
+    "pharmacologie": [
+      "analgesique"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1800 mg/kg",
+    "organes": "systeme nerveux",
+    "indications": [
+      "douleur"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "somnolence"
+    ]
+  },
+  {
+    "nom": "ficus platyphylla",
+    "type": "plante",
+    "description": "Plante digestive",
+    "pharmacologie": [
+      "digestif"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "diarrhee"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "gardenia ternifolia",
+    "type": "plante",
+    "description": "Plante medicinale africaine",
+    "pharmacologie": [
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "douleur"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "guiera senegalensis",
+    "type": "plante",
+    "description": "Plante africaine tres utilisee en medecine traditionnelle",
+    "pharmacologie": [
+      "antibacterien",
+      "antipaludique"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "foie",
+    "indications": [
+      "paludisme",
+      "infection"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "harungana madagascariensis",
+    "type": "plante",
+    "description": "Plante utilisee pour peau",
+    "pharmacologie": [
+      "cicatrisant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "peau",
+    "indications": [
+      "plaies"
+    ],
+    "posologie": "application locale",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "holarrhena floribunda",
+    "type": "plante",
+    "description": "Plante antidiarrheique",
+    "pharmacologie": [
+      "antidiarrheique"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "diarrhee"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "constipation"
+    ]
+  },
+  {
+    "nom": "irvingia gabonensis",
+    "type": "plante",
+    "description": "Manguier sauvage riche en nutriments",
+    "pharmacologie": [
+      "hypolipemiant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "metabolique",
+    "indications": [
+      "obesite"
+    ],
+    "posologie": "graines",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "lippia multiflora",
+    "type": "plante",
+    "description": "Plante aromatique africaine",
+    "pharmacologie": [
+      "calmant",
+      "digestif"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "stress"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "millettia thonningii",
+    "type": "plante",
+    "description": "Plante insecticide et medicinale",
+    "pharmacologie": [
+      "insecticide"
+    ],
+    "toxicologie": "elevee",
+    "dl50": "500 mg/kg",
+    "organes": "systeme nerveux",
+    "indications": [
+      "parasites"
+    ],
+    "posologie": "usage controle",
+    "effets": [
+      "toxicite neurologique"
+    ]
+  },
+  {
+    "nom": "monodora myristica",
+    "type": "plante",
+    "description": "Epice medicinale africaine",
+    "pharmacologie": [
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "digestion"
+    ],
+    "posologie": "epice",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "nauclea latifolia",
+    "type": "plante",
+    "description": "Plante antipaludique",
+    "pharmacologie": [
+      "antipaludique"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "foie",
+    "indications": [
+      "paludisme"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "troubles digestifs"
+    ]
+  },
+  {
+    "nom": "olax subscorpioidea",
+    "type": "plante",
+    "description": "Plante utilisee pour douleurs",
+    "pharmacologie": [
+      "analgesique"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1800 mg/kg",
+    "organes": "systeme nerveux",
+    "indications": [
+      "douleur"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "somnolence"
+    ]
+  },
+  {
+    "nom": "pavetta crassipes",
+    "type": "plante",
+    "description": "Plante medicinale africaine",
+    "pharmacologie": [
+      "antibacterien"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "infection"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "phyllanthus amarus",
+    "type": "plante",
+    "description": "Plante hepatoprotectrice",
+    "pharmacologie": [
+      "hepatoprotecteur",
+      "antiviral"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "foie",
+    "indications": [
+      "hepatite"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "secamone afzelii",
+    "type": "plante",
+    "description": "Plante medicinale africaine",
+    "pharmacologie": [
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "douleur"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "spathodea campanulata",
+    "type": "plante",
+    "description": "Arbre medicinal africain",
+    "pharmacologie": [
+      "anti-inflammatoire"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "peau",
+    "indications": [
+      "plaies"
+    ],
+    "posologie": "application",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "strophanthus hispidus",
+    "type": "plante",
+    "description": "Plante cardiotoxique utilisee en medecine",
+    "pharmacologie": [
+      "cardiotoxique"
+    ],
+    "toxicologie": "elevee",
+    "dl50": "200 mg/kg",
+    "organes": "coeur",
+    "indications": [
+      "usage medical controle"
+    ],
+    "posologie": "controle strict",
+    "effets": [
+      "troubles cardiaques"
+    ]
+  },
+  {
+    "nom": "tapinanthus dodoneifolius",
+    "type": "plante",
+    "description": "Plante parasitaire medicinale",
+    "pharmacologie": [
+      "antihypertenseur"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1500 mg/kg",
+    "organes": "coeur",
+    "indications": [
+      "hypertension"
+    ],
+    "posologie": "infusion",
+    "effets": [
+      "hypotension"
+    ]
+  },
+  {
+    "nom": "trichilia emetica",
+    "type": "plante",
+    "description": "Plante purgative africaine",
+    "pharmacologie": [
+      "purgatif"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1200 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "constipation"
+    ],
+    "posologie": "controlee",
+    "effets": [
+      "vomissements"
+    ]
+  },
+  {
+    "nom": "voacanga africana",
+    "type": "plante",
+    "description": "Plante neuroactive africaine",
+    "pharmacologie": [
+      "neuroactif"
+    ],
+    "toxicologie": "elevee",
+    "dl50": "500 mg/kg",
+    "organes": "systeme nerveux",
+    "indications": [
+      "usage traditionnel"
+    ],
+    "posologie": "controlee",
+    "effets": [
+      "hallucinations"
+    ]
+  },
+  {
+    "nom": "warburgia salutaris",
+    "type": "plante",
+    "description": "Plante antimicrobienne africaine",
+    "pharmacologie": [
+      "antibacterien"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "1500 mg/kg",
+    "organes": "digestif",
+    "indications": [
+      "infection"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "irritation"
+    ]
+  },
+  {
+    "nom": "zanthoxylum zanthoxyloides",
+    "type": "plante",
+    "description": "Plante utilisee pour douleurs dentaires",
+    "pharmacologie": [
+      "analgesique"
+    ],
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "systeme nerveux",
+    "indications": [
+      "douleur dentaire"
+    ],
+    "posologie": "racine",
+    "effets": [
+      "irritation"
+    ]
+  },
+  {
+    "nom": "acokanthera schimperi",
+    "type": "plante",
+    "description": "Plante tres toxique africaine",
+    "pharmacologie": [
+      "cardiotoxique"
+    ],
+    "toxicologie": "tres elevee",
+    "dl50": "100 mg/kg",
+    "organes": "coeur",
+    "indications": [
+      "usage traditionnel controle"
+    ],
+    "posologie": "dangereux",
+    "effets": [
+      "arret cardiaque"
+    ]
+  },
+  {
+    "nom": "baphia nitida",
+    "type": "plante",
+    "description": "Plante utilisee pour la peau",
+    "pharmacologie": [
+      "antioxydant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "peau",
+    "indications": [
+      "soins cutanes"
+    ],
+    "posologie": "application",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "acacia nilotica",
+    "type": "plante",
+    "description": "Plante antiseptique et cicatrisante",
+    "pharmacologie": [
+      "antibacterien",
+      "cicatrisant"
+    ],
+    "toxicologie": "faible",
+    "dl50": "5000 mg/kg",
+    "organes": "peau",
+    "indications": [
+      "plaies"
+    ],
+    "posologie": "decoction",
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "ibuprofen",
+    "type": "medicament",
+    "absorption": "rapide",
+    "distribution": "liaison proteique elevee",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "2 h",
+    "dl50": "636 mg/kg",
+    "organes": "rein, estomac",
+    "toxicologie": "ulcerogene",
+    "indications": [
+      "douleur",
+      "inflammation"
+    ],
+    "interactions": [
+      "anticoagulants"
+    ],
+    "effets": [
+      "gastralgie"
+    ]
+  },
+  {
+    "nom": "aspirin",
+    "type": "medicament",
+    "absorption": "rapide",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "3 h",
+    "dl50": "200 mg/kg",
+    "organes": "estomac",
+    "toxicologie": "hemorragique",
+    "indications": [
+      "douleur",
+      "antiagregant"
+    ],
+    "interactions": [
+      "warfarin"
+    ],
+    "effets": [
+      "ulcere"
+    ]
+  },
+  {
+    "nom": "amoxicillin",
+    "type": "medicament",
+    "absorption": "bonne",
+    "distribution": "tissus",
+    "metabolisme": "faible",
+    "elimination": "renale",
+    "demi_vie": "1 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "rein",
+    "toxicologie": "faible",
+    "indications": [
+      "infection bacterienne"
+    ],
+    "interactions": [
+      "allopurinol"
+    ],
+    "effets": [
+      "allergie"
+    ]
+  },
+  {
+    "nom": "metformin",
+    "type": "medicament",
+    "absorption": "moderee",
+    "distribution": "large",
+    "metabolisme": "non",
+    "elimination": "renale",
+    "demi_vie": "6 h",
+    "dl50": ">3000 mg/kg",
+    "organes": "rein",
+    "toxicologie": "acidose lactique rare",
+    "indications": [
+      "diabete"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "diarrhee"
+    ]
+  },
+  {
+    "nom": "diclofenac",
+    "type": "medicament",
+    "absorption": "rapide",
+    "distribution": "tissus",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "2 h",
+    "dl50": "200 mg/kg",
+    "organes": "foie",
+    "toxicologie": "hepatotoxique",
+    "indications": [
+      "douleur"
+    ],
+    "interactions": [
+      "AINS"
+    ],
+    "effets": [
+      "ulcere"
+    ]
+  },
+  {
+    "nom": "tramadol",
+    "type": "medicament",
+    "absorption": "bonne",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "6 h",
+    "dl50": "350 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "dependance",
+    "indications": [
+      "douleur"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "somnolence"
+    ]
+  },
+  {
+    "nom": "codeine",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "CYP2D6",
+    "elimination": "renale",
+    "demi_vie": "3 h",
+    "dl50": "400 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "depression respiratoire",
+    "indications": [
+      "douleur",
+      "toux"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "somnolence"
+    ]
+  },
+  {
+    "nom": "diazepam",
+    "type": "medicament",
+    "absorption": "rapide",
+    "distribution": "lipophile",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "30 h",
+    "dl50": "700 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "sedatif",
+    "indications": [
+      "anxiete"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "somnolence"
+    ]
+  },
+  {
+    "nom": "warfarin",
+    "type": "medicament",
+    "absorption": "bonne",
+    "distribution": "proteines",
+    "metabolisme": "hepatique",
+    "elimination": "biliaire",
+    "demi_vie": "36 h",
+    "dl50": "300 mg/kg",
+    "organes": "sang",
+    "toxicologie": "hemorragique",
+    "indications": [
+      "anticoagulant"
+    ],
+    "interactions": [
+      "aspirin"
+    ],
+    "effets": [
+      "hemorragie"
+    ]
+  },
+  {
+    "nom": "captopril",
+    "type": "medicament",
+    "absorption": "rapide",
+    "distribution": "systemique",
+    "metabolisme": "faible",
+    "elimination": "renale",
+    "demi_vie": "2 h",
+    "dl50": "1000 mg/kg",
+    "organes": "rein",
+    "toxicologie": "hypotension",
+    "indications": [
+      "HTA"
+    ],
+    "interactions": [
+      "diuretiques"
+    ],
+    "effets": [
+      "toux"
+    ]
+  },
+  {
+    "nom": "enalapril",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "11 h",
+    "dl50": ">1000 mg/kg",
+    "organes": "rein",
+    "toxicologie": "hypotension",
+    "indications": [
+      "HTA"
+    ],
+    "interactions": [
+      "AINS"
+    ],
+    "effets": [
+      "toux"
+    ]
+  },
+  {
+    "nom": "losartan",
+    "type": "medicament",
+    "absorption": "bonne",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "biliaire",
+    "demi_vie": "6 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "rein",
+    "toxicologie": "faible",
+    "indications": [
+      "HTA"
+    ],
+    "interactions": [
+      "diuretiques"
+    ],
+    "effets": [
+      "vertige"
+    ]
+  },
+  {
+    "nom": "amlodipine",
+    "type": "medicament",
+    "absorption": "bonne",
+    "distribution": "large",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "30 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "coeur",
+    "toxicologie": "hypotension",
+    "indications": [
+      "HTA"
+    ],
+    "interactions": [
+      "CYP3A4"
+    ],
+    "effets": [
+      "oedeme"
+    ]
+  },
+  {
+    "nom": "furosemide",
+    "type": "medicament",
+    "absorption": "variable",
+    "distribution": "systemique",
+    "metabolisme": "faible",
+    "elimination": "renale",
+    "demi_vie": "2 h",
+    "dl50": "2600 mg/kg",
+    "organes": "rein",
+    "toxicologie": "dehydratation",
+    "indications": [
+      "oedeme"
+    ],
+    "interactions": [
+      "aminosides"
+    ],
+    "effets": [
+      "hypokaliemie"
+    ]
+  },
+  {
+    "nom": "spironolactone",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "16 h",
+    "dl50": ">1000 mg/kg",
+    "organes": "rein",
+    "toxicologie": "hyperkaliemie",
+    "indications": [
+      "HTA"
+    ],
+    "interactions": [
+      "IEC"
+    ],
+    "effets": [
+      "gynecomastie"
+    ]
+  },
+  {
+    "nom": "omeprazole",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "1 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "estomac",
+    "toxicologie": "faible",
+    "indications": [
+      "ulcere"
+    ],
+    "interactions": [
+      "clopidogrel"
+    ],
+    "effets": [
+      "diarrhee"
+    ]
+  },
+  {
+    "nom": "ranitidine",
+    "type": "medicament",
+    "absorption": "bonne",
+    "distribution": "systemique",
+    "metabolisme": "faible",
+    "elimination": "renale",
+    "demi_vie": "3 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "estomac",
+    "toxicologie": "faible",
+    "indications": [
+      "ulcere"
+    ],
+    "interactions": [
+      "peu"
+    ],
+    "effets": [
+      "rares"
+    ]
+  },
+  {
+    "nom": "salbutamol",
+    "type": "medicament",
+    "absorption": "inhalation",
+    "distribution": "SNC faible",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "4 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "poumon",
+    "toxicologie": "tachycardie",
+    "indications": [
+      "asthme"
+    ],
+    "interactions": [
+      "beta-bloquants"
+    ],
+    "effets": [
+      "tremblement"
+    ]
+  },
+  {
+    "nom": "prednisone",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "3 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "immunitaire",
+    "toxicologie": "immunosuppression",
+    "indications": [
+      "inflammation"
+    ],
+    "interactions": [
+      "AINS"
+    ],
+    "effets": [
+      "hyperglycemie"
+    ]
+  },
+  {
+    "nom": "dexamethasone",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "large",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "36 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "immunitaire",
+    "toxicologie": "immunosuppression",
+    "indications": [
+      "inflammation"
+    ],
+    "interactions": [
+      "AINS"
+    ],
+    "effets": [
+      "hyperglycemie"
+    ]
+  },
+  {
+    "nom": "azithromycin",
+    "type": "medicament",
+    "absorption": "bonne",
+    "distribution": "tissus",
+    "metabolisme": "hepatique",
+    "elimination": "biliaire",
+    "demi_vie": "68 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "foie",
+    "toxicologie": "faible",
+    "indications": [
+      "infection"
+    ],
+    "interactions": [
+      "QT"
+    ],
+    "effets": [
+      "diarrhee"
+    ]
+  },
+  {
+    "nom": "ciprofloxacin",
+    "type": "medicament",
+    "absorption": "bonne",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "4 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "tendons",
+    "toxicologie": "tendinopathie",
+    "indications": [
+      "infection"
+    ],
+    "interactions": [
+      "antiacides"
+    ],
+    "effets": [
+      "nausées"
+    ]
+  },
+  {
+    "nom": "ceftriaxone",
+    "type": "medicament",
+    "absorption": "IV",
+    "distribution": "systemique",
+    "metabolisme": "faible",
+    "elimination": "biliaire",
+    "demi_vie": "8 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "foie",
+    "toxicologie": "faible",
+    "indications": [
+      "infection"
+    ],
+    "interactions": [
+      "calcium"
+    ],
+    "effets": [
+      "allergie"
+    ]
+  },
+  {
+    "nom": "gentamicin",
+    "type": "medicament",
+    "absorption": "IV",
+    "distribution": "faible SNC",
+    "metabolisme": "non",
+    "elimination": "renale",
+    "demi_vie": "2 h",
+    "dl50": "100 mg/kg",
+    "organes": "rein, oreille",
+    "toxicologie": "nephro/ototoxique",
+    "indications": [
+      "infection"
+    ],
+    "interactions": [
+      "diuretiques"
+    ],
+    "effets": [
+      "surdité"
+    ]
+  },
+  {
+    "nom": "insulin",
+    "type": "medicament",
+    "absorption": "SC",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "variable",
+    "dl50": "N/A",
+    "organes": "metabolique",
+    "toxicologie": "hypoglycemie",
+    "indications": [
+      "diabete"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "hypoglycemie"
+    ]
+  },
+  {
+    "nom": "glibenclamide",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "10 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "pancreas",
+    "toxicologie": "hypoglycemie",
+    "indications": [
+      "diabete"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "hypoglycemie"
+    ]
+  },
+  {
+    "nom": "atorvastatin",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "foie",
+    "metabolisme": "CYP3A4",
+    "elimination": "biliaire",
+    "demi_vie": "14 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "foie",
+    "toxicologie": "myopathie",
+    "indications": [
+      "cholesterol"
+    ],
+    "interactions": [
+      "macrolides"
+    ],
+    "effets": [
+      "douleur musculaire"
+    ]
+  },
+  {
+    "nom": "simvastatin",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "foie",
+    "metabolisme": "CYP3A4",
+    "elimination": "biliaire",
+    "demi_vie": "2 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "foie",
+    "toxicologie": "myopathie",
+    "indications": [
+      "cholesterol"
+    ],
+    "interactions": [
+      "macrolides"
+    ],
+    "effets": [
+      "myalgie"
+    ]
+  },
+  {
+    "nom": "clopidogrel",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "6 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "sang",
+    "toxicologie": "hemorragie",
+    "indications": [
+      "antiagregant"
+    ],
+    "interactions": [
+      "IPP"
+    ],
+    "effets": [
+      "saignement"
+    ]
+  },
+  {
+    "nom": "heparin",
+    "type": "medicament",
+    "absorption": "IV/SC",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "1.5 h",
+    "dl50": "N/A",
+    "organes": "sang",
+    "toxicologie": "hemorragie",
+    "indications": [
+      "anticoagulant"
+    ],
+    "interactions": [
+      "AINS"
+    ],
+    "effets": [
+      "saignement"
+    ]
+  },
+  {
+    "nom": "morphine",
+    "type": "medicament",
+    "absorption": "orale/IV",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "3 h",
+    "dl50": "200 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "depression respiratoire",
+    "indications": [
+      "douleur severe"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "somnolence"
+    ]
+  },
+  {
+    "nom": "ketamine",
+    "type": "medicament",
+    "absorption": "IV",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "2 h",
+    "dl50": "200 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "dissociation",
+    "indications": [
+      "anesthesie"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "hallucination"
+    ]
+  },
+  {
+    "nom": "propofol",
+    "type": "medicament",
+    "absorption": "IV",
+    "distribution": "lipophile",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "2 h",
+    "dl50": "N/A",
+    "organes": "SNC",
+    "toxicologie": "depression respiratoire",
+    "indications": [
+      "anesthesie"
+    ],
+    "interactions": [
+      "opioides"
+    ],
+    "effets": [
+      "hypotension"
+    ]
+  },
+  {
+    "nom": "haloperidol",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "20 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "extrapyramidal",
+    "indications": [
+      "psychose"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "rigidite"
+    ]
+  },
+  {
+    "nom": "fluoxetine",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "2-4 j",
+    "dl50": ">2000 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "syndrome serotoninergique",
+    "indications": [
+      "depression"
+    ],
+    "interactions": [
+      "IMAO"
+    ],
+    "effets": [
+      "insomnie"
+    ]
+  },
+  {
+    "nom": "sertraline",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "24 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "serotonine",
+    "indications": [
+      "depression"
+    ],
+    "interactions": [
+      "IMAO"
+    ],
+    "effets": [
+      "nausees"
+    ]
+  },
+  {
+    "nom": "risperidone",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "20 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "metabolique",
+    "indications": [
+      "psychose"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "prise de poids"
+    ]
+  },
+  {
+    "nom": "toluene",
+    "cas": "108-88-3",
+    "formule": "C7H8",
+    "vlep": "50 ppm",
+    "cmr": "non classe",
+    "pictogrammes": [
+      "GHS02",
+      "GHS07"
+    ],
+    "organes": "SNC",
+    "effets": "narcosis",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "xylene",
+    "cas": "1330-20-7",
+    "formule": "C8H10",
+    "vlep": "100 ppm",
+    "cmr": "non classe",
+    "pictogrammes": [
+      "GHS02"
+    ],
+    "organes": "SNC",
+    "effets": "vertiges",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "formaldehyde",
+    "cas": "50-00-0",
+    "formule": "CH2O",
+    "vlep": "0.3 ppm",
+    "cmr": "cancerigene",
+    "pictogrammes": [
+      "GHS08"
+    ],
+    "organes": "respiratoire",
+    "effets": "irritation",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "methanol",
+    "cas": "67-56-1",
+    "formule": "CH3OH",
+    "vlep": "200 ppm",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS02",
+      "GHS06"
+    ],
+    "organes": "nerf optique",
+    "effets": "cécité",
+    "voies": [
+      "ingestion",
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "ethanol",
+    "cas": "64-17-5",
+    "formule": "C2H6O",
+    "vlep": "1000 ppm",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS02"
+    ],
+    "organes": "foie",
+    "effets": "hepatotoxicite",
+    "voies": [
+      "ingestion"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "chloroform",
+    "cas": "67-66-3",
+    "formule": "CHCl3",
+    "vlep": "10 ppm",
+    "cmr": "suspect",
+    "pictogrammes": [
+      "GHS08"
+    ],
+    "organes": "foie",
+    "effets": "toxicite",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "carbon monoxide",
+    "cas": "630-08-0",
+    "formule": "CO",
+    "vlep": "25 ppm",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS04"
+    ],
+    "organes": "sang",
+    "effets": "hypoxie",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "hydrogen sulfide",
+    "cas": "7783-06-4",
+    "formule": "H2S",
+    "vlep": "10 ppm",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS06"
+    ],
+    "organes": "SNC",
+    "effets": "paralysie",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "ammonia",
+    "cas": "7664-41-7",
+    "formule": "NH3",
+    "vlep": "25 ppm",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS05"
+    ],
+    "organes": "respiratoire",
+    "effets": "irritation",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "lead",
+    "cas": "7439-92-1",
+    "formule": "Pb",
+    "vlep": "0.05 mg/m3",
+    "cmr": "reprotoxique",
+    "pictogrammes": [
+      "GHS08"
+    ],
+    "organes": "SNC",
+    "effets": "saturnisme",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "mercury",
+    "cas": "7439-97-6",
+    "formule": "Hg",
+    "vlep": "0.025 mg/m3",
+    "cmr": "neurotoxique",
+    "pictogrammes": [
+      "GHS06"
+    ],
+    "organes": "SNC",
+    "effets": "tremblements",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "arsenic",
+    "cas": "7440-38-2",
+    "formule": "As",
+    "vlep": "0.01 mg/m3",
+    "cmr": "cancerigene",
+    "pictogrammes": [
+      "GHS08"
+    ],
+    "organes": "peau",
+    "effets": "cancer",
+    "voies": [
+      "ingestion"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "cyanide",
+    "cas": "57-12-5",
+    "formule": "CN-",
+    "vlep": "5 mg/m3",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS06"
+    ],
+    "organes": "mitochondrie",
+    "effets": "asphyxie",
+    "voies": [
+      "ingestion"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "acetone",
+    "cas": "67-64-1",
+    "formule": "C3H6O",
+    "vlep": "500 ppm",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS02"
+    ],
+    "organes": "SNC",
+    "effets": "vertige",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "acetic acid",
+    "cas": "64-19-7",
+    "formule": "CH3COOH",
+    "vlep": "10 ppm",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS05"
+    ],
+    "organes": "peau",
+    "effets": "corrosif",
+    "voies": [
+      "contact"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "sulfuric acid",
+    "cas": "7664-93-9",
+    "formule": "H2SO4",
+    "vlep": "1 mg/m3",
+    "cmr": "cancerigene",
+    "pictogrammes": [
+      "GHS05"
+    ],
+    "organes": "peau",
+    "effets": "brulure",
+    "voies": [
+      "contact"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "nitric acid",
+    "cas": "7697-37-2",
+    "formule": "HNO3",
+    "vlep": "2 ppm",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS05"
+    ],
+    "organes": "respiratoire",
+    "effets": "corrosif",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "chlorine",
+    "cas": "7782-50-5",
+    "formule": "Cl2",
+    "vlep": "0.5 ppm",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS06"
+    ],
+    "organes": "poumon",
+    "effets": "oedeme pulmonaire",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "ozone",
+    "cas": "10028-15-6",
+    "formule": "O3",
+    "vlep": "0.1 ppm",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS07"
+    ],
+    "organes": "poumon",
+    "effets": "irritation",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "atenolol",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "faible",
+    "elimination": "renale",
+    "demi_vie": "6 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "coeur",
+    "toxicologie": "bradycardie",
+    "indications": [
+      "HTA"
+    ],
+    "interactions": [
+      "beta-agonistes"
+    ],
+    "effets": [
+      "fatigue"
+    ]
+  },
+  {
+    "nom": "propranolol",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "4 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "coeur",
+    "toxicologie": "bradycardie",
+    "indications": [
+      "HTA"
+    ],
+    "interactions": [
+      "salbutamol"
+    ],
+    "effets": [
+      "bronchospasme"
+    ]
+  },
+  {
+    "nom": "metoprolol",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "4 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "coeur",
+    "toxicologie": "hypotension",
+    "indications": [
+      "HTA"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "fatigue"
+    ]
+  },
+  {
+    "nom": "digoxin",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "coeur",
+    "metabolisme": "faible",
+    "elimination": "renale",
+    "demi_vie": "36 h",
+    "dl50": "30 mg/kg",
+    "organes": "coeur",
+    "toxicologie": "arythmie",
+    "indications": [
+      "insuffisance cardiaque"
+    ],
+    "interactions": [
+      "diuretiques"
+    ],
+    "effets": [
+      "nausees"
+    ]
+  },
+  {
+    "nom": "lidocaine",
+    "type": "medicament",
+    "absorption": "IV/local",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "2 h",
+    "dl50": "300 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "convulsions",
+    "indications": [
+      "anesthesie"
+    ],
+    "interactions": [
+      "antiarythmiques"
+    ],
+    "effets": [
+      "vertige"
+    ]
+  },
+  {
+    "nom": "bupivacaine",
+    "type": "medicament",
+    "absorption": "locale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "3 h",
+    "dl50": "150 mg/kg",
+    "organes": "coeur",
+    "toxicologie": "cardiotoxique",
+    "indications": [
+      "anesthesie"
+    ],
+    "interactions": [
+      "antiarythmiques"
+    ],
+    "effets": [
+      "hypotension"
+    ]
+  },
+  {
+    "nom": "ketoprofen",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "2 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "estomac",
+    "toxicologie": "ulcerogene",
+    "indications": [
+      "douleur"
+    ],
+    "interactions": [
+      "anticoagulants"
+    ],
+    "effets": [
+      "gastralgie"
+    ]
+  },
+  {
+    "nom": "naproxen",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "12 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "estomac",
+    "toxicologie": "ulcere",
+    "indications": [
+      "inflammation"
+    ],
+    "interactions": [
+      "AINS"
+    ],
+    "effets": [
+      "nausées"
+    ]
+  },
+  {
+    "nom": "meloxicam",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "20 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "rein",
+    "toxicologie": "nephrotoxique",
+    "indications": [
+      "arthrite"
+    ],
+    "interactions": [
+      "AINS"
+    ],
+    "effets": [
+      "oedeme"
+    ]
+  },
+  {
+    "nom": "celecoxib",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "CYP2C9",
+    "elimination": "biliaire",
+    "demi_vie": "11 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "coeur",
+    "toxicologie": "risque CV",
+    "indications": [
+      "douleur"
+    ],
+    "interactions": [
+      "warfarin"
+    ],
+    "effets": [
+      "hypertension"
+    ]
+  },
+  {
+    "nom": "hydrochlorothiazide",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "faible",
+    "elimination": "renale",
+    "demi_vie": "8 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "rein",
+    "toxicologie": "hypokaliemie",
+    "indications": [
+      "HTA"
+    ],
+    "interactions": [
+      "digoxine"
+    ],
+    "effets": [
+      "vertige"
+    ]
+  },
+  {
+    "nom": "chloroquine",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "tissus",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "30 h",
+    "dl50": "300 mg/kg",
+    "organes": "retine",
+    "toxicologie": "retinopathie",
+    "indications": [
+      "paludisme"
+    ],
+    "interactions": [
+      "antiarythmiques"
+    ],
+    "effets": [
+      "troubles visuels"
+    ]
+  },
+  {
+    "nom": "quinine",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "11 h",
+    "dl50": "500 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "cinchonisme",
+    "indications": [
+      "paludisme"
+    ],
+    "interactions": [
+      "anticoagulants"
+    ],
+    "effets": [
+      "acouphenes"
+    ]
+  },
+  {
+    "nom": "artesunate",
+    "type": "medicament",
+    "absorption": "orale/IV",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "1 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "foie",
+    "toxicologie": "faible",
+    "indications": [
+      "paludisme"
+    ],
+    "interactions": [
+      "antipaludiques"
+    ],
+    "effets": [
+      "nausées"
+    ]
+  },
+  {
+    "nom": "doxycycline",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "tissus",
+    "metabolisme": "faible",
+    "elimination": "biliaire",
+    "demi_vie": "18 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "digestif",
+    "toxicologie": "photosensibilisation",
+    "indications": [
+      "infection"
+    ],
+    "interactions": [
+      "calcium"
+    ],
+    "effets": [
+      "diarrhee"
+    ]
+  },
+  {
+    "nom": "levofloxacin",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "faible",
+    "elimination": "renale",
+    "demi_vie": "7 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "tendons",
+    "toxicologie": "tendinopathie",
+    "indications": [
+      "infection"
+    ],
+    "interactions": [
+      "antiacides"
+    ],
+    "effets": [
+      "douleur tendon"
+    ]
+  },
+  {
+    "nom": "metronidazole",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "8 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "foie",
+    "toxicologie": "neurotoxique rare",
+    "indications": [
+      "infection"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "nausées"
+    ]
+  },
+  {
+    "nom": "fluconazole",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "faible",
+    "elimination": "renale",
+    "demi_vie": "30 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "foie",
+    "toxicologie": "hepatotoxique",
+    "indications": [
+      "mycose"
+    ],
+    "interactions": [
+      "CYP"
+    ],
+    "effets": [
+      "rash"
+    ]
+  },
+  {
+    "nom": "ketoconazole",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "biliaire",
+    "demi_vie": "8 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "foie",
+    "toxicologie": "hepatotoxique",
+    "indications": [
+      "mycose"
+    ],
+    "interactions": [
+      "CYP3A4"
+    ],
+    "effets": [
+      "nausées"
+    ]
+  },
+  {
+    "nom": "clindamycin",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "tissus",
+    "metabolisme": "hepatique",
+    "elimination": "biliaire",
+    "demi_vie": "3 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "digestif",
+    "toxicologie": "colite",
+    "indications": [
+      "infection"
+    ],
+    "interactions": [
+      "macrolides"
+    ],
+    "effets": [
+      "diarrhee"
+    ]
+  },
+  {
+    "nom": "phenol",
+    "cas": "108-95-2",
+    "formule": "C6H5OH",
+    "vlep": "5 ppm",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS05"
+    ],
+    "organes": "peau",
+    "effets": "brulures",
+    "voies": [
+      "contact"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "styrene",
+    "cas": "100-42-5",
+    "formule": "C8H8",
+    "vlep": "20 ppm",
+    "cmr": "suspect",
+    "pictogrammes": [
+      "GHS07"
+    ],
+    "organes": "SNC",
+    "effets": "vertige",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "acrylonitrile",
+    "cas": "107-13-1",
+    "formule": "C3H3N",
+    "vlep": "2 ppm",
+    "cmr": "cancerigene",
+    "pictogrammes": [
+      "GHS08"
+    ],
+    "organes": "SNC",
+    "effets": "toxicite",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "vinyl chloride",
+    "cas": "75-01-4",
+    "formule": "C2H3Cl",
+    "vlep": "1 ppm",
+    "cmr": "cancerigene",
+    "pictogrammes": [
+      "GHS08"
+    ],
+    "organes": "foie",
+    "effets": "angiosarcome",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "ethylene oxide",
+    "cas": "75-21-8",
+    "formule": "C2H4O",
+    "vlep": "1 ppm",
+    "cmr": "cancerigene",
+    "pictogrammes": [
+      "GHS08"
+    ],
+    "organes": "SNC",
+    "effets": "toxicite",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "benzaldehyde",
+    "cas": "100-52-7",
+    "formule": "C7H6O",
+    "vlep": "10 ppm",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS07"
+    ],
+    "organes": "respiratoire",
+    "effets": "irritation",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "formic acid",
+    "cas": "64-18-6",
+    "formule": "CH2O2",
+    "vlep": "5 ppm",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS05"
+    ],
+    "organes": "peau",
+    "effets": "corrosif",
+    "voies": [
+      "contact"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "butanol",
+    "cas": "71-36-3",
+    "formule": "C4H10O",
+    "vlep": "20 ppm",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS02"
+    ],
+    "organes": "SNC",
+    "effets": "vertige",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "isopropanol",
+    "cas": "67-63-0",
+    "formule": "C3H8O",
+    "vlep": "200 ppm",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS02"
+    ],
+    "organes": "SNC",
+    "effets": "somnolence",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "diethyl ether",
+    "cas": "60-29-7",
+    "formule": "C4H10O",
+    "vlep": "400 ppm",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS02"
+    ],
+    "organes": "SNC",
+    "effets": "anesthesie",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "tetrachloroethylene",
+    "cas": "127-18-4",
+    "formule": "C2Cl4",
+    "vlep": "25 ppm",
+    "cmr": "suspect",
+    "pictogrammes": [
+      "GHS08"
+    ],
+    "organes": "foie",
+    "effets": "toxicite",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "trichloroethylene",
+    "cas": "79-01-6",
+    "formule": "C2HCl3",
+    "vlep": "10 ppm",
+    "cmr": "cancerigene",
+    "pictogrammes": [
+      "GHS08"
+    ],
+    "organes": "rein",
+    "effets": "toxicite",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "ethylene glycol",
+    "cas": "107-21-1",
+    "formule": "C2H6O2",
+    "vlep": "50 ppm",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS07"
+    ],
+    "organes": "rein",
+    "effets": "toxicite",
+    "voies": [
+      "ingestion"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "propylene glycol",
+    "cas": "57-55-6",
+    "formule": "C3H8O2",
+    "vlep": "N/A",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS07"
+    ],
+    "organes": "digestif",
+    "effets": "faible",
+    "voies": [
+      "ingestion"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "sodium hydroxide",
+    "cas": "1310-73-2",
+    "formule": "NaOH",
+    "vlep": "2 mg/m3",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS05"
+    ],
+    "organes": "peau",
+    "effets": "corrosif",
+    "voies": [
+      "contact"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "potassium hydroxide",
+    "cas": "1310-58-3",
+    "formule": "KOH",
+    "vlep": "2 mg/m3",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS05"
+    ],
+    "organes": "peau",
+    "effets": "corrosif",
+    "voies": [
+      "contact"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "calcium oxide",
+    "cas": "1305-78-8",
+    "formule": "CaO",
+    "vlep": "2 mg/m3",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS05"
+    ],
+    "organes": "peau",
+    "effets": "irritation",
+    "voies": [
+      "contact"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "magnesium oxide",
+    "cas": "1309-48-4",
+    "formule": "MgO",
+    "vlep": "10 mg/m3",
+    "cmr": "non",
+    "pictogrammes": [
+      "GHS07"
+    ],
+    "organes": "poumon",
+    "effets": "irritation",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "silicon dioxide",
+    "cas": "7631-86-9",
+    "formule": "SiO2",
+    "vlep": "0.1 mg/m3",
+    "cmr": "cancerigene",
+    "pictogrammes": [
+      "GHS08"
+    ],
+    "organes": "poumon",
+    "effets": "silicose",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "asbestos",
+    "cas": "1332-21-4",
+    "formule": "-",
+    "vlep": "0.1 fibre/cm3",
+    "cmr": "cancerigene",
+    "pictogrammes": [
+      "GHS08"
+    ],
+    "organes": "poumon",
+    "effets": "cancer",
+    "voies": [
+      "inhalation"
+    ],
+    "type": "inconnu"
+  },
+  {
+    "nom": "rifampicin",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "biliaire",
+    "demi_vie": "4 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "foie",
+    "toxicologie": "hepatotoxique",
+    "indications": [
+      "tuberculose"
+    ],
+    "interactions": [
+      "inducteur enzymatique"
+    ],
+    "effets": [
+      "coloration urine"
+    ]
+  },
+  {
+    "nom": "isoniazid",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "2 h",
+    "dl50": "200 mg/kg",
+    "organes": "foie",
+    "toxicologie": "hepatite",
+    "indications": [
+      "tuberculose"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "neuropathie"
+    ]
+  },
+  {
+    "nom": "ethambutol",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "faible",
+    "elimination": "renale",
+    "demi_vie": "4 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "oeil",
+    "toxicologie": "nevrite optique",
+    "indications": [
+      "tuberculose"
+    ],
+    "interactions": [
+      "peu"
+    ],
+    "effets": [
+      "troubles visuels"
+    ]
+  },
+  {
+    "nom": "streptomycin",
+    "type": "medicament",
+    "absorption": "IM",
+    "distribution": "faible SNC",
+    "metabolisme": "non",
+    "elimination": "renale",
+    "demi_vie": "2 h",
+    "dl50": "200 mg/kg",
+    "organes": "oreille",
+    "toxicologie": "ototoxique",
+    "indications": [
+      "infection"
+    ],
+    "interactions": [
+      "diuretiques"
+    ],
+    "effets": [
+      "surdité"
+    ]
+  },
+  {
+    "nom": "valproate",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "12 h",
+    "dl50": "200 mg/kg",
+    "organes": "foie",
+    "toxicologie": "hepatotoxique",
+    "indications": [
+      "epilepsie"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "tremblements"
+    ]
+  },
+  {
+    "nom": "carbamazepine",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "CYP",
+    "elimination": "renale",
+    "demi_vie": "12 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "neurotoxique",
+    "indications": [
+      "epilepsie"
+    ],
+    "interactions": [
+      "inducteur enzymatique"
+    ],
+    "effets": [
+      "vertige"
+    ]
+  },
+  {
+    "nom": "phenytoin",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "22 h",
+    "dl50": "100 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "neurotoxique",
+    "indications": [
+      "epilepsie"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "ataxie"
+    ]
+  },
+  {
+    "nom": "levetiracetam",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "faible",
+    "elimination": "renale",
+    "demi_vie": "7 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "faible",
+    "indications": [
+      "epilepsie"
+    ],
+    "interactions": [
+      "peu"
+    ],
+    "effets": [
+      "fatigue"
+    ]
+  },
+  {
+    "nom": "clonazepam",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "30 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "sedatif",
+    "indications": [
+      "anxiete"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "somnolence"
+    ]
+  },
+  {
+    "nom": "lorazepam",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "12 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "sedatif",
+    "indications": [
+      "anxiete"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "somnolence"
+    ]
+  },
+  {
+    "nom": "arsine",
+    "type": "chimique",
+    "cas": "7784-42-1",
+    "formule": "AsH3",
+    "toxicologie": "tres elevee",
+    "organes": "sang",
+    "effets": "hemolyse",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "phosgene",
+    "type": "chimique",
+    "cas": "75-44-5",
+    "formule": "COCl2",
+    "toxicologie": "tres elevee",
+    "organes": "poumon",
+    "effets": "oedeme pulmonaire",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "cyanure d'hydrogene",
+    "type": "chimique",
+    "cas": "74-90-8",
+    "formule": "HCN",
+    "toxicologie": "extreme",
+    "organes": "mitochondrie",
+    "effets": "asphyxie cellulaire",
+    "voies": [
+      "inhalation",
+      "ingestion"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "chlorure de mercure",
+    "type": "chimique",
+    "cas": "7487-94-7",
+    "formule": "HgCl2",
+    "toxicologie": "elevee",
+    "organes": "rein",
+    "effets": "insuffisance renale",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "cadmium",
+    "type": "chimique",
+    "cas": "7440-43-9",
+    "formule": "Cd",
+    "toxicologie": "elevee",
+    "organes": "rein",
+    "effets": "nephrotoxicite",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "cancerigene"
+  },
+  {
+    "nom": "plomb tetraethyl",
+    "type": "chimique",
+    "cas": "78-00-2",
+    "formule": "Pb(C2H5)4",
+    "toxicologie": "elevee",
+    "organes": "SNC",
+    "effets": "neurotoxique",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "nickel carbonyle",
+    "type": "chimique",
+    "cas": "13463-39-3",
+    "formule": "Ni(CO)4",
+    "toxicologie": "extreme",
+    "organes": "poumon",
+    "effets": "insuffisance respiratoire",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "fluorure d'hydrogene",
+    "type": "chimique",
+    "cas": "7664-39-3",
+    "formule": "HF",
+    "toxicologie": "elevee",
+    "organes": "peau",
+    "effets": "brulures profondes",
+    "voies": [
+      "contact"
+    ],
+    "danger": "corrosif"
+  },
+  {
+    "nom": "dioxine",
+    "type": "chimique",
+    "cas": "1746-01-6",
+    "formule": "C12H4Cl4O2",
+    "toxicologie": "extreme",
+    "organes": "foie",
+    "effets": "cancer",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "cancerigene"
+  },
+  {
+    "nom": "polychlorobiphenyles",
+    "type": "chimique",
+    "cas": "1336-36-3",
+    "formule": "PCB",
+    "toxicologie": "elevee",
+    "organes": "foie",
+    "effets": "perturbateur endocrinien",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "formamide",
+    "type": "chimique",
+    "cas": "75-12-7",
+    "formule": "CH3NO",
+    "toxicologie": "moderee",
+    "organes": "foie",
+    "effets": "toxicite",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "acide oxalique",
+    "type": "chimique",
+    "cas": "144-62-7",
+    "formule": "C2H2O4",
+    "toxicologie": "elevee",
+    "organes": "rein",
+    "effets": "calculs renaux",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "peroxyde d'hydrogene",
+    "type": "chimique",
+    "cas": "7722-84-1",
+    "formule": "H2O2",
+    "toxicologie": "moderee",
+    "organes": "peau",
+    "effets": "irritation",
+    "voies": [
+      "contact"
+    ],
+    "danger": "oxydant"
+  },
+  {
+    "nom": "benzopyrene",
+    "type": "chimique",
+    "cas": "50-32-8",
+    "formule": "C20H12",
+    "toxicologie": "elevee",
+    "organes": "poumon",
+    "effets": "cancer",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "cancerigene"
+  },
+  {
+    "nom": "nitrosamine",
+    "type": "chimique",
+    "cas": "55-18-5",
+    "formule": "C2H6N2O",
+    "toxicologie": "elevee",
+    "organes": "foie",
+    "effets": "cancer",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "cancerigene"
+  },
+  {
+    "nom": "chlordecone",
+    "type": "chimique",
+    "cas": "143-50-0",
+    "formule": "C10Cl10O",
+    "toxicologie": "elevee",
+    "organes": "SNC",
+    "effets": "neurotoxique",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "paraquat",
+    "type": "chimique",
+    "cas": "4685-14-7",
+    "formule": "C12H14N2",
+    "toxicologie": "extreme",
+    "organes": "poumon",
+    "effets": "fibrose pulmonaire",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "glyphosate",
+    "type": "chimique",
+    "cas": "1071-83-6",
+    "formule": "C3H8NO5P",
+    "toxicologie": "moderee",
+    "organes": "foie",
+    "effets": "irritation",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "atrazine",
+    "type": "chimique",
+    "cas": "1912-24-9",
+    "formule": "C8H14ClN5",
+    "toxicologie": "moderee",
+    "organes": "endocrinien",
+    "effets": "perturbateur hormonal",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "ddt",
+    "type": "chimique",
+    "cas": "50-29-3",
+    "formule": "C14H9Cl5",
+    "toxicologie": "elevee",
+    "organes": "SNC",
+    "effets": "neurotoxique",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "malathion",
+    "type": "chimique",
+    "cas": "121-75-5",
+    "formule": "C10H19O6PS2",
+    "toxicologie": "moderee",
+    "organes": "SNC",
+    "effets": "inhibition cholinesterase",
+    "voies": [
+      "contact"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "parathion",
+    "type": "chimique",
+    "cas": "56-38-2",
+    "formule": "C10H14NO5PS",
+    "toxicologie": "extreme",
+    "organes": "SNC",
+    "effets": "neurotoxique",
+    "voies": [
+      "contact"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "sarin",
+    "type": "chimique",
+    "cas": "107-44-8",
+    "formule": "C4H10FO2P",
+    "toxicologie": "extreme",
+    "organes": "SNC",
+    "effets": "paralysie",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "arme chimique"
+  },
+  {
+    "nom": "tabun",
+    "type": "chimique",
+    "cas": "77-81-6",
+    "formule": "C5H11N2O2P",
+    "toxicologie": "extreme",
+    "organes": "SNC",
+    "effets": "paralysie",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "arme chimique"
+  },
+  {
+    "nom": "ricine",
+    "type": "chimique",
+    "cas": "9009-86-3",
+    "formule": "proteine",
+    "toxicologie": "extreme",
+    "organes": "cellule",
+    "effets": "inhibition synthese proteique",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "aflatoxine",
+    "type": "chimique",
+    "cas": "1402-68-2",
+    "formule": "C17H12O6",
+    "toxicologie": "elevee",
+    "organes": "foie",
+    "effets": "cancer",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "cancerigene"
+  },
+  {
+    "nom": "monoxyde d'azote",
+    "type": "chimique",
+    "cas": "10102-43-9",
+    "formule": "NO",
+    "toxicologie": "moderee",
+    "organes": "poumon",
+    "effets": "irritation",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "dioxyde d'azote",
+    "type": "chimique",
+    "cas": "10102-44-0",
+    "formule": "NO2",
+    "toxicologie": "elevee",
+    "organes": "poumon",
+    "effets": "oedeme pulmonaire",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "ricinus communis",
+    "type": "plante",
+    "description": "Plante contenant la ricine",
+    "toxicologie": "extreme",
+    "dl50": "20 mg/kg",
+    "organes": "foie, reins",
+    "effets": "inhibition proteique",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "datura stramonium",
+    "type": "plante",
+    "description": "Plante hallucinogene toxique",
+    "toxicologie": "elevee",
+    "dl50": "200 mg/kg",
+    "organes": "SNC",
+    "effets": "delire, tachycardie",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "atropa belladonna",
+    "type": "plante",
+    "description": "Belladone riche en alcaloides",
+    "toxicologie": "elevee",
+    "dl50": "100 mg/kg",
+    "organes": "SNC",
+    "effets": "hallucination",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "aconitum napellus",
+    "type": "plante",
+    "description": "Plante tres toxique",
+    "toxicologie": "extreme",
+    "dl50": "5 mg/kg",
+    "organes": "coeur",
+    "effets": "arythmie",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "nerium oleander",
+    "type": "plante",
+    "description": "Laurier rose toxique",
+    "toxicologie": "elevee",
+    "dl50": "100 mg/kg",
+    "organes": "coeur",
+    "effets": "troubles cardiaques",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "abrus precatorius",
+    "type": "plante",
+    "description": "Graines contenant abrin",
+    "toxicologie": "extreme",
+    "dl50": "0.1 mg/kg",
+    "organes": "cellules",
+    "effets": "inhibition proteique",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "taxus baccata",
+    "type": "plante",
+    "description": "If toxique",
+    "toxicologie": "elevee",
+    "dl50": "50 mg/kg",
+    "organes": "coeur",
+    "effets": "arythmie",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "euphorbia tirucalli",
+    "type": "plante",
+    "description": "Plante irritante",
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "peau",
+    "effets": "irritation",
+    "voies": [
+      "contact"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "strychnos nux-vomica",
+    "type": "plante",
+    "description": "Source de strychnine",
+    "toxicologie": "extreme",
+    "dl50": "2 mg/kg",
+    "organes": "SNC",
+    "effets": "convulsions",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "hemlock (conium maculatum)",
+    "type": "plante",
+    "description": "Plante neurotoxique",
+    "toxicologie": "extreme",
+    "dl50": "5 mg/kg",
+    "organes": "SNC",
+    "effets": "paralysie",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "digitalis purpurea",
+    "type": "plante",
+    "description": "Source de digitaline",
+    "toxicologie": "elevee",
+    "dl50": "100 mg/kg",
+    "organes": "coeur",
+    "effets": "arythmie",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "olea europaea (feuilles fortes doses)",
+    "type": "plante",
+    "description": "toxique a forte dose",
+    "toxicologie": "faible a moderee",
+    "dl50": "5000 mg/kg",
+    "organes": "foie",
+    "effets": "hypotension",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "catharanthus roseus",
+    "type": "plante",
+    "description": "Plante contenant alcaloides toxiques",
+    "toxicologie": "elevee",
+    "dl50": "100 mg/kg",
+    "organes": "SNC",
+    "effets": "toxicite cellulaire",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "solanum nigrum",
+    "type": "plante",
+    "description": "Contient solanine",
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "digestif",
+    "effets": "nausees",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "cassava (cyanogene)",
+    "type": "plante",
+    "description": "manioc cru toxique",
+    "toxicologie": "elevee",
+    "dl50": "50 mg/kg",
+    "organes": "SNC",
+    "effets": "cyanure",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "lathyrus sativus",
+    "type": "plante",
+    "description": "Plante neurotoxique",
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "SNC",
+    "effets": "paralysie",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "aristolochia spp",
+    "type": "plante",
+    "description": "plante nephrotoxique",
+    "toxicologie": "elevee",
+    "dl50": "100 mg/kg",
+    "organes": "rein",
+    "effets": "insuffisance renale",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "cancerigene"
+  },
+  {
+    "nom": "kalanchoe spp",
+    "type": "plante",
+    "description": "plante cardiotoxique",
+    "toxicologie": "moderee",
+    "dl50": "1500 mg/kg",
+    "organes": "coeur",
+    "effets": "arythmie",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "dieffenbachia",
+    "type": "plante",
+    "description": "plante irritante",
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "bouche",
+    "effets": "irritation",
+    "voies": [
+      "contact"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "colchicum autumnale",
+    "type": "plante",
+    "description": "contient colchicine",
+    "toxicologie": "extreme",
+    "dl50": "5 mg/kg",
+    "organes": "cellules",
+    "effets": "arret mitose",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "veratrum album",
+    "type": "plante",
+    "description": "plante toxique",
+    "toxicologie": "elevee",
+    "dl50": "50 mg/kg",
+    "organes": "SNC",
+    "effets": "hypotension",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "chelidonium majus",
+    "type": "plante",
+    "description": "plante hepatotoxique",
+    "toxicologie": "moderee",
+    "dl50": "1500 mg/kg",
+    "organes": "foie",
+    "effets": "hepatite",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "papaver somniferum",
+    "type": "plante",
+    "description": "source opium",
+    "toxicologie": "elevee",
+    "dl50": "300 mg/kg",
+    "organes": "SNC",
+    "effets": "depression respiratoire",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "mandragora officinarum",
+    "type": "plante",
+    "description": "plante hallucinogene",
+    "toxicologie": "elevee",
+    "dl50": "100 mg/kg",
+    "organes": "SNC",
+    "effets": "delire",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "hyoscyamus niger",
+    "type": "plante",
+    "description": "plante toxique",
+    "toxicologie": "elevee",
+    "dl50": "100 mg/kg",
+    "organes": "SNC",
+    "effets": "hallucination",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "anacardium occidentale coque",
+    "type": "plante",
+    "description": "coque irritante",
+    "toxicologie": "moderee",
+    "dl50": "2000 mg/kg",
+    "organes": "peau",
+    "effets": "brulure",
+    "voies": [
+      "contact"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "gelsemium sempervirens",
+    "type": "plante",
+    "description": "plante neurotoxique",
+    "toxicologie": "extreme",
+    "dl50": "5 mg/kg",
+    "organes": "SNC",
+    "effets": "paralysie respiratoire",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "ammoniac",
+    "type": "chimique",
+    "cas": "7664-41-7",
+    "formule": "NH3",
+    "usage": "engrais, industrie chimique",
+    "toxicologie": "elevee",
+    "organes": "poumon",
+    "effets": "irritation severe",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "corrosif"
+  },
+  {
+    "nom": "chlore",
+    "type": "chimique",
+    "cas": "7782-50-5",
+    "formule": "Cl2",
+    "usage": "desinfection, industrie",
+    "toxicologie": "elevee",
+    "organes": "poumon",
+    "effets": "oedeme pulmonaire",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "acide sulfurique",
+    "type": "chimique",
+    "cas": "7664-93-9",
+    "formule": "H2SO4",
+    "usage": "batteries, industrie",
+    "toxicologie": "elevee",
+    "organes": "peau",
+    "effets": "brulures",
+    "voies": [
+      "contact"
+    ],
+    "danger": "corrosif"
+  },
+  {
+    "nom": "acide chlorhydrique",
+    "type": "chimique",
+    "cas": "7647-01-0",
+    "formule": "HCl",
+    "usage": "nettoyage industriel",
+    "toxicologie": "elevee",
+    "organes": "respiratoire",
+    "effets": "irritation",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "corrosif"
+  },
+  {
+    "nom": "acide nitrique",
+    "type": "chimique",
+    "cas": "7697-37-2",
+    "formule": "HNO3",
+    "usage": "explosifs, industrie",
+    "toxicologie": "elevee",
+    "organes": "peau",
+    "effets": "brulures",
+    "voies": [
+      "contact"
+    ],
+    "danger": "corrosif"
+  },
+  {
+    "nom": "hydroxyde de sodium",
+    "type": "chimique",
+    "cas": "1310-73-2",
+    "formule": "NaOH",
+    "usage": "savon, industrie",
+    "toxicologie": "elevee",
+    "organes": "peau",
+    "effets": "corrosion",
+    "voies": [
+      "contact"
+    ],
+    "danger": "corrosif"
+  },
+  {
+    "nom": "hydroxyde de potassium",
+    "type": "chimique",
+    "cas": "1310-58-3",
+    "formule": "KOH",
+    "usage": "industrie chimique",
+    "toxicologie": "elevee",
+    "organes": "peau",
+    "effets": "corrosion",
+    "voies": [
+      "contact"
+    ],
+    "danger": "corrosif"
+  },
+  {
+    "nom": "chloroforme",
+    "type": "chimique",
+    "cas": "67-66-3",
+    "formule": "CHCl3",
+    "usage": "solvant",
+    "toxicologie": "elevee",
+    "organes": "foie",
+    "effets": "toxicite",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "monoxyde de carbone",
+    "type": "chimique",
+    "cas": "630-08-0",
+    "formule": "CO",
+    "usage": "combustion",
+    "toxicologie": "extreme",
+    "organes": "sang",
+    "effets": "hypoxie",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "dioxyde de soufre",
+    "type": "chimique",
+    "cas": "7446-09-5",
+    "formule": "SO2",
+    "usage": "industrie",
+    "toxicologie": "elevee",
+    "organes": "poumon",
+    "effets": "irritation",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "hydrogene sulfure",
+    "type": "chimique",
+    "cas": "7783-06-4",
+    "formule": "H2S",
+    "usage": "petrole",
+    "toxicologie": "extreme",
+    "organes": "SNC",
+    "effets": "paralysie",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "cyanure de sodium",
+    "type": "chimique",
+    "cas": "143-33-9",
+    "formule": "NaCN",
+    "usage": "mines",
+    "toxicologie": "extreme",
+    "organes": "cellules",
+    "effets": "asphyxie",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "acide acétique",
+    "type": "chimique",
+    "cas": "64-19-7",
+    "formule": "CH3COOH",
+    "usage": "industrie alimentaire",
+    "toxicologie": "moderee",
+    "organes": "peau",
+    "effets": "irritation",
+    "voies": [
+      "contact"
+    ],
+    "danger": "corrosif"
+  },
+  {
+    "nom": "amiante",
+    "type": "chimique",
+    "cas": "1332-21-4",
+    "formule": "-",
+    "usage": "construction",
+    "toxicologie": "elevee",
+    "organes": "poumon",
+    "effets": "cancer",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "cancerigene"
+  },
+  {
+    "nom": "silice cristalline",
+    "type": "chimique",
+    "cas": "14808-60-7",
+    "formule": "SiO2",
+    "usage": "construction",
+    "toxicologie": "elevee",
+    "organes": "poumon",
+    "effets": "silicose",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "cancerigene"
+  },
+  {
+    "nom": "plomb",
+    "type": "chimique",
+    "cas": "7439-92-1",
+    "formule": "Pb",
+    "usage": "batteries",
+    "toxicologie": "elevee",
+    "organes": "SNC",
+    "effets": "neurotoxique",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "mercure",
+    "type": "chimique",
+    "cas": "7439-97-6",
+    "formule": "Hg",
+    "usage": "industrie",
+    "toxicologie": "elevee",
+    "organes": "SNC",
+    "effets": "tremblements",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "nickel",
+    "type": "chimique",
+    "cas": "7440-02-0",
+    "formule": "Ni",
+    "usage": "alliages",
+    "toxicologie": "moderee",
+    "organes": "peau",
+    "effets": "allergie",
+    "voies": [
+      "contact"
+    ],
+    "danger": "sensibilisant"
+  },
+  {
+    "nom": "chrome vi",
+    "type": "chimique",
+    "cas": "18540-29-9",
+    "formule": "Cr6+",
+    "usage": "industrie",
+    "toxicologie": "elevee",
+    "organes": "poumon",
+    "effets": "cancer",
+    "voies": [
+      "inhalation"
+    ],
+    "danger": "cancerigene"
+  },
+  {
+    "nom": "bisoprolol",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique partiel",
+    "elimination": "renale",
+    "demi_vie": "10-12 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "coeur",
+    "toxicologie": "bradycardie",
+    "indications": [
+      "HTA",
+      "insuffisance cardiaque"
+    ],
+    "interactions": [
+      "beta-agonistes"
+    ],
+    "effets": [
+      "fatigue",
+      "vertiges"
+    ]
+  },
+  {
+    "nom": "valsartan",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "faible",
+    "elimination": "biliaire",
+    "demi_vie": "6 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "rein",
+    "toxicologie": "hypotension",
+    "indications": [
+      "HTA"
+    ],
+    "interactions": [
+      "diuretiques"
+    ],
+    "effets": [
+      "vertige"
+    ]
+  },
+  {
+    "nom": "telmisartan",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "biliaire",
+    "demi_vie": "24 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "rein",
+    "toxicologie": "hypotension",
+    "indications": [
+      "HTA"
+    ],
+    "interactions": [
+      "IEC"
+    ],
+    "effets": [
+      "fatigue"
+    ]
+  },
+  {
+    "nom": "verapamil",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "CYP3A4",
+    "elimination": "renale",
+    "demi_vie": "7 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "coeur",
+    "toxicologie": "bradycardie",
+    "indications": [
+      "arythmie"
+    ],
+    "interactions": [
+      "beta-bloquants"
+    ],
+    "effets": [
+      "constipation"
+    ]
+  },
+  {
+    "nom": "diltiazem",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "4 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "coeur",
+    "toxicologie": "hypotension",
+    "indications": [
+      "angor"
+    ],
+    "interactions": [
+      "CYP"
+    ],
+    "effets": [
+      "oedeme"
+    ]
+  },
+  {
+    "nom": "nitroglycerin",
+    "type": "medicament",
+    "absorption": "sublinguale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "1-4 min",
+    "dl50": ">2000 mg/kg",
+    "organes": "coeur",
+    "toxicologie": "hypotension",
+    "indications": [
+      "angine"
+    ],
+    "interactions": [
+      "sildenafil"
+    ],
+    "effets": [
+      "maux de tete"
+    ]
+  },
+  {
+    "nom": "isosorbide dinitrate",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "1 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "coeur",
+    "toxicologie": "hypotension",
+    "indications": [
+      "angine"
+    ],
+    "interactions": [
+      "vasodilatateurs"
+    ],
+    "effets": [
+      "vertige"
+    ]
+  },
+  {
+    "nom": "glimepiride",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "5 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "pancreas",
+    "toxicologie": "hypoglycemie",
+    "indications": [
+      "diabete"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "hypoglycemie"
+    ]
+  },
+  {
+    "nom": "pioglitazone",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "CYP2C8",
+    "elimination": "biliaire",
+    "demi_vie": "7 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "foie",
+    "toxicologie": "hepatotoxique",
+    "indications": [
+      "diabete"
+    ],
+    "interactions": [
+      "CYP"
+    ],
+    "effets": [
+      "prise de poids"
+    ]
+  },
+  {
+    "nom": "acarbose",
+    "type": "medicament",
+    "absorption": "faible",
+    "distribution": "digestif",
+    "metabolisme": "intestinal",
+    "elimination": "fecale",
+    "demi_vie": "2 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "intestin",
+    "toxicologie": "faible",
+    "indications": [
+      "diabete"
+    ],
+    "interactions": [
+      "enzymes digestives"
+    ],
+    "effets": [
+      "flatulence"
+    ]
+  },
+  {
+    "nom": "pantoprazole",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "1 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "estomac",
+    "toxicologie": "faible",
+    "indications": [
+      "ulcere"
+    ],
+    "interactions": [
+      "clopidogrel"
+    ],
+    "effets": [
+      "diarrhee"
+    ]
+  },
+  {
+    "nom": "esomeprazole",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "1.5 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "estomac",
+    "toxicologie": "faible",
+    "indications": [
+      "ulcere"
+    ],
+    "interactions": [
+      "CYP"
+    ],
+    "effets": [
+      "nausées"
+    ]
+  },
+  {
+    "nom": "lansoprazole",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "1.5 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "estomac",
+    "toxicologie": "faible",
+    "indications": [
+      "ulcere"
+    ],
+    "interactions": [
+      "CYP"
+    ],
+    "effets": [
+      "diarrhee"
+    ]
+  },
+  {
+    "nom": "ondansetron",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "3 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "QT long",
+    "indications": [
+      "vomissements"
+    ],
+    "interactions": [
+      "antiarythmiques"
+    ],
+    "effets": [
+      "constipation"
+    ]
+  },
+  {
+    "nom": "domperidone",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "digestif",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "7 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "coeur",
+    "toxicologie": "arythmie",
+    "indications": [
+      "vomissements"
+    ],
+    "interactions": [
+      "macrolides"
+    ],
+    "effets": [
+      "QT long"
+    ]
+  },
+  {
+    "nom": "loperamide",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "digestif",
+    "metabolisme": "hepatique",
+    "elimination": "fecale",
+    "demi_vie": "10 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "intestin",
+    "toxicologie": "constipation",
+    "indications": [
+      "diarrhee"
+    ],
+    "interactions": [
+      "opioides"
+    ],
+    "effets": [
+      "constipation"
+    ]
+  },
+  {
+    "nom": "montelukast",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "biliaire",
+    "demi_vie": "5 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "poumon",
+    "toxicologie": "faible",
+    "indications": [
+      "asthme"
+    ],
+    "interactions": [
+      "CYP"
+    ],
+    "effets": [
+      "maux de tete"
+    ]
+  },
+  {
+    "nom": "theophylline",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "8 h",
+    "dl50": "200 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "toxicite cardiaque",
+    "indications": [
+      "asthme"
+    ],
+    "interactions": [
+      "CYP"
+    ],
+    "effets": [
+      "tachycardie"
+    ]
+  },
+  {
+    "nom": "cetirizine",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "faible",
+    "elimination": "renale",
+    "demi_vie": "8 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "faible",
+    "indications": [
+      "allergie"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "somnolence"
+    ]
+  },
+  {
+    "nom": "loratadine",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "8 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "faible",
+    "indications": [
+      "allergie"
+    ],
+    "interactions": [
+      "CYP"
+    ],
+    "effets": [
+      "fatigue"
+    ]
+  },
+  {
+    "nom": "diphenhydramine",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "9 h",
+    "dl50": "500 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "sedatif",
+    "indications": [
+      "allergie"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "somnolence"
+    ]
+  },
+  {
+    "nom": "hydroxyzine",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "20 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "sedatif",
+    "indications": [
+      "anxiete"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "somnolence"
+    ]
+  },
+  {
+    "nom": "buspirone",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "2-3 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "faible",
+    "indications": [
+      "anxiete"
+    ],
+    "interactions": [
+      "CYP"
+    ],
+    "effets": [
+      "vertige"
+    ]
+  },
+  {
+    "nom": "zolpidem",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "2 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "sedatif",
+    "indications": [
+      "insomnie"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "somnolence"
+    ]
+  },
+  {
+    "nom": "metoclopramide",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "6 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "extrapyramidal",
+    "indications": [
+      "vomissements"
+    ],
+    "interactions": [
+      "antipsychotiques"
+    ],
+    "effets": [
+      "dystonie"
+    ]
+  },
+  {
+    "nom": "baclofen",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "faible",
+    "elimination": "renale",
+    "demi_vie": "3 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "sedatif",
+    "indications": [
+      "spasticite"
+    ],
+    "interactions": [
+      "alcool"
+    ],
+    "effets": [
+      "somnolence"
+    ]
+  },
+  {
+    "nom": "tizanidine",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "SNC",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "2 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "SNC",
+    "toxicologie": "hypotension",
+    "indications": [
+      "spasmes"
+    ],
+    "interactions": [
+      "CYP1A2"
+    ],
+    "effets": [
+      "fatigue"
+    ]
+  },
+  {
+    "nom": "allopurinol",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "renale",
+    "demi_vie": "2 h",
+    "dl50": ">2000 mg/kg",
+    "organes": "rein",
+    "toxicologie": "rash severe",
+    "indications": [
+      "goutte"
+    ],
+    "interactions": [
+      "azathioprine"
+    ],
+    "effets": [
+      "rash"
+    ]
+  },
+  {
+    "nom": "colchicine",
+    "type": "medicament",
+    "absorption": "orale",
+    "distribution": "systemique",
+    "metabolisme": "hepatique",
+    "elimination": "biliaire",
+    "demi_vie": "9 h",
+    "dl50": "5 mg/kg",
+    "organes": "cellules",
+    "toxicologie": "toxique",
+    "indications": [
+      "goutte"
+    ],
+    "interactions": [
+      "CYP3A4"
+    ],
+    "effets": [
+      "diarrhee"
+    ]
+  },
+  {
+    "nom": "diquat",
+    "type": "chimique",
+    "cas": "85-00-7",
+    "famille": "herbicide",
+    "usage": "desherbant",
+    "toxicologie": "elevee",
+    "organes": "rein",
+    "effets": "insuffisance renale",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "simazine",
+    "type": "chimique",
+    "cas": "122-34-9",
+    "famille": "herbicide",
+    "usage": "culture",
+    "toxicologie": "moderee",
+    "organes": "foie",
+    "effets": "toxicite chronique",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "2,4-d",
+    "type": "chimique",
+    "cas": "94-75-7",
+    "famille": "herbicide",
+    "usage": "desherbant",
+    "toxicologie": "moderee",
+    "organes": "SNC",
+    "effets": "neuropathie",
+    "voies": [
+      "contact"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "lindane",
+    "type": "chimique",
+    "cas": "58-89-9",
+    "famille": "insecticide",
+    "usage": "agriculture",
+    "toxicologie": "elevee",
+    "organes": "SNC",
+    "effets": "convulsions",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "chlorpyrifos",
+    "type": "chimique",
+    "cas": "2921-88-2",
+    "famille": "organophosphate",
+    "usage": "insecticide",
+    "toxicologie": "elevee",
+    "organes": "SNC",
+    "effets": "inhibition cholinesterase",
+    "voies": [
+      "contact"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "diazinon",
+    "type": "chimique",
+    "cas": "333-41-5",
+    "famille": "organophosphate",
+    "usage": "insecticide",
+    "toxicologie": "elevee",
+    "organes": "SNC",
+    "effets": "neurotoxique",
+    "voies": [
+      "contact"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "carbaryl",
+    "type": "chimique",
+    "cas": "63-25-2",
+    "famille": "carbamate",
+    "usage": "insecticide",
+    "toxicologie": "moderee",
+    "organes": "SNC",
+    "effets": "inhibition cholinesterase",
+    "voies": [
+      "contact"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "carbofuran",
+    "type": "chimique",
+    "cas": "1563-66-2",
+    "famille": "carbamate",
+    "usage": "insecticide",
+    "toxicologie": "extreme",
+    "organes": "SNC",
+    "effets": "neurotoxique",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "aldicarb",
+    "type": "chimique",
+    "cas": "116-06-3",
+    "famille": "carbamate",
+    "usage": "insecticide",
+    "toxicologie": "extreme",
+    "organes": "SNC",
+    "effets": "paralysie",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "permethrin",
+    "type": "chimique",
+    "cas": "52645-53-1",
+    "famille": "pyrethroide",
+    "usage": "insecticide",
+    "toxicologie": "faible",
+    "organes": "peau",
+    "effets": "irritation",
+    "voies": [
+      "contact"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "cypermethrin",
+    "type": "chimique",
+    "cas": "52315-07-8",
+    "famille": "pyrethroide",
+    "usage": "insecticide",
+    "toxicologie": "moderee",
+    "organes": "SNC",
+    "effets": "neurotoxique",
+    "voies": [
+      "contact"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "deltamethrin",
+    "type": "chimique",
+    "cas": "52918-63-5",
+    "famille": "pyrethroide",
+    "usage": "insecticide",
+    "toxicologie": "moderee",
+    "organes": "SNC",
+    "effets": "tremblements",
+    "voies": [
+      "contact"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "lambda-cyhalothrin",
+    "type": "chimique",
+    "cas": "91465-08-6",
+    "famille": "pyrethroide",
+    "usage": "insecticide",
+    "toxicologie": "moderee",
+    "organes": "SNC",
+    "effets": "neurotoxique",
+    "voies": [
+      "contact"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "imidacloprid",
+    "type": "chimique",
+    "cas": "138261-41-3",
+    "famille": "neonicotinoide",
+    "usage": "insecticide",
+    "toxicologie": "moderee",
+    "organes": "SNC",
+    "effets": "toxicite neurologique",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "thiamethoxam",
+    "type": "chimique",
+    "cas": "153719-23-4",
+    "famille": "neonicotinoide",
+    "usage": "insecticide",
+    "toxicologie": "moderee",
+    "organes": "SNC",
+    "effets": "toxicite",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "clothianidin",
+    "type": "chimique",
+    "cas": "210880-92-5",
+    "famille": "neonicotinoide",
+    "usage": "insecticide",
+    "toxicologie": "moderee",
+    "organes": "SNC",
+    "effets": "toxicite",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "fipronil",
+    "type": "chimique",
+    "cas": "120068-37-3",
+    "famille": "phenylpyrazole",
+    "usage": "insecticide",
+    "toxicologie": "elevee",
+    "organes": "SNC",
+    "effets": "convulsions",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "spinosad",
+    "type": "chimique",
+    "cas": "131929-60-7",
+    "famille": "biopesticide",
+    "usage": "insecticide",
+    "toxicologie": "faible",
+    "organes": "digestif",
+    "effets": "faible toxicite",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "faible"
+  },
+  {
+    "nom": "mancozeb",
+    "type": "chimique",
+    "cas": "8018-01-7",
+    "famille": "fongicide",
+    "usage": "agriculture",
+    "toxicologie": "moderee",
+    "organes": "thyroide",
+    "effets": "perturbation",
+    "voies": [
+      "contact"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "chlorothalonil",
+    "type": "chimique",
+    "cas": "1897-45-6",
+    "famille": "fongicide",
+    "usage": "agriculture",
+    "toxicologie": "elevee",
+    "organes": "rein",
+    "effets": "toxicite",
+    "voies": [
+      "contact"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "captan",
+    "type": "chimique",
+    "cas": "133-06-2",
+    "famille": "fongicide",
+    "usage": "agriculture",
+    "toxicologie": "moderee",
+    "organes": "peau",
+    "effets": "irritation",
+    "voies": [
+      "contact"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "carbendazim",
+    "type": "chimique",
+    "cas": "10605-21-7",
+    "famille": "fongicide",
+    "usage": "agriculture",
+    "toxicologie": "elevee",
+    "organes": "reproduction",
+    "effets": "reprotoxique",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "benomyl",
+    "type": "chimique",
+    "cas": "17804-35-2",
+    "famille": "fongicide",
+    "usage": "agriculture",
+    "toxicologie": "moderee",
+    "organes": "reproduction",
+    "effets": "toxicite reproductive",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "metalaxyl",
+    "type": "chimique",
+    "cas": "57837-19-1",
+    "famille": "fongicide",
+    "usage": "agriculture",
+    "toxicologie": "faible",
+    "organes": "foie",
+    "effets": "faible toxicite",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "faible"
+  },
+  {
+    "nom": "alachlor",
+    "type": "chimique",
+    "cas": "15972-60-8",
+    "famille": "herbicide",
+    "usage": "maïs",
+    "toxicologie": "moderee",
+    "organes": "foie",
+    "effets": "cancer suspecte",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "metolachlor",
+    "type": "chimique",
+    "cas": "51218-45-2",
+    "famille": "herbicide",
+    "usage": "culture",
+    "toxicologie": "moderee",
+    "organes": "foie",
+    "effets": "toxicite chronique",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "acetochlor",
+    "type": "chimique",
+    "cas": "34256-82-1",
+    "famille": "herbicide",
+    "usage": "agriculture",
+    "toxicologie": "moderee",
+    "organes": "foie",
+    "effets": "toxicite",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "butachlor",
+    "type": "chimique",
+    "cas": "23184-66-9",
+    "famille": "herbicide",
+    "usage": "riz",
+    "toxicologie": "moderee",
+    "organes": "foie",
+    "effets": "toxicite",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "pendimethalin",
+    "type": "chimique",
+    "cas": "40487-42-1",
+    "famille": "herbicide",
+    "usage": "culture",
+    "toxicologie": "faible",
+    "organes": "foie",
+    "effets": "faible toxicite",
+    "voies": [
+      "contact"
+    ],
+    "danger": "faible"
+  },
+  {
+    "nom": "trifluralin",
+    "type": "chimique",
+    "cas": "1582-09-8",
+    "famille": "herbicide",
+    "usage": "culture",
+    "toxicologie": "moderee",
+    "organes": "foie",
+    "effets": "toxicite",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "dicamba",
+    "type": "chimique",
+    "cas": "1918-00-9",
+    "famille": "herbicide",
+    "usage": "desherbant",
+    "toxicologie": "faible",
+    "organes": "peau",
+    "effets": "irritation",
+    "voies": [
+      "contact"
+    ],
+    "danger": "faible"
+  },
+  {
+    "nom": "bromoxynil",
+    "type": "chimique",
+    "cas": "1689-84-5",
+    "famille": "herbicide",
+    "usage": "agriculture",
+    "toxicologie": "elevee",
+    "organes": "foie",
+    "effets": "toxicite",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "ioxynil",
+    "type": "chimique",
+    "cas": "1689-83-4",
+    "famille": "herbicide",
+    "usage": "culture",
+    "toxicologie": "elevee",
+    "organes": "thyroide",
+    "effets": "toxicite endocrine",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "metsulfuron-methyl",
+    "type": "chimique",
+    "cas": "74223-64-6",
+    "famille": "herbicide",
+    "usage": "culture",
+    "toxicologie": "faible",
+    "organes": "foie",
+    "effets": "faible toxicite",
+    "voies": [
+      "contact"
+    ],
+    "danger": "faible"
+  },
+  {
+    "nom": "propanil",
+    "type": "chimique",
+    "cas": "709-98-8",
+    "famille": "herbicide",
+    "usage": "riz",
+    "toxicologie": "moderee",
+    "organes": "sang",
+    "effets": "methemoglobinemie",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "endosulfan",
+    "type": "chimique",
+    "cas": "115-29-7",
+    "famille": "insecticide",
+    "usage": "agriculture",
+    "toxicologie": "elevee",
+    "organes": "SNC",
+    "effets": "convulsions",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "heptachlor",
+    "type": "chimique",
+    "cas": "76-44-8",
+    "famille": "organochlore",
+    "usage": "insecticide",
+    "toxicologie": "elevee",
+    "organes": "foie",
+    "effets": "cancer",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "cancerigene"
+  },
+  {
+    "nom": "aldrin",
+    "type": "chimique",
+    "cas": "309-00-2",
+    "famille": "organochlore",
+    "usage": "insecticide",
+    "toxicologie": "elevee",
+    "organes": "SNC",
+    "effets": "neurotoxique",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "dieldrin",
+    "type": "chimique",
+    "cas": "60-57-1",
+    "famille": "organochlore",
+    "usage": "insecticide",
+    "toxicologie": "elevee",
+    "organes": "SNC",
+    "effets": "convulsions",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "chlordane",
+    "type": "chimique",
+    "cas": "57-74-9",
+    "famille": "organochlore",
+    "usage": "insecticide",
+    "toxicologie": "elevee",
+    "organes": "foie",
+    "effets": "cancer",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "cancerigene"
+  },
+  {
+    "nom": "methoxychlor",
+    "type": "chimique",
+    "cas": "72-43-5",
+    "famille": "organochlore",
+    "usage": "insecticide",
+    "toxicologie": "moderee",
+    "organes": "endocrinien",
+    "effets": "perturbateur hormonal",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "fenitrothion",
+    "type": "chimique",
+    "cas": "122-14-5",
+    "famille": "organophosphate",
+    "usage": "insecticide",
+    "toxicologie": "elevee",
+    "organes": "SNC",
+    "effets": "neurotoxique",
+    "voies": [
+      "contact"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "dimethoate",
+    "type": "chimique",
+    "cas": "60-51-5",
+    "famille": "organophosphate",
+    "usage": "insecticide",
+    "toxicologie": "elevee",
+    "organes": "SNC",
+    "effets": "inhibition cholinesterase",
+    "voies": [
+      "contact"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "phorate",
+    "type": "chimique",
+    "cas": "298-02-2",
+    "famille": "organophosphate",
+    "usage": "insecticide",
+    "toxicologie": "extreme",
+    "organes": "SNC",
+    "effets": "paralysie",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "chlorfenvinphos",
+    "type": "chimique",
+    "cas": "470-90-6",
+    "famille": "organophosphate",
+    "usage": "insecticide",
+    "toxicologie": "elevee",
+    "organes": "SNC",
+    "effets": "neurotoxique",
+    "voies": [
+      "contact"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "oxamyl",
+    "type": "chimique",
+    "cas": "23135-22-0",
+    "famille": "carbamate",
+    "usage": "insecticide",
+    "toxicologie": "extreme",
+    "organes": "SNC",
+    "effets": "inhibition cholinesterase",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "mortel"
+  },
+  {
+    "nom": "methomyl",
+    "type": "chimique",
+    "cas": "16752-77-5",
+    "famille": "carbamate",
+    "usage": "insecticide",
+    "toxicologie": "elevee",
+    "organes": "SNC",
+    "effets": "neurotoxique",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  },
+  {
+    "nom": "propoxur",
+    "type": "chimique",
+    "cas": "114-26-1",
+    "famille": "carbamate",
+    "usage": "insecticide",
+    "toxicologie": "moderee",
+    "organes": "SNC",
+    "effets": "toxicite",
+    "voies": [
+      "contact"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "bendiocarb",
+    "type": "chimique",
+    "cas": "22781-23-3",
+    "famille": "carbamate",
+    "usage": "insecticide",
+    "toxicologie": "moderee",
+    "organes": "SNC",
+    "effets": "inhibition cholinesterase",
+    "voies": [
+      "contact"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "allethrin",
+    "type": "chimique",
+    "cas": "584-79-2",
+    "famille": "pyrethroide",
+    "usage": "insecticide",
+    "toxicologie": "faible",
+    "organes": "SNC",
+    "effets": "irritation",
+    "voies": [
+      "contact"
+    ],
+    "danger": "faible"
+  },
+  {
+    "nom": "resmethrin",
+    "type": "chimique",
+    "cas": "10453-86-8",
+    "famille": "pyrethroide",
+    "usage": "insecticide",
+    "toxicologie": "faible",
+    "organes": "peau",
+    "effets": "irritation",
+    "voies": [
+      "contact"
+    ],
+    "danger": "faible"
+  },
+  {
+    "nom": "tetramethrin",
+    "type": "chimique",
+    "cas": "7696-12-0",
+    "famille": "pyrethroide",
+    "usage": "insecticide",
+    "toxicologie": "faible",
+    "organes": "SNC",
+    "effets": "tremblements",
+    "voies": [
+      "contact"
+    ],
+    "danger": "faible"
+  },
+  {
+    "nom": "bifenthrin",
+    "type": "chimique",
+    "cas": "82657-04-3",
+    "famille": "pyrethroide",
+    "usage": "insecticide",
+    "toxicologie": "moderee",
+    "organes": "SNC",
+    "effets": "neurotoxique",
+    "voies": [
+      "contact"
+    ],
+    "danger": "nocif"
+  },
+  {
+    "nom": "abamectin",
+    "type": "chimique",
+    "cas": "71751-41-2",
+    "famille": "avermectine",
+    "usage": "insecticide",
+    "toxicologie": "elevee",
+    "organes": "SNC",
+    "effets": "neurotoxique",
+    "voies": [
+      "ingestion"
+    ],
+    "danger": "toxique"
+  }
+]

@@ -8,6 +8,12 @@ import requests
 
 app = FastAPI()
 
+# ✅ Charger la base propre UNIQUEMENT
+with open("data/database_clean.json", encoding="utf-8") as f:
+    database = json.load(f)
+
+print("Produits chargés :", len(database))
+
 # CORS
 app.add_middleware(
     CORSMiddleware,
@@ -17,10 +23,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# DATABASE
-with open("data/database.json", encoding="utf-8") as f:
-    DATABASE = json.load(f)
-
 # -------------------------
 # 🔎 SEARCH
 # -------------------------
@@ -29,10 +31,10 @@ def search(nom: str):
 
     nom = nom.lower()
 
-    results = [x for x in DATABASE if nom in x["nom"].lower()]
+    results = [x for x in database if nom in x["nom"]]
 
     if results:
-        return JSONResponse(content={"source": "local", "data": results})
+        return {"source": "local", "data": results}
 
     # PubChem fallback
     try:
@@ -42,16 +44,17 @@ def search(nom: str):
 
         props = data["PropertyTable"]["Properties"][0]
 
-        return JSONResponse(content={
+        return {
             "source": "pubchem",
             "data": {
                 "nom": nom,
                 "formula": props.get("MolecularFormula"),
                 "weight": props.get("MolecularWeight")
             }
-        })
+        }
     except:
-        return JSONResponse(content={"error": "Substance not found"})
+        return {"error": "Substance not found"}
+
 
 # -------------------------
 # ⚗️ INTERACTION
@@ -62,78 +65,58 @@ def interaction(noms: str):
     noms_list = [x.strip().lower() for x in noms.split(",")]
 
     if "paracetamol" in noms_list and "alcohol" in noms_list:
-        return JSONResponse(content={"result": "High liver toxicity risk"})
+        return {"result": "High liver toxicity risk"}
 
     if "warfarin" in noms_list and "aspirin" in noms_list:
-        return JSONResponse(content={"result": "High bleeding risk"})
+        return {"result": "High bleeding risk"}
 
     if "benzene" in noms_list:
-        return JSONResponse(content={"result": "Chronic toxicity (bone marrow)"})
+        return {"result": "Chronic toxicity (bone marrow)"}
 
-    return JSONResponse(content={"result": "No major interaction"})
+    return {"result": "No major interaction"}
+
 
 # -------------------------
-# 📊 FICHE COMPLETE (SANS IA)
+# 📊 FICHE COMPLETE (PROPRE)
 # -------------------------
 @app.get("/fiche")
 def fiche(nom: str):
 
     nom = nom.lower()
 
-    if "paracetamol" in nom:
-        return JSONResponse(content={
-            "fiche": """
-Substance: Paracetamol
+    for item in database:
+        if item["nom"].lower() == nom:
 
-Type: Medicament
+            fiche_text = f"""
+Substance: {item.get('nom','-')}
 
-Pharmacology:
-- Analgesic
-- Antipyretic
+Type: {item.get('type','-')}
 
-Toxicity:
-- Hepatotoxic in overdose
+Description:
+{item.get('description','-')}
 
-Target organ:
-- Liver
+Pharmacologie:
+{', '.join(item.get('pharmacologie', [])) if isinstance(item.get('pharmacologie'), list) else item.get('pharmacologie','-')}
 
-Symptoms:
-- Nausea
-- Vomiting
-- Liver failure
+Toxicité:
+{item.get('toxicologie','-')}
 
-Recommendation:
-- Respect dosage
-- Avoid alcohol
+Organes cibles:
+{item.get('organes','-')}
+
+Indications:
+{', '.join(item.get('indications', [])) if isinstance(item.get('indications'), list) else item.get('indications','-')}
+
+Posologie:
+{item.get('posologie','-')}
+
+Effets indésirables:
+{', '.join(item.get('effets', [])) if isinstance(item.get('effets'), list) else item.get('effets','-')}
 """
-        })
 
-    if "benzene" in nom:
-        return JSONResponse(content={
-            "fiche": """
-Substance: Benzene
+            return {"fiche": fiche_text}
 
-Type: Chemical
-
-Toxicity:
-- Carcinogenic
-- Chronic exposure dangerous
-
-Target:
-- Bone marrow
-
-Exposure:
-- Inhalation
-
-Precaution:
-- Use protective equipment
-"""
-        })
-
-    return JSONResponse(content={
-        "fiche": f"No detailed data available for {nom}"
-    })
-
+    return {"fiche": f"Aucune fiche disponible pour {nom}"}
 # -------------------------
 # ROOT
 # -------------------------
