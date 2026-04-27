@@ -2,45 +2,40 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SENTOX</title>
 
 <style>
 body{
-    font-family:Arial;
+    font-family: Arial;
     text-align:center;
     background:#f2f2f2;
 }
-
 h1{
-    color:#15803d;
+    color:green;
 }
-
 input{
-    width:85%;
+    width:80%;
     padding:12px;
-    margin:10px;
     border-radius:10px;
-    border:1px solid #ccc;
+    border:2px solid black;
 }
-
 button{
-    padding:10px;
+    padding:12px;
     margin:5px;
     border:none;
-    border-radius:8px;
-    background:#16a34a;
+    border-radius:10px;
+    background:green;
     color:white;
+    font-weight:bold;
 }
-
 .card{
     background:white;
-    margin:10px;
     padding:15px;
+    margin:10px;
     border-radius:10px;
-    text-align:left;
 }
 </style>
+
 </head>
 
 <body>
@@ -49,78 +44,47 @@ button{
 
 <input id="searchInput" placeholder="Entrer une substance...">
 
-<br>
+<br><br>
 
-<button id="btnSearch">🔎 Recherche</button>
-<button id="btnInteraction">⚗️ Interaction</button>
-<button id="btnFiche">📊 Fiche</button>
+<button onclick="rechercher()">🔍 Recherche</button>
+<button onclick="interaction()">🧪 Interaction</button>
+<button onclick="fiche()">📊 Fiche</button>
 
 <div id="resultats"></div>
 
 <script>
 
-// 🔥 TEST JS
-console.log("JS chargé");
-
-// 🔥 API
 const API = "https://sentox-ai-backend.onrender.com";
 
-// 🔎 RECHERCHE
 async function rechercher(){
     let val = document.getElementById("searchInput").value;
     let div = document.getElementById("resultats");
 
-    div.innerHTML = "Chargement...";
+    let res = await fetch(API + "/search?nom=" + val);
+    let data = await res.json();
 
-    try{
-        let res = await fetch(API + "/search?nom=" + encodeURIComponent(val));
-        let data = await res.json();
-
-        let html = "";
-
-        if(data.source === "local"){
-            data.data.forEach(x=>{
-                html += <div class="card">${x.nom}</div>;
-            });
-        }
-
-        else if(data.source === "pubchem"){
-            html = <div class="card">Formule: ${data.data.formula}</div>;
-        }
-
-        div.innerHTML = html;
-
-    }catch(e){
-        div.innerHTML = "<div class='card'>Erreur</div>";
-    }
+    div.innerHTML = "<div class='card'>" + JSON.stringify(data) + "</div>";
 }
 
-// ⚗️ INTERACTION
 async function interaction(){
     let val = document.getElementById("searchInput").value;
     let div = document.getElementById("resultats");
 
-    let res = await fetch(API + "/interaction?noms=" + encodeURIComponent(val));
+    let res = await fetch(API + "/interaction?noms=" + val);
     let data = await res.json();
 
-    div.innerHTML = <div class="card">${data.result}</div>;
+    div.innerHTML = "<div class='card'>" + data.result + "</div>";
 }
 
-// 📊 FICHE
 async function fiche(){
     let val = document.getElementById("searchInput").value;
     let div = document.getElementById("resultats");
 
-    let res = await fetch(API + "/fiche?nom=" + encodeURIComponent(val));
+    let res = await fetch(API + "/fiche?nom=" + val);
     let data = await res.json();
 
-    div.innerHTML = <div class="card"><pre>${data.fiche}</pre></div>;
+    div.innerHTML = "<div class='card'>" + JSON.stringify(data) + "</div>";
 }
-
-// 🔥 BIND EVENTS (IMPORTANT)
-document.getElementById("btnSearch").addEventListener("click", rechercher);
-document.getElementById("btnInteraction").addEventListener("click", interaction);
-document.getElementById("btnFiche").addEventListener("click", fiche);
 
 </script>
 
