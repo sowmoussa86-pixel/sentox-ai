@@ -1,53 +1,48 @@
 const API = "https://sentox-ai-backend.onrender.com";
 
-window.onload = () => {
+window.onload = function () {
+
+  alert("JS connecté"); // 👈 doit apparaître
 
   const input = document.getElementById("searchInput");
-  const resultDiv = document.getElementById("results");
+  const result = document.getElementById("results");
 
-  const btnSearch = document.getElementById("btnSearch");
-  const btnInteraction = document.getElementById("btnInteraction");
-  const btnFiche = document.getElementById("btnFiche");
-
-  // 🔍 RECHERCHE
-  btnSearch.onclick = async () => {
+  document.getElementById("btnSearch").onclick = async function () {
     const val = input.value.trim();
     if (!val) return alert("Entre une substance");
 
     try {
-      const res = await fetch(${API}/search?nom=${val});
+      const res = await fetch(API + "/search?nom=" + val);
       const data = await res.json();
-      resultDiv.innerHTML = <pre>${JSON.stringify(data, null, 2)}</pre>;
+      result.innerHTML = "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
     } catch {
-      resultDiv.innerHTML = "Erreur serveur";
+      result.innerHTML = "Erreur recherche";
     }
   };
 
-  // ⚗️ INTERACTION
-  btnInteraction.onclick = async () => {
+  document.getElementById("btnInteraction").onclick = async function () {
     const val = input.value.trim();
     if (!val) return alert("Entre une substance");
 
     try {
-      const res = await fetch(${API}/interaction?nom=${val});
+      const res = await fetch(API + "/interaction?nom=" + val);
       const data = await res.json();
-      resultDiv.innerHTML = <pre>${JSON.stringify(data, null, 2)}</pre>;
+      result.innerHTML = "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
     } catch {
-      resultDiv.innerHTML = "Erreur interaction";
+      result.innerHTML = "Erreur interaction";
     }
   };
 
-  // 📊 FICHE
-  btnFiche.onclick = async () => {
+  document.getElementById("btnFiche").onclick = async function () {
     const val = input.value.trim();
     if (!val) return alert("Entre une substance");
 
     try {
-      const res = await fetch(${API}/fiche?nom=${val});
+      const res = await fetch(API + "/fiche?nom=" + val);
       const data = await res.json();
-      resultDiv.innerHTML = <pre>${JSON.stringify(data, null, 2)}</pre>;
+      result.innerHTML = "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
     } catch {
-      resultDiv.innerHTML = "Erreur fiche";
+      result.innerHTML = "Erreur fiche";
     }
   };
 
