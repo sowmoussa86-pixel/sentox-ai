@@ -3,84 +3,82 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>SENTOX</title>
 
 <style>
 body {
-  margin: 0;
+  margin:0;
   font-family: Arial;
-  text-align: center;
-  background: #f5f5f5;
+  text-align:center;
+  background:#f4f6f8;
 }
 
+/* 🔥 LOGO PLEIN ÉCRAN */
 .hero {
-  width: 100%;
-  height: 40vh;
-  overflow: hidden;
-}
-
-.hero img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width:100%;
+  height:300px;
+  background:url("logo.png") center/cover no-repeat;
 }
 
 h1 {
-  color: green;
+  color:#2e7d32;
 }
 
+/* INPUT */
 input {
-  width: 80%;
-  padding: 15px;
-  font-size: 16px;
-  border-radius: 10px;
-  border: 2px solid #ccc;
-  margin-top: 10px;
+  width:80%;
+  max-width:400px;
+  padding:15px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  margin-top:20px;
 }
 
+/* BOUTONS */
 button {
-  padding: 12px 20px;
-  margin: 10px;
-  border: none;
-  border-radius: 10px;
-  background: green;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
+  margin:10px;
+  padding:12px 20px;
+  border:none;
+  border-radius:10px;
+  background:#2e7d32;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
 }
 
-#results {
-  margin-top: 20px;
-}
-
+/* RESULTATS */
 .card {
-  background: white;
-  padding: 15px;
-  margin: 10px;
-  border-radius: 10px;
+  background:white;
+  margin:20px;
+  padding:15px;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  text-align:left;
 }
 </style>
+
 </head>
 
 <body>
 
-<div class="hero">
-  <img src="logo.png">
-</div>
+<div class="hero"></div>
 
 <h1>SENTOX</h1>
 
-<input id="searchInput">
-<div id="results"></div>
-<script src="./script.js"></script>
+<input id="searchInput" placeholder="Entrer une substance...">
+
 <br>
 
-<button id="btnSearch">🔍 Recherche</button>
+<button id="btnSearch">🔎 Recherche</button>
 <button id="btnInteraction">⚗️ Interaction</button>
-<button id="btnFiche">📊 Fiche</button>
+<button id="btnFiche">📄 Fiche</button>
+<button id="btnPDF">📥 PDF</button>
+<button id="btnIA">🧠 Analyse IA</button>
 
 <div id="results"></div>
 
-<script src="./script.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>

@@ -55,7 +55,33 @@ def search(nom: str):
     except:
         return {"error": "Substance not found"}
 
+@app.get("/ai")
+def analyse_ai(nom: str):
+    
+    nom = nom.lower()
 
+    if "paracetamol" in nom:
+        return {
+            "substance": "Paracétamol",
+            "toxicite": "Hépatotoxique",
+            "dose_dangereuse": "> 4g/jour",
+            "niveau_risque": "⚠️ Modéré à élevé",
+            "analyse": "Risque d’atteinte du foie en cas de surdosage"
+        }
+
+    elif "neem" in nom:
+        return {
+            "substance": "Neem",
+            "toxicite": "Faible à dose normale",
+            "niveau_risque": "⚠️ Faible",
+            "analyse": "Peut devenir toxique à forte dose"
+        }
+
+    return {
+        "substance": nom,
+        "analyse": "Aucune donnée IA disponible",
+        "niveau_risque": "❓ Inconnu"
+    }
 # -------------------------
 # ⚗️ INTERACTION
 # -------------------------
