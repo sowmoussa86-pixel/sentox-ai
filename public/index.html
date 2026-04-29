@@ -8,23 +8,23 @@
 body{
     margin:0;
     font-family: Arial;
+    background:#f5f5f5;
     text-align:center;
-
-    background: url("logo.png") no-repeat center center;
-    background-size: cover;
 }
 
-.overlay{
-    background: rgba(255,255,255,0.85);
-    min-height:100vh;
-    padding-top:40px;
+.container{
+    padding:20px;
 }
 
-h1{
-    color:green;
-    margin-bottom:20px;
+/* LOGO PROPRE */
+.logo{
+    width:200px;
+    max-width:80%;
+    margin:20px auto;
+    display:block;
 }
 
+/* INPUT */
 input{
     width:80%;
     max-width:400px;
@@ -34,6 +34,7 @@ input{
     font-size:16px;
 }
 
+/* BOUTONS */
 button{
     padding:12px 20px;
     margin:8px;
@@ -43,12 +44,14 @@ button{
     color:white;
     font-weight:bold;
     font-size:15px;
+    cursor:pointer;
 }
 
 button:hover{
     background:#0a8a0a;
 }
 
+/* CARTE RESULTAT */
 .card{
     background:white;
     padding:15px;
@@ -57,10 +60,126 @@ button:hover{
     max-width:500px;
     border-radius:12px;
     text-align:left;
+    box-shadow:0 2px 5px rgba(0,0,0,0.2);
 }
 </style>
 
 </head>
+
+<body>
+
+<div class="container">
+
+<img src="logo.png" class="logo">
+
+<h2>SENTOX</h2>
+
+<input id="searchInput" placeholder="Entrer une substance...">
+
+<br><br>
+
+<button onclick="rechercher()">🔍 Recherche</button>
+<button onclick="interaction()">🧪 Interaction</button>
+<button onclick="fiche()">📊 Fiche</button>
+
+<div id="resultats"></div>
+
+</div>
+
+<script>
+
+const API = "https://sentox-ai-backend.onrender.com";
+
+// 🔎 RECHERCHE
+async function rechercher(){
+    let val = document.getElementById("searchInput").value;
+    let div = document.getElementById("resultats");
+
+    div.innerHTML = "Chargement...";
+
+    try{
+        let res = await fetch(API + "/search?nom=" + encodeURIComponent(val));
+        let data = await res.json();
+
+        if(data.data && data.data.length > 0){
+            let item = data.data[0];
+
+            div.innerHTML = `
+            <div class="card">
+            <b>Nom :</b> ${item.nom}<br>
+            <b>Type :</b> ${item.type}<br>
+            <b>Description :</b> ${item.description}<br>
+            <b>Toxicité :</b> ${item.toxicologie}<br>
+            <b>Organes :</b> ${item.organes}
+            </div>`;
+        } else {
+            div.innerHTML = "<div class='card'>Aucun résultat</div>";
+        }
+
+    }catch(e){
+        div.innerHTML = "<div class='card'>❌ Backend indisponible (Render endormi)</div>";
+    }
+}
+
+
+// 🧪 INTERACTION
+async function interaction(){
+    let val = document.getElementById("searchInput").value;
+    let div = document.getElementById("resultats");
+
+    div.innerHTML = "Analyse...";
+
+    try{
+        let res = await fetch(API + "/interaction?noms=" + encodeURIComponent(val));
+        let data = await res.json();
+
+        div.innerHTML = <div class="card"><b>Résultat :</b> ${data.result}</div>;
+    }catch(e){
+        div.innerHTML = "<div class='card'>❌ Erreur interaction</div>";
+    }
+}
+
+
+// 📊 FICHE
+async function fiche(){
+    let val = document.getElementById("searchInput").value;
+    let div = document.getElementById("resultats");
+
+    div.innerHTML = "Chargement fiche...";
+
+    try{
+        let res = await fetch(API + "/fiche?nom=" + encodeURIComponent(val));
+        let data = await res.json();
+
+        if(data.fiche){
+            let f = data.fiche;
+
+            div.innerHTML = `
+            <div class="card">
+            <h3>📊 Fiche toxicologique</h3>
+            <b>Nom :</b> ${f.nom}<br>
+            <b>Type :</b> ${f.type}<br>
+            <b>Description :</b> ${f.description}<br>
+            <b>Pharmacologie :</b> ${f.pharmacologie}<br>
+            <b>Toxicité :</b> ${f.toxicologie}<br>
+            <b>Organes :</b> ${f.organes}<br>
+            <b>Indications :</b> ${f.indications}<br>
+            <b>Posologie :</b> ${f.posologie}<br>
+            <b>Effets :</b> ${f.effets}
+            </div>`;
+        } else {
+            div.innerHTML = "<div class='card'>Fiche non disponible</div>";
+        }
+
+    }catch(e){
+        div.innerHTML = "<div class='card'>❌ Erreur serveur</div>";
+    }
+}
+
+</script>
+
+</body>
+</html>
 
 <body>
 
