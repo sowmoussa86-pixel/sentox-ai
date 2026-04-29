@@ -1,65 +1,54 @@
-const API = "https://sentox-ai-backend.onrender.com"; // ton backend
+const API = "https://sentox-ai-backend.onrender.com";
 
-const input = document.getElementById("searchInput");
-const resultDiv = document.getElementById("results");
+window.onload = () => {
 
-const btnSearch = document.getElementById("btnSearch");
-const btnInteraction = document.getElementById("btnInteraction");
-const btnFiche = document.getElementById("btnFiche");
+  const input = document.getElementById("searchInput");
+  const resultDiv = document.getElementById("results");
 
-// 👉 RECHERCHE
-btnSearch.addEventListener("click", async () => {
-  const val = input.value.trim();
+  const btnSearch = document.getElementById("btnSearch");
+  const btnInteraction = document.getElementById("btnInteraction");
+  const btnFiche = document.getElementById("btnFiche");
 
-  if (!val) {
-    alert("Entre une substance !");
-    return;
-  }
+  // 🔍 RECHERCHE
+  btnSearch.onclick = async () => {
+    const val = input.value.trim();
+    if (!val) return alert("Entre une substance");
 
-  try {
-    const res = await fetch(${API}/search?nom=${val});
-    const data = await res.json();
+    try {
+      const res = await fetch(${API}/search?nom=${val});
+      const data = await res.json();
+      resultDiv.innerHTML = <pre>${JSON.stringify(data, null, 2)}</pre>;
+    } catch {
+      resultDiv.innerHTML = "Erreur serveur";
+    }
+  };
 
-    resultDiv.innerHTML = <div class="card">${JSON.stringify(data)}</div>;
-  } catch (e) {
-    resultDiv.innerHTML = "Erreur serveur";
-  }
-});
+  // ⚗️ INTERACTION
+  btnInteraction.onclick = async () => {
+    const val = input.value.trim();
+    if (!val) return alert("Entre une substance");
 
-// 👉 INTERACTION
-btnInteraction.addEventListener("click", async () => {
-  const val = input.value.trim();
+    try {
+      const res = await fetch(${API}/interaction?nom=${val});
+      const data = await res.json();
+      resultDiv.innerHTML = <pre>${JSON.stringify(data, null, 2)}</pre>;
+    } catch {
+      resultDiv.innerHTML = "Erreur interaction";
+    }
+  };
 
-  if (!val) {
-    alert("Entre une substance !");
-    return;
-  }
+  // 📊 FICHE
+  btnFiche.onclick = async () => {
+    const val = input.value.trim();
+    if (!val) return alert("Entre une substance");
 
-  try {
-    const res = await fetch(${API}/interaction?nom=${val});
-    const data = await res.json();
+    try {
+      const res = await fetch(${API}/fiche?nom=${val});
+      const data = await res.json();
+      resultDiv.innerHTML = <pre>${JSON.stringify(data, null, 2)}</pre>;
+    } catch {
+      resultDiv.innerHTML = "Erreur fiche";
+    }
+  };
 
-    resultDiv.innerHTML = <div class="card">${JSON.stringify(data)}</div>;
-  } catch (e) {
-    resultDiv.innerHTML = "Erreur interaction";
-  }
-});
-
-// 👉 FICHE COMPLETE
-btnFiche.addEventListener("click", async () => {
-  const val = input.value.trim();
-
-  if (!val) {
-    alert("Entre une substance !");
-    return;
-  }
-
-  try {
-    const res = await fetch(${API}/fiche?nom=${val});
-    const data = await res.json();
-
-    resultDiv.innerHTML = <div class="card">${JSON.stringify(data)}</div>;
-  } catch (e) {
-    resultDiv.innerHTML = "Erreur fiche";
-  }
-});
+};
