@@ -1,20 +1,12 @@
-# -*- coding: utf-8 -*-
-
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
-import json
+from fpdf import FPDF
 import requests
 
 app = FastAPI()
 
-# ✅ Charger la base propre UNIQUEMENT
-with open("data/database_clean.json", encoding="utf-8") as f:
-    database = json.load(f)
-
-print("Produits chargés :", len(database))
-
-# CORS
+# ✅ Autoriser le frontend (important sinon boutons bloqués)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -23,12 +15,29 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# -------------------------
-# 🔎 SEARCH
-# -------------------------
+# =========================
+# BASE DE DONNÉES SIMPLE
+# =========================
+database = [
+    {
+        "nom": "paracetamol",
+        "type": "medicament",
+        "description": "Antalgique et antipyrétique",
+        "toxicologie": "Hépatotoxique à forte dose"
+    },
+    {
+        "nom": "neem",
+        "type": "plante",
+        "description": "Plante médicinale utilisée en Afrique et en Inde",
+        "toxicologie": "Faible à dose normale, toxique à forte dose"
+    }
+]
+
+# =========================
+# SEARCH
+# =========================
 @app.get("/search")
 def search(nom: str):
-
     nom = nom.lower()
 
     results = [x for x in database if nom in x["nom"]]
@@ -36,116 +45,47 @@ def search(nom: str):
     if results:
         return {"source": "local", "data": results}
 
-    # PubChem fallback
-    try:
-        url = f"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{nom}/property/MolecularFormula,MolecularWeight/JSON"
-        r = requests.get(url)
-        data = r.json()
+    return {"error": "Substance non trouvée"}
 
-        props = data["PropertyTable"]["Properties"][0]
-
-        return {
-            "source": "pubchem",
-            "data": {
-                "nom": nom,
-                "formula": props.get("MolecularFormula"),
-                "weight": props.get("MolecularWeight")
-            }
-        }
-    except:
-        return {"error": "Substance not found"}
-
-@app.get("/ai")
-def analyse_ai(nom: str):
-    
-    nom = nom.lower()
-
-    if "paracetamol" in nom:
-        return {
-            "substance": "Paracétamol",
-            "toxicite": "Hépatotoxique",
-            "dose_dangereuse": "> 4g/jour",
-            "niveau_risque": "⚠️ Modéré à élevé",
-            "analyse": "Risque d’atteinte du foie en cas de surdosage"
-        }
-
-    elif "neem" in nom:
-        return {
-            "substance": "Neem",
-            "toxicite": "Faible à dose normale",
-            "niveau_risque": "⚠️ Faible",
-            "analyse": "Peut devenir toxique à forte dose"
-        }
-
-    return {
-        "substance": nom,
-        "analyse": "Aucune donnée IA disponible",
-        "niveau_risque": "❓ Inconnu"
-    }
-# -------------------------
-# ⚗️ INTERACTION
-# -------------------------
+# =========================
+# INTERACTION
+# =========================
 @app.get("/interaction")
 def interaction(noms: str):
-
     noms_list = [x.strip().lower() for x in noms.split(",")]
 
-    if "paracetamol" in noms_list and "alcohol" in noms_list:
-        return {"result": "High liver toxicity risk"}
+    return {
+        "substances": noms_list,
+        "risque": "Interaction modérée possible",
+        "conseil": "Consulter un spécialiste"
+    }
 
-    if "warfarin" in noms_list and "aspirin" in noms_list:
-        return {"result": "High bleeding risk"}
+# =========================
+# IA ANALYSE
+# =========================
+@app.get("/ai")
+def analyse_ai(nom: str):
+    return {
+        "substance": nom,
+        "niveau_risque": "modéré",
+        "analyse": "Analyse IA : effet possible sur le foie, dépend de la dose"
+    }
 
-    if "benzene" in noms_list:
-        return {"result": "Chronic toxicity (bone marrow)"}
+# =========================
+# PDF
+# =========================
+@app.get("/pdf/{nom}")
+def generate_pdf(nom: str):
 
-    return {"result": "No major interaction"}
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
 
+    pdf.cell(200, 10, txt="RAPPORT TOXICOLOGIQUE SENTOX", ln=True)
+    pdf.cell(200, 10, txt=f"Substance: {nom}", ln=True)
+    pdf.cell(200, 10, txt="Analyse: Risque dépend de la dose", ln=True)
 
-# -------------------------
-# 📊 FICHE COMPLETE (PROPRE)
-# -------------------------
-@app.get("/fiche")
-def fiche(nom: str):
+    file_name = f"{nom}.pdf"
+    pdf.output(file_name)
 
-    nom = nom.lower()
-
-    for item in database:
-        if item["nom"].lower() == nom:
-
-            fiche_text = f"""
-Substance: {item.get('nom','-')}
-
-Type: {item.get('type','-')}
-
-Description:
-{item.get('description','-')}
-
-Pharmacologie:
-{', '.join(item.get('pharmacologie', [])) if isinstance(item.get('pharmacologie'), list) else item.get('pharmacologie','-')}
-
-Toxicité:
-{item.get('toxicologie','-')}
-
-Organes cibles:
-{item.get('organes','-')}
-
-Indications:
-{', '.join(item.get('indications', [])) if isinstance(item.get('indications'), list) else item.get('indications','-')}
-
-Posologie:
-{item.get('posologie','-')}
-
-Effets indésirables:
-{', '.join(item.get('effets', [])) if isinstance(item.get('effets'), list) else item.get('effets','-')}
-"""
-
-            return {"fiche": fiche_text}
-
-    return {"fiche": f"Aucune fiche disponible pour {nom}"}
-# -------------------------
-# ROOT
-# -------------------------
-@app.get("/")
-def home():
-    return {"message": "SENTOX PRO OK"}
+    return FileResponse(file_name, media_type='application/pdf', filename=file_name)
