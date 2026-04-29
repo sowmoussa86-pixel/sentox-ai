@@ -1,277 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SENTOX</title>
 
 <style>
-body{
-    margin:0;
-    font-family: Arial;
-    background:#f5f5f5;
-    text-align:center;
+body {
+  margin: 0;
+  font-family: Arial;
+  text-align: center;
+  background: #f5f5f5;
 }
 
-.container{
-    padding:20px;
+.hero {
+  width: 100%;
+  height: 40vh;
+  overflow: hidden;
 }
 
-/* LOGO PROPRE */
-.logo{
-    width:200px;
-    max-width:80%;
-    margin:20px auto;
-    display:block;
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* INPUT */
-input{
-    width:80%;
-    max-width:400px;
-    padding:15px;
-    border-radius:12px;
-    border:2px solid #333;
-    font-size:16px;
+h1 {
+  color: green;
 }
 
-/* BOUTONS */
-button{
-    padding:12px 20px;
-    margin:8px;
-    border:none;
-    border-radius:12px;
-    background:green;
-    color:white;
-    font-weight:bold;
-    font-size:15px;
-    cursor:pointer;
+input {
+  width: 80%;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  margin-top: 10px;
 }
 
-button:hover{
-    background:#0a8a0a;
+button {
+  padding: 12px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 10px;
+  background: green;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-/* CARTE RESULTAT */
-.card{
-    background:white;
-    padding:15px;
-    margin:15px auto;
-    width:90%;
-    max-width:500px;
-    border-radius:12px;
-    text-align:left;
-    box-shadow:0 2px 5px rgba(0,0,0,0.2);
+#results {
+  margin-top: 20px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 10px;
 }
 </style>
-
 </head>
 
 <body>
 
-<div class="container">
-
-<img src="logo.png" class="logo">
-
-<h2>SENTOX</h2>
-
-<input id="searchInput" placeholder="Entrer une substance...">
-
-<br><br>
-
-<button onclick="rechercher()">🔍 Recherche</button>
-<button onclick="interaction()">🧪 Interaction</button>
-<button onclick="fiche()">📊 Fiche</button>
-
-<div id="resultats"></div>
-
+<div class="hero">
+  <img src="logo.png">
 </div>
-
-<script>
-
-const API = "https://sentox-ai-backend.onrender.com";
-
-// 🔎 RECHERCHE
-async function rechercher(){
-    let val = document.getElementById("searchInput").value;
-    let div = document.getElementById("resultats");
-
-    div.innerHTML = "Chargement...";
-
-    try{
-        let res = await fetch(API + "/search?nom=" + encodeURIComponent(val));
-        let data = await res.json();
-
-        if(data.data && data.data.length > 0){
-            let item = data.data[0];
-
-            div.innerHTML = `
-            <div class="card">
-            <b>Nom :</b> ${item.nom}<br>
-            <b>Type :</b> ${item.type}<br>
-            <b>Description :</b> ${item.description}<br>
-            <b>Toxicité :</b> ${item.toxicologie}<br>
-            <b>Organes :</b> ${item.organes}
-            </div>`;
-        } else {
-            div.innerHTML = "<div class='card'>Aucun résultat</div>";
-        }
-
-    }catch(e){
-        div.innerHTML = "<div class='card'>❌ Backend indisponible (Render endormi)</div>";
-    }
-}
-
-
-// 🧪 INTERACTION
-async function interaction(){
-    let val = document.getElementById("searchInput").value;
-    let div = document.getElementById("resultats");
-
-    div.innerHTML = "Analyse...";
-
-    try{
-        let res = await fetch(API + "/interaction?noms=" + encodeURIComponent(val));
-        let data = await res.json();
-
-        div.innerHTML = <div class="card"><b>Résultat :</b> ${data.result}</div>;
-    }catch(e){
-        div.innerHTML = "<div class='card'>❌ Erreur interaction</div>";
-    }
-}
-
-
-// 📊 FICHE
-async function fiche(){
-    let val = document.getElementById("searchInput").value;
-    let div = document.getElementById("resultats");
-
-    div.innerHTML = "Chargement fiche...";
-
-    try{
-        let res = await fetch(API + "/fiche?nom=" + encodeURIComponent(val));
-        let data = await res.json();
-
-        if(data.fiche){
-            let f = data.fiche;
-
-            div.innerHTML = `
-            <div class="card">
-            <h3>📊 Fiche toxicologique</h3>
-            <b>Nom :</b> ${f.nom}<br>
-            <b>Type :</b> ${f.type}<br>
-            <b>Description :</b> ${f.description}<br>
-            <b>Pharmacologie :</b> ${f.pharmacologie}<br>
-            <b>Toxicité :</b> ${f.toxicologie}<br>
-            <b>Organes :</b> ${f.organes}<br>
-            <b>Indications :</b> ${f.indications}<br>
-            <b>Posologie :</b> ${f.posologie}<br>
-            <b>Effets :</b> ${f.effets}
-            </div>`;
-        } else {
-            div.innerHTML = "<div class='card'>Fiche non disponible</div>";
-        }
-
-    }catch(e){
-        div.innerHTML = "<div class='card'>❌ Erreur serveur</div>";
-    }
-}
-
-</script>
-
-</body>
-</html>
-
-<body>
-
-<div class="overlay">
 
 <h1>SENTOX</h1>
 
-<input id="searchInput" placeholder="Entrer une substance...">
+<input id="searchInput" placeholder="Entrer une substance..." />
 
-<br><br>
+<br>
 
-<button onclick="rechercher()">🔍 Recherche</button>
-<button onclick="interaction()">🧪 Interaction</button>
-<button onclick="fiche()">📊 Fiche</button>
+<button id="btnSearch">🔍 Recherche</button>
+<button id="btnInteraction">⚗️ Interaction</button>
+<button id="btnFiche">📊 Fiche</button>
 
-<div id="resultats"></div>
+<div id="results"></div>
 
-</div>
-
-<script>
-
-const API = "https://sentox-ai-backend.onrender.com";
-
-// 🔎 RECHERCHE
-async function rechercher(){
-    let val = document.getElementById("searchInput").value;
-    let div = document.getElementById("resultats");
-
-    let res = await fetch(API + "/search?nom=" + val);
-    let data = await res.json();
-
-    if(data.data){
-        let item = data.data[0];
-
-        div.innerHTML = `
-        <div class="card">
-        <b>Nom :</b> ${item.nom}<br>
-        <b>Type :</b> ${item.type}<br>
-        <b>Description :</b> ${item.description}<br>
-        <b>Toxicité :</b> ${item.toxicologie}<br>
-        <b>Organes :</b> ${item.organess || item.organes}
-        </div>`;
-    } else {
-        div.innerHTML = "<div class='card'>Aucun résultat</div>";
-    }
-}
-
-
-// 🧪 INTERACTION
-async function interaction(){
-    let val = document.getElementById("searchInput").value;
-    let div = document.getElementById("resultats");
-
-    let res = await fetch(API + "/interaction?noms=" + val);
-    let data = await res.json();
-
-    div.innerHTML = <div class="card"><b>Résultat :</b> ${data.result}</div>;
-}
-
-
-// 📊 FICHE COMPLETE
-async function fiche(){
-    let val = document.getElementById("searchInput").value;
-    let div = document.getElementById("resultats");
-
-    let res = await fetch(API + "/fiche?nom=" + val);
-    let data = await res.json();
-
-    if(data.fiche){
-
-        let f = data.fiche;
-
-        div.innerHTML = `
-        <div class="card">
-        <h3>📊 Fiche toxicologique</h3>
-        <b>Nom :</b> ${f.nom}<br>
-        <b>Type :</b> ${f.type}<br>
-        <b>Description :</b> ${f.description}<br>
-        <b>Pharmacologie :</b> ${f.pharmacologie}<br>
-        <b>Toxicité :</b> ${f.toxicologie}<br>
-        <b>Organes :</b> ${f.organes}<br>
-        <b>Indications :</b> ${f.indications}<br>
-        <b>Posologie :</b> ${f.posologie}<br>
-        <b>Effets :</b> ${f.effets}
-        </div>
-        `;
-    } else {
-        div.innerHTML = "<div class='card'>Fiche non disponible</div>";
-    }
-}
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
