@@ -1,86 +1,165 @@
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
-from fastapi.middleware.cors import CORSMiddleware
+import requests
 from fpdf import FPDF
+import os
 
 app = FastAPI()
 
-# ✅ autorise le frontend
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# =========================
+# 🧪 BASE DE DONNÉES LOCALE
+# =========================
 
-# =========================
-# DATABASE SIMPLE
-# =========================
 database = [
     {
         "nom": "paracetamol",
         "type": "medicament",
-        "description": "Antalgique et antipyrétique",
-        "toxicologie": "Hépatotoxique à forte dose"
+        "description": "antalgique et antipyrétique",
+        "toxicologie": "hepatotoxique en surdosage",
+        "dose": "max 4g/jour"
+    },
+    {
+        "nom": "aspirine",
+        "type": "medicament",
+        "description": "anti-inflammatoire",
+        "toxicologie": "risque hemorragique",
+        "dose": "500mg à 1g"
+    },
+    {
+        "nom": "ibuprofene",
+        "type": "medicament",
+        "description": "anti-inflammatoire non stéroïdien",
+        "toxicologie": "toxique pour l'estomac et reins",
+        "dose": "200-400mg"
     },
     {
         "nom": "neem",
         "type": "plante",
-        "description": "Plante médicinale utilisée en Afrique et en Inde",
-        "toxicologie": "Faible à dose normale, toxique à forte dose"
+        "description": "plante médicinale antiseptique et antiparasitaire",
+        "toxicologie": "toxique à forte dose",
+        "dose": "usage traditionnel modéré"
+    },
+    {
+        "nom": "quinine",
+        "type": "medicament",
+        "description": "antipaludique",
+        "toxicologie": "cinchonisme à forte dose",
+        "dose": "selon prescription"
     }
 ]
 
 # =========================
-# SEARCH
+# 🔍 SEARCH
 # =========================
+
 @app.get("/search")
 def search(nom: str):
-    nom = nom.lower()
-    results = [x for x in database if nom in x["nom"]]
+
+    nom = nom.lower().strip()
+
+    results = []
+
+    for item in database:
+        if (
+            nom in item["nom"].lower()
+            or nom in item["type"].lower()
+            or nom in item["description"].lower()
+        ):
+            results.append(item)
 
     if results:
-        return {"data": results}
+        return {"source": "local", "data": results}
 
-    return {"error": "Non trouvé"}
+    # 🔁 fallback PubChem
+    try:
+        url = f"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{nom}/property/MolecularFormula,MolecularWeight/JSON"
+        r = requests.get(url)
+        data = r.json()
+
+        props = data["PropertyTable"]["Properties"][0]
+
+        return {
+            "source": "pubchem",
+            "data": {
+                "nom": nom,
+                "formula": props.get("MolecularFormula"),
+                "weight": props.get("MolecularWeight")
+            }
+        }
+
+    except:
+        return {"error": "Substance non trouvée"}
 
 # =========================
-# INTERACTION
+# ⚠️ INTERACTION
 # =========================
+
 @app.get("/interaction")
 def interaction(noms: str):
-    return {
-        "substances": noms,
-        "risque": "Interaction possible",
-        "conseil": "Consulter un expert"
-    }
+
+    noms_list = [x.strip().lower() for x in noms.split(",")]
+
+    if "paracetamol" in noms_list and "alcool" in noms_list:
+        return {"danger": "⚠️ Risque hépatotoxique grave"}
+
+    if "aspirine" in noms_list and "ibuprofene" in noms_list:
+        return {"danger": "⚠️ Risque hémorragique augmenté"}
+
+    return {"message": "Aucune interaction majeure connue"}
 
 # =========================
-# IA
+# 🤖 IA TOXICOLOGIQUE SIMPLE
 # =========================
-@app.get("/ai")
-def ai(nom: str):
-    return {
-        "substance": nom,
-        "analyse": "Analyse IA : risque dépend de la dose, surveiller foie"
-    }
+
+@app.get("/ai/{nom}")
+def analyse_ai(nom: str):
+
+    nom = nom.lower()
+
+    for item in database:
+        if nom in item["nom"]:
+            return {
+                "analyse": f"{item['nom']} est {item['type']}.\n"
+                           f"Effet: {item['description']}.\n"
+                           f"Toxicologie: {item['toxicologie']}.\n"
+                           f"Dose: {item['dose']}"
+            }
+
+    return {"analyse": "Aucune donnée IA disponible"}
 
 # =========================
-# PDF
+# 📄 PDF
 # =========================
+
 @app.get("/pdf/{nom}")
-def pdf(nom: str):
+def generate_pdf(nom: str):
+
+    nom = nom.lower()
+    filename = f"{nom}.pdf"
+
+    contenu = None
+
+    for item in database:
+        if nom in item["nom"]:
+            contenu = item
+            break
 
     pdf = FPDF()
     pdf.add_page()
     pdf.set_font("Arial", size=12)
 
-    pdf.cell(200, 10, txt="RAPPORT TOXICOLOGIQUE SENTOX", ln=True)
-    pdf.cell(200, 10, txt=f"Substance: {nom}", ln=True)
-    pdf.cell(200, 10, txt="Analyse: risque dépend de la dose", ln=True)
+    pdf.cell(200, 10, txt="RAPPORT SENTOX", ln=True)
 
-    filename = f"{nom}.pdf"
+    if contenu:
+        pdf.cell(200, 10, txt=f"Nom: {contenu['nom']}", ln=True)
+        pdf.cell(200, 10, txt=f"Type: {contenu['type']}", ln=True)
+        pdf.cell(200, 10, txt=f"Description: {contenu['description']}", ln=True)
+        pdf.cell(200, 10, txt=f"Toxicologie: {contenu['toxicologie']}", ln=True)
+        pdf.cell(200, 10, txt=f"Dose: {contenu['dose']}", ln=True)
+    else:
+        pdf.cell(200, 10, txt="Substance non trouvée", ln=True)
+
     pdf.output(filename)
 
-    return FileResponse(filename, media_type="application/pdf", filename=filename)
+    if os.path.exists(filename):
+        return FileResponse(filename, media
