@@ -1,16 +1,25 @@
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 import requests
 from fpdf import FPDF
 import os
 
 app = FastAPI()
 
-# =========================
-# 🧪 BASE DE DONNÉES LOCALE
-# =========================
+# ✅ CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-database = [
+# =========================
+# 📚 BASE DE DONNÉES LOCALE
+# =========================
+DATABASE = [
     {
         "nom": "paracetamol",
         "type": "medicament",
@@ -23,35 +32,20 @@ database = [
         "type": "medicament",
         "description": "anti-inflammatoire",
         "toxicologie": "risque hemorragique",
-        "dose": "500mg à 1g"
-    },
-    {
-        "nom": "ibuprofene",
-        "type": "medicament",
-        "description": "anti-inflammatoire non stéroïdien",
-        "toxicologie": "toxique pour l'estomac et reins",
-        "dose": "200-400mg"
+        "dose": "500mg"
     },
     {
         "nom": "neem",
         "type": "plante",
-        "description": "plante médicinale antiseptique et antiparasitaire",
+        "description": "plante médicinale africaine",
         "toxicologie": "toxique à forte dose",
-        "dose": "usage traditionnel modéré"
-    },
-    {
-        "nom": "quinine",
-        "type": "medicament",
-        "description": "antipaludique",
-        "toxicologie": "cinchonisme à forte dose",
-        "dose": "selon prescription"
+        "dose": "usage modéré"
     }
 ]
 
 # =========================
-# 🔍 SEARCH
+# 🔍 SEARCH (LOCAL + PUBCHEM)
 # =========================
-
 @app.get("/search")
 def search(nom: str):
 
@@ -59,21 +53,21 @@ def search(nom: str):
 
     results = []
 
-    for item in database:
+    for item in DATABASE:
         if (
             nom in item["nom"].lower()
-            or nom in item["type"].lower()
             or nom in item["description"].lower()
+            or nom in item["type"].lower()
         ):
             results.append(item)
 
     if results:
         return {"source": "local", "data": results}
 
-    # 🔁 fallback PubChem
+    # fallback PubChem
     try:
         url = f"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{nom}/property/MolecularFormula,MolecularWeight/JSON"
-        r = requests.get(url)
+        r = requests.get(url, timeout=5)
         data = r.json()
 
         props = data["PropertyTable"]["Properties"][0]
@@ -93,55 +87,48 @@ def search(nom: str):
 # =========================
 # ⚠️ INTERACTION
 # =========================
-
 @app.get("/interaction")
 def interaction(noms: str):
 
     noms_list = [x.strip().lower() for x in noms.split(",")]
 
     if "paracetamol" in noms_list and "alcool" in noms_list:
-        return {"danger": "⚠️ Risque hépatotoxique grave"}
+        return {"danger": "⚠️ Risque hépatotoxique"}
 
     if "aspirine" in noms_list and "ibuprofene" in noms_list:
-        return {"danger": "⚠️ Risque hémorragique augmenté"}
+        return {"danger": "⚠️ Risque hémorragique"}
 
-    return {"message": "Aucune interaction majeure connue"}
+    return {"message": "Aucune interaction majeure"}
 
 # =========================
-# 🤖 IA TOXICOLOGIQUE SIMPLE
+# 🤖 IA SIMPLE (STABLE)
 # =========================
-
-@app.get("/ai/{nom}")
+@app.get("/ai")
 def analyse_ai(nom: str):
 
     nom = nom.lower()
 
-    for item in database:
+    for item in DATABASE:
         if nom in item["nom"]:
             return {
-                "analyse": f"{item['nom']} est {item['type']}.\n"
-                           f"Effet: {item['description']}.\n"
-                           f"Toxicologie: {item['toxicologie']}.\n"
-                           f"Dose: {item['dose']}"
+                "analyse": f"{item['nom']} → {item['toxicologie']}. Dose: {item['dose']}"
             }
 
     return {"analyse": "Aucune donnée IA disponible"}
 
 # =========================
-# 📄 PDF
+# 📄 PDF ROBUSTE
 # =========================
-
 @app.get("/pdf/{nom}")
 def generate_pdf(nom: str):
 
     nom = nom.lower()
     filename = f"{nom}.pdf"
 
-    contenu = None
-
-    for item in database:
+    produit = None
+    for item in DATABASE:
         if nom in item["nom"]:
-            contenu = item
+            produit = item
             break
 
     pdf = FPDF()
@@ -150,16 +137,24 @@ def generate_pdf(nom: str):
 
     pdf.cell(200, 10, txt="RAPPORT SENTOX", ln=True)
 
-    if contenu:
-        pdf.cell(200, 10, txt=f"Nom: {contenu['nom']}", ln=True)
-        pdf.cell(200, 10, txt=f"Type: {contenu['type']}", ln=True)
-        pdf.cell(200, 10, txt=f"Description: {contenu['description']}", ln=True)
-        pdf.cell(200, 10, txt=f"Toxicologie: {contenu['toxicologie']}", ln=True)
-        pdf.cell(200, 10, txt=f"Dose: {contenu['dose']}", ln=True)
+    if produit:
+        pdf.cell(200, 10, txt=f"Nom: {produit['nom']}", ln=True)
+        pdf.cell(200, 10, txt=f"Type: {produit['type']}", ln=True)
+        pdf.cell(200, 10, txt=f"Toxicologie: {produit['toxicologie']}", ln=True)
+        pdf.cell(200, 10, txt=f"Dose: {produit['dose']}", ln=True)
     else:
-        pdf.cell(200, 10, txt="Substance non trouvée", ln=True)
+        pdf.cell(200, 10, txt="Produit non trouvé", ln=True)
 
     pdf.output(filename)
 
     if os.path.exists(filename):
-        return FileResponse(filename, media
+        return FileResponse(filename, media_type="application/pdf", filename=filename)
+
+    return {"error": "PDF non généré"}
+
+# =========================
+# ROOT
+# =========================
+@app.get("/")
+def home():
+    return {"message": "SENTOX API OK"}
