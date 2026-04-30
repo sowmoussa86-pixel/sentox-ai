@@ -2,11 +2,10 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fpdf import FPDF
-import requests
 
 app = FastAPI()
 
-# ✅ Autoriser le frontend (important sinon boutons bloqués)
+# ✅ autorise le frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -16,7 +15,7 @@ app.add_middleware(
 )
 
 # =========================
-# BASE DE DONNÉES SIMPLE
+# DATABASE SIMPLE
 # =========================
 database = [
     {
@@ -39,43 +38,39 @@ database = [
 @app.get("/search")
 def search(nom: str):
     nom = nom.lower()
-
     results = [x for x in database if nom in x["nom"]]
 
     if results:
-        return {"source": "local", "data": results}
+        return {"data": results}
 
-    return {"error": "Substance non trouvée"}
+    return {"error": "Non trouvé"}
 
 # =========================
 # INTERACTION
 # =========================
 @app.get("/interaction")
 def interaction(noms: str):
-    noms_list = [x.strip().lower() for x in noms.split(",")]
-
     return {
-        "substances": noms_list,
-        "risque": "Interaction modérée possible",
-        "conseil": "Consulter un spécialiste"
+        "substances": noms,
+        "risque": "Interaction possible",
+        "conseil": "Consulter un expert"
     }
 
 # =========================
-# IA ANALYSE
+# IA
 # =========================
 @app.get("/ai")
-def analyse_ai(nom: str):
+def ai(nom: str):
     return {
         "substance": nom,
-        "niveau_risque": "modéré",
-        "analyse": "Analyse IA : effet possible sur le foie, dépend de la dose"
+        "analyse": "Analyse IA : risque dépend de la dose, surveiller foie"
     }
 
 # =========================
 # PDF
 # =========================
 @app.get("/pdf/{nom}")
-def generate_pdf(nom: str):
+def pdf(nom: str):
 
     pdf = FPDF()
     pdf.add_page()
@@ -83,9 +78,9 @@ def generate_pdf(nom: str):
 
     pdf.cell(200, 10, txt="RAPPORT TOXICOLOGIQUE SENTOX", ln=True)
     pdf.cell(200, 10, txt=f"Substance: {nom}", ln=True)
-    pdf.cell(200, 10, txt="Analyse: Risque dépend de la dose", ln=True)
+    pdf.cell(200, 10, txt="Analyse: risque dépend de la dose", ln=True)
 
-    file_name = f"{nom}.pdf"
-    pdf.output(file_name)
+    filename = f"{nom}.pdf"
+    pdf.output(filename)
 
-    return FileResponse(file_name, media_type='application/pdf', filename=file_name)
+    return FileResponse(filename, media_type="application/pdf", filename=filename)
