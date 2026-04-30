@@ -1,51 +1,90 @@
-const API = "https://sentox-ai-backend.onrender.com";
+// 🔍 RECHERCHE
+async function rechercher() {
+    let nom = document.getElementById("search").value;
 
-function search() {
-    const value = document.getElementById("input").value;
+    if (!nom) {
+        alert("Entrer une substance");
+        return;
+    }
 
-    fetch(API + "/search?nom=" + value)
-    .then(res => res.json())
-    .then(data => {
+    try {
+        let res = await fetch(/search?nom=${nom});
+        let data = await res.json();
 
-        if (data.data) {
-            const item = data.data[0];
+        let div = document.getElementById("resultat");
 
-            document.getElementById("result").innerHTML = `
-                <h3>${item.nom}</h3>
-                <p><b>Type:</b> ${item.type}</p>
-                <p><b>Description:</b> ${item.description}</p>
-                <p><b>Toxicologie:</b> ${item.toxicologie}</p>
-            `;
-        } else {
-            document.getElementById("result").innerHTML = "Aucun résultat";
+        if (!data.data || data.data.length === 0) {
+            div.innerHTML = "Aucun résultat";
+            return;
         }
 
-    });
+        let item = data.data[0];
+
+        div.innerHTML = `
+            <h2>${item.nom}</h2>
+            <p><b>Type :</b> ${item.type}</p>
+            <p><b>Description :</b> ${item.description || "-"}</p>
+            <p><b>Toxicologie :</b> ${item.toxicologie || "-"}</p>
+        `;
+
+    } catch (error) {
+        document.getElementById("resultat").innerHTML = "Erreur serveur";
+    }
 }
 
-function interaction() {
-    const value = document.getElementById("input").value;
 
-    fetch(API + "/interaction?noms=" + value)
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById("result").innerHTML =
-            JSON.stringify(data);
-    });
+// ⚡ INTERACTION
+async function interaction() {
+    let nom = document.getElementById("search").value;
+
+    if (!nom) {
+        alert("Entrer une substance");
+        return;
+    }
+
+    try {
+        let res = await fetch(/interaction?noms=${nom});
+        let data = await res.json();
+
+        document.getElementById("resultat").innerHTML =
+            "<b>Interaction :</b><br>" + JSON.stringify(data);
+
+    } catch (error) {
+        document.getElementById("resultat").innerHTML = "Erreur interaction";
+    }
 }
 
+
+// 📄 PDF
 function pdf() {
-    const value = document.getElementById("input").value;
-    window.open(API + "/pdf/" + value);
+    let nom = document.getElementById("search").value;
+
+    if (!nom) {
+        alert("Entrer une substance");
+        return;
+    }
+
+    window.open(/pdf?nom=${nom}, "_blank");
 }
 
-function ai() {
-    const value = document.getElementById("input").value;
 
-    fetch(API + "/ai?nom=" + value)
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById("result").innerHTML =
-            "<b>Analyse IA:</b> " + data.analyse;
-    });
+// 🤖 IA
+async function analyseIA() {
+    let nom = document.getElementById("search").value;
+
+    if (!nom) {
+        alert("Entrer une substance");
+        return;
+    }
+
+    try {
+        let res = await fetch(/ai?nom=${nom});
+        let data = await res.json();
+
+        document.getElementById("resultat").innerHTML =
+            "<b>Analyse IA :</b><br>" + (data.analyse || "Aucune analyse");
+
+    } catch (error) {
+        document.getElementById("resultat").innerHTML = "Erreur IA";
+    }
 }
