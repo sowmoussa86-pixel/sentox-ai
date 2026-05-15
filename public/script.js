@@ -1,90 +1,70 @@
-// 🔍 RECHERCHE
 async function rechercher() {
-    let nom = document.getElementById("search").value;
+    let res = await fetch(`/search/${nom}`);
+    let data = await res.json();
 
-    if (!nom) {
-        alert("Entrer une substance");
+    if (data.error) {
+        document.getElementById("resultat").innerHTML = data.error;
         return;
     }
 
-    try {
-        let res = await fetch(/search?nom=${nom});
-        let data = await res.json();
+    document.getElementById("resultat").innerHTML = `
+        <h2>${data.Nom}</h2>
+        <p><b>Formule :</b> ${data.Formule}</p>
+        <p><b>Poids moléculaire :</b> ${data["Poids moléculaire"]}</p>
+        <p><b>Nom IUPAC :</b> ${data["Nom IUPAC"]}</p>
+    `;
+}
 
-        let div = document.getElementById("resultat");
+async function analyseIA() {
 
-        if (!data.data || data.data.length === 0) {
-            div.innerHTML = "Aucun résultat";
-            return;
-        }
+    let nom = document.getElementById("search").value;
 
-        let item = data.data[0];
+    let res = await fetch(`/analyse/${nom}`);
+    let data = await res.json();
 
-        div.innerHTML = `
-            <h2>${item.nom}</h2>
-            <p><b>Type :</b> ${item.type}</p>
-            <p><b>Description :</b> ${item.description || "-"}</p>
-            <p><b>Toxicologie :</b> ${item.toxicologie || "-"}</p>
+    if (data.error) {
+        document.getElementById("resultat").innerHTML = `
+            <h2>Erreur IA</h2>
+            <p>${data.error}</p>
         `;
 
-    } catch (error) {
-        document.getElementById("resultat").innerHTML = "Erreur serveur";
+        return;
     }
+
+    document.getElementById("resultat").innerHTML = `
+        <h2>Analyse IA SENTOX</h2>
+
+        <p><b>Produit :</b> ${data.Produit}</p>
+
+        <pre style="
+        white-space: pre-wrap;
+        font-family: Arial;
+        line-height: 1.5;
+        ">
+${data["Analyse IA"]}
+        </pre>
+    `;
 }
 
-
-// ⚡ INTERACTION
 async function interaction() {
+
     let nom = document.getElementById("search").value;
 
-    if (!nom) {
-        alert("Entrer une substance");
-        return;
-    }
+    let res = await fetch(`/interaction/${nom}`);
+    let data = await res.json();
 
-    try {
-        let res = await fetch(/interaction?noms=${nom});
-        let data = await res.json();
-
-        document.getElementById("resultat").innerHTML =
-            "<b>Interaction :</b><br>" + JSON.stringify(data);
-
-    } catch (error) {
-        document.getElementById("resultat").innerHTML = "Erreur interaction";
-    }
+    document.getElementById("resultat").innerHTML = `
+        <h2>Interactions</h2>
+        <p><b>Produit :</b> ${data.Produit}</p>
+        <ul>
+            ${data["Interactions possibles"].map(i => `<li>${i}</li>`).join("")}
+        </ul>
+    `;
 }
 
-
-// 📄 PDF
 function pdf() {
+
     let nom = document.getElementById("search").value;
 
-    if (!nom) {
-        alert("Entrer une substance");
-        return;
-    }
-
-    window.open(/pdf?nom=${nom}, "_blank");
-}
-
-
-// 🤖 IA
-async function analyseIA() {
-    let nom = document.getElementById("search").value;
-
-    if (!nom) {
-        alert("Entrer une substance");
-        return;
-    }
-
-    try {
-        let res = await fetch(/ai?nom=${nom});
-        let data = await res.json();
-
-        document.getElementById("resultat").innerHTML =
-            "<b>Analyse IA :</b><br>" + (data.analyse || "Aucune analyse");
-
-    } catch (error) {
-        document.getElementById("resultat").innerHTML = "Erreur IA";
-    }
+    window.open(`/pdf/${nom}`, "_blank");
 }

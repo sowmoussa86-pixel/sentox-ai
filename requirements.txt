@@ -1,5 +1,4 @@
-fastapi
-uvicorn
+flask
 requests
-openai
-reportlab
+google-generativeai
+gunicorn

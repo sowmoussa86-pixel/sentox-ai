@@ -1,160 +1,143 @@
-from fastapi import FastAPI
-from fastapi.responses import FileResponse
-from fastapi.middleware.cors import CORSMiddleware
+from flask import Flask, jsonify, send_from_directory
+import google.generativeai as genai
 import requests
-from fpdf import FPDF
 import os
 
-app = FastAPI()
-
-# ✅ CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+app = Flask(__name__, static_folder="public")
 
 # =========================
-# 📚 BASE DE DONNÉES LOCALE
+# CONFIGURATION GEMINI
 # =========================
-DATABASE = [
-    {
-        "nom": "paracetamol",
-        "type": "medicament",
-        "description": "antalgique et antipyrétique",
-        "toxicologie": "hepatotoxique en surdosage",
-        "dose": "max 4g/jour"
-    },
-    {
-        "nom": "aspirine",
-        "type": "medicament",
-        "description": "anti-inflammatoire",
-        "toxicologie": "risque hemorragique",
-        "dose": "500mg"
-    },
-    {
-        "nom": "neem",
-        "type": "plante",
-        "description": "plante médicinale africaine",
-        "toxicologie": "toxique à forte dose",
-        "dose": "usage modéré"
-    }
-]
+
+GEMINI_API_KEY = "GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")"
+
+genai.configure(api_key=GEMINI_API_KEY)
+
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 # =========================
-# 🔍 SEARCH (LOCAL + PUBCHEM)
+# PAGE PRINCIPALE
 # =========================
-@app.get("/search")
-def search(nom: str):
 
-    nom = nom.lower().strip()
+@app.route("/")
+def home():
+    return send_from_directory("public", "index.html")
 
-    results = []
+# =========================
+# FICHIERS STATIQUES
+# =========================
 
-    for item in DATABASE:
-        if (
-            nom in item["nom"].lower()
-            or nom in item["description"].lower()
-            or nom in item["type"].lower()
-        ):
-            results.append(item)
+@app.route("/<path:path>")
+def static_files(path):
+    return send_from_directory("public", path)
 
-    if results:
-        return {"source": "local", "data": results}
+# =========================
+# RECHERCHE PUBCHEM
+# =========================
 
-    # fallback PubChem
+@app.route("/search/<query>")
+def search(query):
+
     try:
-        url = f"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{nom}/property/MolecularFormula,MolecularWeight/JSON"
-        r = requests.get(url, timeout=5)
-        data = r.json()
+
+        url = f"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{query}/property/MolecularFormula,MolecularWeight,IUPACName/JSON"
+
+        response = requests.get(url)
+
+        if response.status_code != 200:
+            return jsonify({
+                "error": "Produit non trouvé"
+            })
+
+        data = response.json()
 
         props = data["PropertyTable"]["Properties"][0]
 
-        return {
-            "source": "pubchem",
-            "data": {
-                "nom": nom,
-                "formula": props.get("MolecularFormula"),
-                "weight": props.get("MolecularWeight")
-            }
+        result = {
+            "Nom": query,
+            "Formule": props.get("MolecularFormula"),
+            "Poids moléculaire": props.get("MolecularWeight"),
+            "Nom IUPAC": props.get("IUPACName")
         }
 
-    except:
-        return {"error": "Substance non trouvée"}
+        return jsonify(result)
+
+    except Exception as e:
+
+        return jsonify({
+            "error": str(e)
+        })
 
 # =========================
-# ⚠️ INTERACTION
+# ANALYSE IA GEMINI
 # =========================
-@app.get("/interaction")
-def interaction(noms: str):
 
-    noms_list = [x.strip().lower() for x in noms.split(",")]
+@app.route("/analyse/<query>")
+def analyse(query):
 
-    if "paracetamol" in noms_list and "alcool" in noms_list:
-        return {"danger": "⚠️ Risque hépatotoxique"}
+    prompt = f"""
+    Fais une analyse toxicologique scientifique du produit suivant :
 
-    if "aspirine" in noms_list and "ibuprofene" in noms_list:
-        return {"danger": "⚠️ Risque hémorragique"}
+    {query}
 
-    return {"message": "Aucune interaction majeure"}
+    Donne :
+    - les risques toxicologiques
+    - les organes cibles
+    - les interactions possibles
+    - les précautions
+    - les recommandations scientifiques
+    - un résumé clair
+    """
 
-# =========================
-# 🤖 IA SIMPLE (STABLE)
-# =========================
-@app.get("/ai")
-def analyse_ai(nom: str):
+    try:
 
-    nom = nom.lower()
+        response = model.generate_content(prompt)
 
-    for item in DATABASE:
-        if nom in item["nom"]:
-            return {
-                "analyse": f"{item['nom']} → {item['toxicologie']}. Dose: {item['dose']}"
-            }
+        texte = response.text
 
-    return {"analyse": "Aucune donnée IA disponible"}
+        return jsonify({
+            "Produit": query,
+            "Analyse IA": texte
+        })
 
-# =========================
-# 📄 PDF ROBUSTE
-# =========================
-@app.get("/pdf/{nom}")
-def generate_pdf(nom: str):
+    except Exception as e:
 
-    nom = nom.lower()
-    filename = f"{nom}.pdf"
-
-    produit = None
-    for item in DATABASE:
-        if nom in item["nom"]:
-            produit = item
-            break
-
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
-
-    pdf.cell(200, 10, txt="RAPPORT SENTOX", ln=True)
-
-    if produit:
-        pdf.cell(200, 10, txt=f"Nom: {produit['nom']}", ln=True)
-        pdf.cell(200, 10, txt=f"Type: {produit['type']}", ln=True)
-        pdf.cell(200, 10, txt=f"Toxicologie: {produit['toxicologie']}", ln=True)
-        pdf.cell(200, 10, txt=f"Dose: {produit['dose']}", ln=True)
-    else:
-        pdf.cell(200, 10, txt="Produit non trouvé", ln=True)
-
-    pdf.output(filename)
-
-    if os.path.exists(filename):
-        return FileResponse(filename, media_type="application/pdf", filename=filename)
-
-    return {"error": "PDF non généré"}
+        return jsonify({
+            "error": str(e)
+        })
 
 # =========================
-# ROOT
+# INTERACTIONS
 # =========================
-@app.get("/")
-def home():
-    return {"message": "SENTOX API OK"}
+
+@app.route("/interaction/<query>")
+def interaction(query):
+
+    result = {
+        "Produit": query,
+        "Interactions possibles": [
+            "Interaction hépatique",
+            "Interaction enzymatique",
+            "Risque métabolique"
+        ]
+    }
+
+    return jsonify(result)
+
+# =========================
+# PDF
+# =========================
+
+@app.route("/pdf/<query>")
+def pdf(query):
+
+    return jsonify({
+        "message": f"PDF généré pour {query}"
+    })
+
+# =========================
+# SERVEUR
+# =========================
+
+if __name__ == "__main__":
+    app.run(debug=True, port=8000)

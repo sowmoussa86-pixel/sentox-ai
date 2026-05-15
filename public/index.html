@@ -2,21 +2,19 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>SENTOX - Expertise Toxicologique</title>
+<title>SENTOX</title>
 
 <style>
 body {
-    font-family: Arial;
     margin: 0;
-    text-align: center;
-    background: #f5f7fa;
+    font-family: Arial;
+    background: #f4f6f9;
 }
 
-/* LOGO */
+/* LOGO PLEIN LARGEUR */
 .hero {
     width: 100%;
-    height: 300px;
-    overflow: hidden;
+    height: 250px;
 }
 
 .hero img {
@@ -27,24 +25,24 @@ body {
 
 /* CONTENU */
 .container {
+    text-align: center;
     padding: 20px;
 }
 
 /* INPUT */
-input {
-    width: 60%;
-    padding: 12px;
-    border-radius: 8px;
+#search {
+    width: 50%;
+    padding: 10px;
+    border-radius: 6px;
     border: 1px solid #ccc;
-    margin-top: 15px;
 }
 
 /* BOUTONS */
 button {
     padding: 10px 15px;
-    margin: 10px;
+    margin: 8px;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     background: #2e8b57;
     color: white;
     cursor: pointer;
@@ -57,13 +55,13 @@ button:hover {
 /* RESULTAT */
 #resultat {
     margin-top: 20px;
-    text-align: left;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
     background: white;
     padding: 20px;
     border-radius: 10px;
+    text-align: left;
 }
 </style>
 
@@ -71,20 +69,19 @@ button:hover {
 
 <body>
 
-<!-- LOGO -->
+<!-- ✅ LOGO SEUL (PAS DE TEXTE SENTOX EN DOUBLE) -->
 <div class="hero">
-    <img src="logo.jpg" alt="SENTOX">
+    <img src="logo.jpg">
 </div>
 
 <div class="container">
 
-    <h2>SENTOX</h2>
-
-    <!-- RECHERCHE -->
-    <input id="search" placeholder="Entrer une plante ou substance">
+    <!-- ✅ UNE SEULE BARRE -->
+    <input id="search" placeholder="Entrer une substance">
 
     <br>
 
+    <!-- ✅ BOUTONS -->
     <button onclick="rechercher()">Recherche</button>
     <button onclick="interaction()">Interaction</button>
     <button onclick="pdf()">PDF</button>
@@ -93,65 +90,20 @@ button:hover {
     <!-- RESULTAT -->
     <div id="resultat"></div>
 
-</div>
+<div id="result" style="
+margin-top:20px;
+padding:20px;
+background:white;
+border-radius:10px;
+width:70%;
+margin-left:auto;
+margin-right:auto;
+min-height:100px;
+white-space:pre-wrap;
+font-family:Arial;
+"></div>
 
-<script>
-
-// 🔍 RECHERCHE
-async function rechercher() {
-    let nom = document.getElementById("search").value;
-
-    let res = await fetch(/search?nom=${nom});
-    let data = await res.json();
-
-    let div = document.getElementById("resultat");
-
-    if (!data.data || data.data.length === 0) {
-        div.innerHTML = "Aucun résultat";
-        return;
-    }
-
-    let item = data.data[0];
-
-    div.innerHTML = `
-        <h2>${item.nom}</h2>
-        <p><b>Type :</b> ${item.type}</p>
-        <p><b>Description :</b> ${item.description || "-"}</p>
-        <p><b>Toxicologie :</b> ${item.toxicologie || "-"}</p>
-    `;
-}
-
-
-// ⚡ INTERACTION
-async function interaction() {
-    let nom = document.getElementById("search").value;
-
-    let res = await fetch(/interaction?noms=${nom});
-    let data = await res.json();
-
-    document.getElementById("resultat").innerHTML =
-        "<b>Interaction :</b> " + JSON.stringify(data);
-}
-
-
-// 📄 PDF
-function pdf() {
-    let nom = document.getElementById("search").value;
-    window.open(/pdf?nom=${nom}, "_blank");
-}
-
-
-// 🤖 IA
-async function analyseIA() {
-    let nom = document.getElementById("search").value;
-
-    let res = await fetch(/ai?nom=${nom});
-    let data = await res.json();
-
-    document.getElementById("resultat").innerHTML =
-        "<b>Analyse IA :</b><br>" + data.analyse;
-}
-
+<!-- 🔗 LIEN SCRIPT -->
 <script src="script.js"></script>
 
 </body>
