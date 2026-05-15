@@ -1,15 +1,8 @@
 from flask import Flask, jsonify, send_from_directory
 import google.generativeai as genai
-import requests
 import os
 
-app = Flask(__name__, static_folder="public")
-
-# =========================
-# CONFIGURATION GEMINI
-# =========================
-
-GEMINI_API_KEY = AIzaSyCLba97kfoIXrC3GjXPrWAXZTS_obGRsE4
+GEMINI_API_KEY = "VOTRE_VRAIE_CLE_GEMINI"
 
 genai.configure(api_key=GEMINI_API_KEY)
 
